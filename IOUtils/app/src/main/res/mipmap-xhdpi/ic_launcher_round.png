@@ -1,0 +1,180 @@
+/* -----------------------------------------------------------------------------
+Software License for The Fraunhofer FDK AAC Codec Library for Android
+
+© Copyright  1995 - 2018 Fraunhofer-Gesellschaft zur Förderung der angewandten
+Forschung e.V. All rights reserved.
+
+ 1.    INTRODUCTION
+The Fraunhofer FDK AAC Codec Library for Android ("FDK AAC Codec") is software
+that implements the MPEG Advanced Audio Coding ("AAC") encoding and decoding
+scheme for digital audio. This FDK AAC Codec software is intended to be used on
+a wide variety of Android devices.
+
+AAC's HE-AAC and HE-AAC v2 versions are regarded as today's most efficient
+general perceptual audio codecs. AAC-ELD is considered the best-performing
+full-bandwidth communications codec by independent studies and is widely
+deployed. AAC has been standardized by ISO and IEC as part of the MPEG
+specifications.
+
+Patent licenses for necessary patent claims for the FDK AAC Codec (including
+those of Fraunhofer) may be obtained through Via Licensing
+(www.vialicensing.com) or through the respective patent owners individually for
+the purpose of encoding or decoding bit streams in products that are compliant
+with the ISO/IEC MPEG audio standards. Please note that most manufacturers of
+Android devices already license these patent claims through Via Licensing or
+directly from the patent owners, and therefore FDK AAC Codec software may
+already be covered under those patent licenses when it is used for those
+licensed purposes only.
+
+Commercially-licensed AAC software libraries, including floating-point versions
+with enhanced sound quality, are also available from Fraunhofer. Users are
+encouraged to check the Fraunhofer website for additional applications
+information and documentation.
+
+2.    COPYRIGHT LICENSE
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted without payment of copyright license fees provided that you
+satisfy the following conditions:
+
+You must retain the complete text of this software license in redistributions of
+the FDK AAC Codec or your modifications thereto in source code form.
+
+You must retain the complete text of this software license in the documentation
+and/or other materials provided with redistributions of the FDK AAC Codec or
+your modifications thereto in binary form. You must make available free of
+charge copies of the complete source code of the FDK AAC Codec and your
+modifications thereto to recipients of copies in binary form.
+
+The name of Fraunhofer may not be used to endorse or promote products derived
+from this library without prior written permission.
+
+You may not charge copyright license fees for anyone to use, copy or distribute
+the FDK AAC Codec software or your modifications thereto.
+
+Your modified versions of the FDK AAC Codec must carry prominent notices stating
+that you changed the software and the date of any change. For modified versions
+of the FDK AAC Codec, the term "Fraunhofer FDK AAC Codec Library for Android"
+must be replaced by the term "Third-Party Modified Version of the Fraunhofer FDK
+AAC Codec Library for Android."
+
+3.    NO PATENT LICENSE
+
+NO EXPRESS OR IMPLIED LICENSES TO ANY PATENT CLAIMS, including without
+limitation the patents of Fraunhofer, ARE GRANTED BY THIS SOFTWARE LICENSE.
+Fraunhofer provides no warranty of patent non-infringement with respect to this
+software.
+
+You may use this FDK AAC Codec software or modifications thereto only for
+purposes that are authorized by appropriate patent licenses.
+
+4.    DISCLAIMER
+
+This FDK AAC Codec software is provided by Fraunhofer on behalf of the copyright
+holders and contributors "AS IS" and WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES,
+including but not limited to the implied warranties of merchantability and
+fitness for a particular purpose. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+CONTRIBUTORS BE LIABLE for any direct, indirect, incidental, special, exemplary,
+or consequential damages, including but not limited to procurement of substitute
+goods or services; loss of use, data, or profits, or business interruption,
+however caused and on any theory of liability, whether in contract, strict
+liability, or tort (including negligence), arising in any way out of the use of
+this software, even if advised of the possibility of such damage.
+
+5.    CONTACT INFORMATION
+
+Fraunhofer Institute for Integrated Circuits IIS
+Attention: Audio and Multimedia Departments - FDK AAC LL
+Am Wolfsmantel 33
+91058 Erlangen, Germany
+
+www.iis.fraunhofer.de/amm
+amm-info@iis.fraunhofer.de
+----------------------------------------------------------------------------- */
+
+/**************************** SBR encoder library ******************************
+
+   Author(s):
+
+   Description: SBR encoder top level processing prototype
+
+*******************************************************************************/
+
+#ifndef SBR_ENCODER_H
+#define SBR_ENCODER_H
+
+#include "common_fix.h"
+#include "FDK_audio.h"
+
+#include "FDK_bitstream.h"
+
+/* core coder helpers */
+#define MAX_TRANS_FAC 8
+#define MAX_CODEC_FRAME_RATIO 2
+#define MAX_PAYLOAD_SIZE 256
+
+typedef enum codecType {
+  CODEC_AAC = 0,
+  CODEC_AACLD = 1,
+  CODEC_UNSPECIFIED = 99
+} CODEC_TYPE;
+
+typedef struct {
+  INT bitRate;
+  INT nChannels;
+  INT sampleFreq;
+  INT transFac;
+  INT standardBitrate;
+} CODEC_PARAM;
+
+typedef enum {
+  SBR_MONO,
+  SBR_LEFT_RIGHT,
+  SBR_COUPLING,
+  SBR_SWITCH_LRC
+} SBR_STEREO_MODE;
+
+/* bitstream syntax flags */
+enum {
+  SBR_SYNTAX_LOW_DELAY = 0x0001,
+  SBR_SYNTAX_SCALABLE = 0x0002,
+  SBR_SYNTAX_CRC = 0x0004,
+  SBR_SYNTAX_DRM_CRC = 0x0008,
+  SBR_SYNTAX_ELD_REDUCED_DELAY = 0x0010
+};
+
+typedef enum { FREQ_RES_LOW = 0, FREQ_RES_HIGH } FREQ_RES;
+
+typedef struct {
+  CODEC_TYPE coreCoder; /*!< LC or ELD */
+  UINT bitrateFrom;     /*!< inclusive */
+  UINT bitrateTo;       /*!< exclusive */
+
+  UINT sampleRate;   /*!<   */
+  UCHAR numChannels; /*!<   */
+
+  UCHAR startFreq;       /*!< bs_start_freq */
+  UCHAR startFreqSpeech; /*!< bs_start_freq for speech config flag */
+  UCHAR stopFreq;        /*!< bs_stop_freq */
+  UCHAR stopFreqSpeech;  /*!< bs_stop_freq for speech config flag */
+
+  UCHAR numNoiseBands;        /*!<   */
+  UCHAR noiseFloorOffset;     /*!<   */
+  SCHAR noiseMaxLevel;        /*!<   */
+  SBR_STEREO_MODE stereoMode; /*!<   */
+  UCHAR freqScale;            /*!<   */
+} sbrTuningTable_t;
+
+typedef struct sbrConfiguration {
+  /*
+     core coder dependent configurations
+  */
+  CODEC_PARAM
+  codecSettings; /*!< Core coder settings. To be set from core coder. */
+  INT SendHeaderDataTime; /*!< SBR header send update frequency in ms. */
+  INT useWaveCoding;      /*!< Flag: usage of wavecoding tool. */
+  INT crcSbr;             /*!< Flag: usage of SBR-CRC. */
+  INT dynBwSupported;     /*!< Flag: support for dynamic bandwidth in this
+                             combination. */
+  INT parametricCoding;   /*!< Flag: usage of parametric coding tool. */
+  INT d
