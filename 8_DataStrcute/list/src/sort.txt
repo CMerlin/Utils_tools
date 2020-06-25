@@ -1,0 +1,40 @@
+//快速排序，小的数据往前排，后的数据往后排  
+lklist* sort(lklist * head)  
+{  
+    if (head == NULL)  
+        return NULL;  
+    lklist* p = head->next;  
+    lklist* p_pre = p;  
+    bool flag = false;   //用于标记是否有交换，当数组有序的时候，提高判断效率  
+  
+    while(p_pre->next != NULL)  
+    {  
+        long temp = p_pre->data;  
+        p = p->next;  
+        while (p)  
+        {      
+            if(temp <= (p->data))  
+            {  
+                p = p->next;  
+                continue;  
+            }  
+            else  
+            {  
+                long temp_change;  
+                temp_change = p->data;  
+                p->data = p_pre->data;  
+                p_pre->data = temp_change;  
+                p = p->next;  
+                flag = true;  
+            }  
+            if (flag == false)  
+            {  
+                return head;  
+            }  
+        }         
+        p_pre = p_pre->next;  
+        p = p_pre;  
+    }  
+    return head;  
+      
+}  

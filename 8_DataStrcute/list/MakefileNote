@@ -1,0 +1,22 @@
+##一个简单的Makefile实例子
+CC = gcc ##指定编译器
+##CC = arm-linux-gcc
+src = $(wildcard src/*.c) ##包含所有的*.c文件 
+
+##包含所有的.h文件
+##CFLAGS = -Wall -I./include -DSQLITE_MIXED_ENDIAN_64BIT_FLOAT
+CFLAGS = -Wall -I./include 
+##包含所有的库文件
+##LDFLAGS = -lpthread -ldl -L./lib/W5100HB/lib -L./lib/xml2/lib -L./lib/sqlite3/lib -lW5100HB -lxml2 -lsqlite3
+
+bin = LIST ##可执行文件的名
+
+$(bin) : $(src)
+	$(CC) -o $@ $^ $(CFLAGS) 
+	##$(CC) -o $@ $^ $(CFLAGS) 
+	##$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
+
+##删除编译的时候产生的中间文件
+clean:
+	-rm -f $(bin)
+.PHONY:clean
