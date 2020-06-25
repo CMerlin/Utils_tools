@@ -1,0 +1,275 @@
+<form enctype="multipart/form-data" id="wmform" action="encoder.cgi" method="post" target="upload">
+		<table style="width:758px;" border="0" id="titleTable">
+			<tr>
+				<td colspan="1" style="padding-left:210px;">
+					<h5>$titlelogo.title$</h5>
+				</td>
+				<td rowspan="2" align="left">
+					<table border="0"  width=="100%" colspan="1" style="width:256px;height:144px">
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td width="70%">
+					<table border="0" width="100%" >
+						<tr>
+							<td align="right" class="$image_prex$itemnametd" style="width:170px;">$titlelogo.position$</td>
+							<td>
+								<select id="cap_position" name="cap_position" style="width:150px;">
+									<option value="0">$titlelogo.none$</option>
+									<option value="1">$titlelogo.TopLeft$</option>
+									<option value="2">$titlelogo.TopRight$</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td align="right" class="$image_prex$itemnametd" valign="top" style="width:170px;">$titlelogo.content$</td>
+							<td>
+								<label>
+									<textarea rows="3" cols="30" name="cap_text" id="cap_text"/>
+									<br/>
+									<font style="color:#FF0000;font-size:12px;">$titlelogo.lettersatmost$</font>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<td style="width:170px;"/>
+							<td align="center" style="padding-top: 5px; padding-left: 0px; text-align: left;">
+								<label>
+									<input type="checkbox" id="cap_displaytime" name="cap_displaytime" />&nbsp;$titlelogo.displaytime$</label>
+							</td>
+						</tr>
+						<tr>
+							<td align="center" style="padding-top: 10px; padding-left: 206px; text-align: left;" colspan="2">
+								<input id="saveBtn" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" type="button" value="$btn.save$" />
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td height="16" colspan="2">
+					<div style="width:475px; height:1px; margin-left:25px; background-color:#186FCA;"/>
+				</td>
+			</tr>
+		</table>
+
+		<table style="width:758px;" border="0" id="logoTable">
+			<tr>
+			  <td colspan="1" style="padding-left:210px"><h5>$titlelogo.logo$</h5></td>
+			  <td rowspan="2" align="left">
+					<table border="0"  width=="100%" colspan="1" style="width:256px;height:144px">
+						<tr>
+						  <td align="center"><img src="../images/logo_0.png" id="captionlogo"></td>
+						</tr>
+					</table>
+			 </td>
+			</tr>
+			<tr>
+				<td width="70%">
+					<table border="0" width="100%" >
+						<tr>
+						  <td align="right" class="$image_prex$itemnametd" style="width:170px;">$titlelogo.position$</td>
+						  <td>
+							<select id="logo_position" name="logo_position" style="width:150px;">
+								<option value="0">$titlelogo.none$</option>
+								<option value="1">$titlelogo.TopLeft$</option>
+								<option value="2">$titlelogo.TopRight$</option>
+								<option value="3">$titlelogo.BottomLeft$</option>
+								<option value="4">$titlelogo.BottomRight$</option>
+							</select>
+						  </td>
+						</tr>
+						<tr>
+						  <td class="$image_prex$itemnametd" style="width:170px;">$titlelogo.logopic$</td>
+						  <td>
+							<input type="file" name="file" />
+							<input type="hidden" name="actioncode" value="419">
+							<input type="hidden" name="input" value="1">
+							
+						  </td>
+						</tr>
+						<tr>
+						  <td colspan="2" style="text-align: center;"><font style="color:#FF0000; font-size:12px;" id="logoprompt">$titlelogo.logoprompt1$</font></td>
+						</tr>
+						<tr>
+							<td align="center" style="padding-top: 10px; padding-left: 206px; text-align: left;" colspan="2">
+								<input id="uploadImgBtn" type="button" class="btn-normal" value="$network.ok$" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$titlelogo.upload$" />	
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+			  <td height="16" colspan="2"><div style="width:475px; height:1px; margin-left:25px; background-color:#186FCA;"></div></td>
+			</tr>
+		</table>
+
+		<table style="width:758px;" border="0" id="backgroundTable">
+			<tr>
+			  <td colspan="1" style="padding-left:210px"><h5>$titlelogo.background$</h5></td>
+			  <td rowspan="2" align="left">
+				<table border="0"  width=="100%" colspan="1" style="width:256px;height:144px">
+					<tr>
+					  <td align="center"><img src="../images/background_0.png" id="captionbackground" style="width:252px;height:140px"></td>
+					</tr>
+				</table>
+			  </td>
+			</tr>
+			<tr>
+				<td width="70%">
+					<table border="0" width="100%" >
+						<tr>
+						  <td align="right" class="$image_prex$itemnametd" style="width:170px;">$titlelogo.operation$</td>
+						  <td>
+							<select id="background_operation" name="background_operation" style="width:150px;">
+								<option value="0">$titlelogo.disable$</option>
+								<option value="1">$titlelogo.enable$</option>
+							</select>
+						  </td>
+						</tr>
+						<tr>
+						  <td class="$image_prex$itemnametd" style="width:170px;">$titlelogo.backgroundpic$</td>
+						  <td>
+							<input type="file" name="background_file" />
+							<input type="hidden" name="actioncode" value="473">
+							<input type="hidden" name="input" value="1">
+						  </td>
+						</tr>
+						<tr>
+						  <!--<td height="25" width="184">&nbsp;</td>-->
+						  <td colspan="2" style="text-align: center;"><font style="color:#FF0000; font-size:12px;" id="logoprompt2">$titlelogo.logoprompt2$</font></td>
+						</tr>
+						<tr>
+							<td align="center" style="padding-top: 10px; padding-left: 206px; text-align: left;" colspan="2">
+								<input id="uploadImgBtn1" type="button" class="btn-normal" value="$network.ok$" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$titlelogo.upload$" />	
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+
+
+</form>
+		<iframe name="upload" style="display:none"></iframe>
+<script>
+function initInputTab(val,lang){
+	if(lang==1){
+		jQuery("#cap_text").addClass("class='validate[maxSize[46]]'");
+	}else{
+		jQuery("#cap_text").addClass("class='validate[maxSize[23]]'");
+	}
+}
+function formatTime(date) {
+	var year = date.getFullYear();
+	var month = date.getMonth() + 1;
+	var day = date.getDate();
+	var hours = date.getHours();
+	var minutes = date.getMinutes();
+	var seconds = date.getSeconds();
+	return year + "/" + month + "/" + day + "/" + hours + "/" + minutes + "/" + seconds;
+}
+
+function initPositionSelect() {
+	if(jQuery('#cap_position').val() != '0') {
+		jQuery('#cap_x').prop('disabled', true);
+		jQuery('#cap_y').prop('disabled', true);
+	} else {
+		jQuery('#cap_x').prop('disabled', false);
+		jQuery('#cap_y').prop('disabled', false);
+	}
+	jQuery('#cap_position').change(function() {
+		if(jQuery(this).val() != '0') {
+			jQuery('#cap_x').prop('disabled', true);
+			jQuery('#cap_y').prop('disabled', true);
+		} else {
+			jQuery('#cap_x').prop('disabled', false);
+			jQuery('#cap_y').prop('disabled', false);
+		}
+	});
+	
+	if(jQuery('#logo_position').val() != '0') {
+		jQuery('#logo_x').prop('disabled', true);
+		jQuery('#logo_y').prop('disabled', true);
+	} else {
+		jQuery('#logo_x').prop('disabled', false);
+		jQuery('#logo_y').prop('disabled', false);
+	}
+	jQuery('#logo_position').change(function() {
+		if(jQuery(this).val() != '0') {
+			jQuery('#logo_x').prop('disabled', true);
+			jQuery('#logo_y').prop('disabled', true);
+		} else {
+			jQuery('#logo_x').prop('disabled', false);
+			jQuery('#logo_y').prop('disabled', false);
+		}
+	});
+}
+
+jQuery(function() {
+	initFormValidation();
+	jQuery("input[type=file]").filestyle({ 
+	     image: "../fileStyle/css/choose-file.png",
+	     imageheight : 22,
+	     imagewidth : 52,
+	     width : 150
+	 });
+
+	jQuery('#refreshBtn').click(function() {
+		jQuery('#menue').click();
+	});
+	
+	jQuery('#saveBtn').click(function() {
+		document.charset = "utf-8";
+		var validate = validateFormByID('wmform');
+		if (validate) {
+			var cap_displaytime = jQuery('#cap_displaytime');
+			var displaytime = 0;
+			if(cap_displaytime.prop('checked')) {
+				displaytime = 1;
+				jQuery('#cap_displaytime').val(1);
+			} else {
+				displaytime = 0;
+				jQuery('#cap_displaytime').val(0);
+			}
+			
+			formSet.setHiddenValue('#wmform ', 'actioncode', '411');
+			jQuery('#wmform').submit();
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('#uploadImgBtn').click(function() {
+		formSet.setHiddenValue('#wmform ', 'actioncode', '419');
+		jQuery('#wmform').submit();
+	});
+	
+	jQuery('#uploadImgBtn1').click(function() {
+		formSet.setHiddenValue('#wmform ', 'actioncode', '473');
+		jQuery('#wmform').submit();
+	});
+});
+
+function refreshLogo(width, height){
+	document.getElementById("captionlogo").src = "../images/logo_0.png?d=" + new Date();
+	document.getElementById("captionbackground").src = "../images/background_0.png?d=" + new Date();
+	
+	if(width >= height && width > 256){
+		height = 256*height/width;
+		width = 256;
+	} else if(width < height && height > 256){
+		width = 256*width/height;
+		height = 256;
+	}
+	
+	if(width > 256)
+		width = 256;
+	if(height > 256)
+		height = 256;
+	
+	document.getElementById("captionlogo").width = width;
+	document.getElementById("captionlogo").height = height;
+}
+</script> 

@@ -1,0 +1,826 @@
+<form enctype="multipart/form-data" id="wmform" method="post" target="upload" action="encoder.cgi">
+	<table width="753" height="300" border="0">
+		
+		<!-- add by chengpei 2013-10-22-->
+		  <tr>
+	        <td class="$image_prex$itemnametd" width="184" height="20"></td>
+	        <td><h5>$remotectrl.ptzAjust$</h5></td>
+	      </tr>
+	      <tr>
+	      	<td class="$image_prex$itemnametd" height="25">$remotectrl.input$</td>
+			<td colspan="2">
+		      	<input type="radio" name="inputVideo" value="1" checked />&nbsp;$video.input$1&nbsp;&nbsp;
+		      	<input type="radio" name="inputVideo" value="2" />&nbsp;$video.input$2&nbsp;&nbsp;
+		      	<input type="radio" name="inputVideo" value="3" />&nbsp;$video.input$3
+	      	</td>
+	      </tr>		  
+		  <tr>
+	      	<td class="$image_prex$itemnametd" height="25">$remotectrl.speedCtr$</td>
+	      	<td colspan="2">
+		  		<input type="radio" name="speed" value="1" checked />&nbsp;$remotectrl.low$&nbsp;&nbsp;
+	            <input type="radio" name="speed" value="5" />&nbsp;$remotectrl.mid$&nbsp;&nbsp;
+	            <input type="radio" name="speed" value="8" />&nbsp;$remotectrl.high$
+				</td>
+	      </tr>		  
+	          <tr>		
+				 <td class="$image_prex$itemnametd" height="25">$remotectrl.Position$</td>
+	      		<td colspan="2">
+					<input type="radio" name="position" value="10" checked />&nbsp;$remotectrl.PositionPreset$&nbsp;&nbsp;
+					<input type="radio" name="position" value="11" />&nbsp;$remotectrl.SetPositionPreset$&nbsp;&nbsp;
+					<input type="radio" name="position" value="19" />&nbsp;$remotectrl.DelPositionPreset$
+				</td>
+			</tr>
+	      <tr>
+	        <td height="60" colspan="2">
+	        <div class="ptztrl">
+	        			<div class="up"></div>
+						<div class="down"></div>
+						<div class="left"></div>
+						<!--div class="middle"></div-->
+						<div class="right"></div>
+						<div class="add"></div>
+						<div class="del"></div>
+						<div class="noticeBtn" style="display:none;">$remotectrl.noticeBtn$</div>
+						<div class="btn1"><input id="btn1" name="btn1" value="19" type="hidden"/></div>
+						<div class="btn2"><input id="btn2" name="btn2" value="19" type="hidden"/></div>
+						<div class="btn3"><input id="btn3" name="btn3" value="19" type="hidden"/></div>
+						<div class="btn4"><input id="btn4" name="btn4" value="19" type="hidden"/></div>
+	        </div>
+	        </td>
+	      </tr>
+		  
+		  <tr>
+            <td height="12" colspan="2"><div style="width:515px; height:1px; margin-left:75px; background-color:#186FCA;"></div></td>
+          </tr>
+		  <!--end-->
+		
+		<tr>
+		  <td height="37">&nbsp;</td>
+		  <td><h5>$remotectrl.addressbit$</h5></td>
+		</tr>
+		<tr>
+			<td class="$image_prex$itemnametd" align="right">$remotectrl.address1$</td>
+			<td>
+				<select name="address1" id="address1">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="$image_prex$itemnametd" align="right">$remotectrl.address2$</td>
+			<td>
+				<select name="address2" id="address2">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="$image_prex$itemnametd" align="right">$remotectrl.address3$</td>
+			<td>
+				<select name="address3" id="address3">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+		    <td height="40px">
+		        <input id="saveBtn" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" type="button" value="$btn.save$"/>
+		    </td>
+		</tr>
+		
+		<tr>
+            <td height="12" colspan="2"><div style="width:515px; height:1px; margin-left:75px; background-color:#186FCA;"></div></td>
+        </tr>
+		<tr>
+		  <td width="184" height="28">&nbsp;</td>
+		  <td width="559"><h5>$remotectrl.prototitle$</h5></td>
+		</tr>
+		<tr>
+			<td width="28%" class="$image_prex$itemnametd" align="right">$remotectrl.protocolupload$</td>
+			<td>
+				<input type="file" name="file" style="width: 150px;" />
+				<input type="hidden" name="actioncode" value="413">
+				<input id="submitBtn" type="button" style="margin-left:70px;margin-top:-10px;" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';"  value="$titlelogo.upload$" />
+			</td>
+		</tr>
+		<tr>
+		  <td width="28%" class="$image_prex$itemnametd" align="right">$remotectrl.ptzprotocal$</td>
+		  <td width="72%">
+		    <select name="ptzProtocal" id="ptzProtocal">
+		    </select>
+		    <input id="btnDelete" class="btn-normal-long" onmouseover="this.className='btn-hover-long';" onmouseout="this.className='btn-normal-long';" type="button" value="$remotectrl.delete$" style="margin-left: 17px"/>
+		  </td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+			<input id="saveProtoBtn" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" type="button" value="$btn.save$"/>
+			<font style="font-size:12px;color: #FF0000;">($remotectrl.notice$)</font>
+			</td>
+		</tr>
+		  
+	</table>
+</form>
+<iframe name="upload" style="display:none"></iframe>
+<script>
+var clickFlag = 0;//0 ok, 1 no
+var finishFlag = 0;
+var disableTime = 400;
+function setFlag(){
+	clickFlag = 0;
+}
+function setProtoList(opts){
+	var protoSel = document.getElementById("ptzProtocal");
+	protoSel.options.length = 0;
+	for(var i = 0; i < opts.length; i++){
+		if(!opts[i])
+			continue;
+		var option = document.createElement('option');
+		option.value = opts[i];
+		option.innerHTML = opts[i];
+		protoSel.appendChild(option);
+	}
+}
+function initPositionSet()
+{
+  		var status;
+		status= jQuery('#btn1').val();	
+		if(status==11)
+		  jQuery('.btn1').css({'background-image': 'url(../images/1_2.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/1.png)'});
+
+		 status= jQuery('#btn2').val();	
+		if(status==11)
+		  jQuery('.btn2').css({'background-image': 'url(../images/2_2.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/2.png)'});
+
+		 status= jQuery('#btn3').val();	
+		if(status==11)
+		  jQuery('.btn3').css({'background-image': 'url(../images/3_2.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/3.png)'});
+
+		 status= jQuery('#btn4').val();	
+		if(status==11)
+		  jQuery('.btn4').css({'background-image': 'url(../images/4_2.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/4.png)'});
+}
+jQuery(function() {
+	jQuery("input[type=file]").filestyle({ 
+	 image: "../fileStyle/css/choose-file.png",
+	 imageheight : 22,
+	 imagewidth : 52,
+	 width : 150
+	});
+	 
+	initFormValidation();
+	
+	/*
+	 * init event handlers for the buttons.
+	 */
+	jQuery('#refreshBtn').click(function() {
+		jQuery('#menuf').click();
+	});
+	
+	jQuery('#submitBtn').click(function() {
+		var fileName = jQuery("input[type=file]").val();
+		var startIndex = fileName.lastIndexOf("\\");
+		if(!startIndex){
+			startIndex = 0;
+		}
+		var protName = fileName.substring(startIndex+1);
+		
+		if(protName.length > 49){
+			alert("$remotectrl.lengthlimit$");
+			return;
+		}
+		
+		var suffix = fileName.substring(fileName.lastIndexOf(".")+1);
+		if(suffix != "ini"){
+			alert("$remotectrl.uploadtypeerror$");
+			return;
+		}
+		jQuery('#wmform').submit();
+		openUploading();
+	});
+	
+	jQuery('#saveProtoBtn').click(function(){
+		var proto = jQuery("#ptzProtocal").val();
+		var data = {"actioncode": "434", "ptzProtocal": proto, "dataType": "text"};
+		jQueryAjaxCmd({
+			"data": data,
+			success: function(ret) {
+				if(ret == 1) {
+					alert('$opt.success$');
+				}
+			}
+		});
+	});
+	
+	jQuery('#saveBtn').click(function() {
+		
+		var address1 = parseInt(jQuery("#address1").val());
+		var address2 = parseInt(jQuery("#address2").val());
+		var address3 = parseInt(jQuery("#address3").val());
+		var data = {"actioncode": "412", "dataType": "text", "address1": address1, "address2": address2, "address3": address3};
+		/*
+		if(!proto) {
+			return;
+		}
+		*/
+		if(address1 == address2 || address1 == address3 || address2 == address3){
+			alert("$remotectrl.addressinfo$");
+			return;
+		}
+
+		jQueryAjaxCmd({
+			"data": data,
+			success: function(ret) {
+				if(ret == 1) {
+					alert('$opt.success$');
+				}
+			}
+		});
+	});
+	
+	jQuery('#btnDelete').click(function(){
+		if(!confirm("$remotectrl.deleteconfirm$")){
+			return;
+		}
+		var proto = jQuery("#ptzProtocal").val();
+		var data = {"actioncode": "414", "ptzProtocal": proto, "dataType": "text"};
+		if(!proto) {
+			return;
+		}
+		jQueryAjaxCmd({
+			"data": data,
+			success: function(ret) {
+				if(ret == 1) {
+					alert('$opt.success$');
+					jQuery("#menuf").click();
+				}
+			}
+		});
+	});
+	
+	
+	/*
+	 * init the click event handlers for the PTZ button. 
+	 */
+	//1.left
+	jQuery('.left').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate && clickFlag == 0) {
+			clickFlag = 1;
+			finishFlag++;
+			setTimeout(setFlag, disableTime);
+			jQuery(this).css({'background-image': 'url(../images/remotectrl_left1.png)'});
+			var data = {"actioncode": "443", "PTZtype": "0"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {
+					finishFlag--;
+				}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.left').mouseup(function() {
+		var validate = validateFormByID('wmform');
+		if (validate && finishFlag < 3) {
+			finishFlag++;
+			jQuery(this).css({'background-image': 'url(../images/remotectrl_left.png)'});
+			var data = {"actioncode": "443", "PTZtype": "14"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {
+					finishFlag--;
+				}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.left').mouseover(function() {
+			jQuery(this).css({'background-image': 'url(../images/remotectrl_left1.png)'});
+	});
+	
+	jQuery('.left').mouseout(function() {
+			jQuery(this).css({'background-image': 'url(../images/remotectrl_left.png)'});
+	});
+	
+	//2.right
+	jQuery('.right').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate && clickFlag == 0) {
+			clickFlag = 1;
+			finishFlag++;
+			setTimeout(setFlag, disableTime);
+			jQuery(this).css({'background-image': 'url(../images/remotectrl_right1.png)'});
+			var data = {"actioncode": "443", "PTZtype": "1"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {
+					finishFlag--;
+				}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.right').mouseup(function() {
+		var validate = validateFormByID('wmform');
+		if (validate && finishFlag < 3) {
+			finishFlag++;
+			jQuery(this).css({'background-image': 'url(../images/remotectrl_right.png)'});
+			var data = {"actioncode": "443", "PTZtype": "15"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {
+					finishFlag--;
+				}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.right').mouseover(function() {
+		jQuery(this).css({'background-image': 'url(../images/remotectrl_right1.png)'});
+	});
+	
+	jQuery('.right').mouseout(function() {
+		jQuery(this).css({'background-image': 'url(../images/remotectrl_right.png)'});
+	});
+	
+	//3.up
+	jQuery('.up').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate && clickFlag == 0) {
+			clickFlag = 1;
+			setTimeout(setFlag, disableTime);
+			jQuery(this).css({'background-image': 'url(../images/remotectrl_up1.png)'});
+			var data = {"actioncode": "443", "PTZtype": "2"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.up').mouseup(function() {
+		var validate = validateFormByID('wmform');
+		if (validate) {
+			jQuery(this).css({'background-image': 'url(../images/remotectrl_up.png)'});
+			var data = {"actioncode": "443", "PTZtype": "16"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.up').mouseover(function() {
+		jQuery(this).css({'background-image': 'url(../images/remotectrl_up1.png)'});
+	});
+	
+	jQuery('.up').mouseout(function() {
+		jQuery(this).css({'background-image': 'url(../images/remotectrl_up.png)'});
+	});
+	
+	//4.down
+	jQuery('.down').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate && clickFlag == 0) {
+			clickFlag = 1;
+			setTimeout(setFlag, disableTime);
+			jQuery(this).css({'background-image': 'url(../images/remotectrl_down1.png)'});
+			var data = {"actioncode": "443", "PTZtype": "3"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.down').mouseup(function() {
+		var validate = validateFormByID('wmform');
+		if (validate) {
+			jQuery(this).css({'background-image': 'url(../images/remotectrl_down.png)'});
+			var data = {"actioncode": "443", "PTZtype": "17"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.down').mouseover(function() {
+		jQuery(this).css({'background-image': 'url(../images/remotectrl_down1.png)'});
+	});
+	
+	jQuery('.down').mouseout(function() {
+		jQuery(this).css({'background-image': 'url(../images/remotectrl_down.png)'});
+	});
+	
+	//5.add
+	jQuery('.add').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate && clickFlag == 0) {
+			clickFlag = 1;
+			setTimeout(setFlag, disableTime);
+			jQuery(this).css({'background-image': 'url(../images/increase_1.png)'});
+			var data = {"actioncode": "443", "PTZtype": "8"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.add').mouseup(function() {
+		var validate = validateFormByID('wmform');
+		if (validate) {
+			jQuery(this).css({'background-image': 'url(../images/increase.png)'});
+			var data = {"actioncode": "443", "PTZtype": "22"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.add').mouseover(function() {
+		jQuery(this).css({'background-image': 'url(../images/increase_1.png)'});
+	});
+	
+	jQuery('.add').mouseout(function() {
+		jQuery(this).css({'background-image': 'url(../images/increase.png)'});
+	});
+	
+	//6.del
+	jQuery('.del').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate && clickFlag == 0) {
+			clickFlag = 1;
+			setTimeout(setFlag, disableTime);
+			jQuery(this).css({'background-image': 'url(../images/reduce_1.png)'});
+			var data = {"actioncode": "443", "PTZtype": "9"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.del').mouseup(function() {
+		var validate = validateFormByID('wmform');
+		if (validate) {
+			jQuery(this).css({'background-image': 'url(../images/reduce.png)'});
+			var data = {"actioncode": "443", "PTZtype": "23"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.del').mouseover(function() {
+		jQuery(this).css({'background-image': 'url(../images/reduce_1.png)'});
+	});
+	
+	jQuery('.del').mouseout(function() {
+		jQuery(this).css({'background-image': 'url(../images/reduce.png)'});
+	});
+	
+	
+	
+	//8.btn
+	//(1)btn1
+	jQuery('.btn1').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate) {		
+			var data = {"actioncode": "443"};
+			var speed = '1';
+			var currenttype=jQuery("#btn1").val();
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			var type =  formSet.getRadioValue('#wmform ', 'position');	
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			data['PTZtype'] = type;
+			if(type==10 && currenttype==19)return false;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function(ret) {		
+						if( (ret ==0 &&(type==11 || type == 19)))
+						{
+							jQuery('#btn1').val(type);	
+							if(type==11){jQuery(this).css({'background-image': 'url(../images/1_2.png)'});}
+							if(type==19){jQuery(this).css({'background-image': 'url(../images/1_1.png)'});}
+							
+						}
+					}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.btn1').mouseup(function() {
+		var status = jQuery('#btn1').val();			
+		if(status==11)jQuery(this).css({'background-image': 'url(../images/1_2.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/1.png)'});
+	});
+	
+	jQuery('.btn1').mouseover(function() {
+		var status = jQuery('#btn1').val();	
+		if(status==11)jQuery(this).css({'background-image': 'url(../images/1_3.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/1_1.png)'});
+	});
+	
+	jQuery('.btn1').mouseout(function() {
+		var status = jQuery('#btn1').val();	
+		if(status==11)jQuery(this).css({'background-image': 'url(../images/1_2.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/1.png)'});
+	});
+	
+	//(2)bt2
+	jQuery('.btn2').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate) {		
+			var data = {"actioncode": "443"};
+			var speed = '2';
+			var currenttype=jQuery("#btn2").val();
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			var type =  formSet.getRadioValue('#wmform ', 'position');	
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			data['PTZtype'] = type;
+			if(type==10 && currenttype==19)return false;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function(ret) {						
+						if( (ret ==0 &&(type==11 || type == 19)))
+						{
+							jQuery('#btn2').val(type);	
+							if(type==11){jQuery(this).css({'background-image': 'url(../images/2_2.png)'});}
+							if(type==19){jQuery(this).css({'background-image': 'url(../images/2_1.png)'});}
+							
+						}
+					}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.btn2').mouseup(function() {
+		var status = jQuery('#btn2').val();	
+		if(status==11)jQuery(this).css({'background-image': 'url(../images/2_2.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/2.png)'});
+	});
+	
+	jQuery('.btn2').mouseover(function() {
+		var status = jQuery('#btn2').val();	
+		if(status==11)jQuery(this).css({'background-image': 'url(../images/2_3.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/2_1.png)'});
+	});
+	
+	jQuery('.btn2').mouseout(function() {
+		var status = jQuery('#btn2').val();		
+		if(status==11)jQuery(this).css({'background-image': 'url(../images/2_2.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/2.png)'});
+	});
+	
+	//(3)bt3
+	jQuery('.btn3').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate) {		
+			var data = {"actioncode": "443"};
+			var speed = '3';
+			var currenttype=jQuery("#btn3").val();
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			var type =  formSet.getRadioValue('#wmform ', 'position');	
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			data['PTZtype'] = type;
+			if(type==10 && currenttype==19)return false;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function(ret) {						
+						if( (ret ==0 &&(type==11 || type == 19)))
+						{
+							jQuery('#btn3').val(type);	
+							if(type==11){jQuery(this).css({'background-image': 'url(../images/3_2.png)'});}
+							if(type==19){jQuery(this).css({'background-image': 'url(../images/3_1.png)'});}
+							
+						}
+					}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.btn3').mouseup(function() {
+		var status = jQuery('#btn3').val();	
+		if(status==11)jQuery(this).css({'background-image': 'url(../images/3_2.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/3.png)'});
+	});
+	
+	jQuery('.btn3').mouseover(function() {
+		var status = jQuery('#btn3').val();		
+		if(status==11)jQuery(this).css({'background-image': 'url(../images/3_3.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/3_1.png)'});
+	});
+	
+	jQuery('.btn3').mouseout(function() {
+		var status = jQuery('#btn3').val();	
+		if(status==11)jQuery(this).css({'background-image': 'url(../images/3_2.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/3.png)'});
+	});
+	
+	//(4)bt4
+	jQuery('.btn4').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate) {		
+			var data = {"actioncode": "443"};
+			var speed = '4';
+			var currenttype=jQuery("#btn4").val();
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			var addr = formSet.getSelectValue('#wmform ', 'address' + inputVideo);
+			var type =  formSet.getRadioValue('#wmform ', 'position');	
+			data['PTZspeed'] = speed;
+			data['PTZcamera'] = inputVideo;
+			data['PTZaddr'] = addr;
+			data['PTZtype'] = type;
+			if(type==10 && currenttype==19)return false;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function(ret) {						
+						if( (ret ==0 &&(type==11 || type == 19)))
+						{
+							jQuery('#btn4').val(type);	
+							if(type==11){jQuery(this).css({'background-image': 'url(../images/4_2.png)'});}
+							if(type==19){jQuery(this).css({'background-image': 'url(../images/4_1.png)'});}
+							
+						}
+					}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('.btn4').mouseup(function() {
+		var status = jQuery('#btn4').val();	
+		if(status==11)jQuery(this).css({'background-image': 'url(../images/4_2.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/4.png)'});
+	});
+	
+	jQuery('.btn4').mouseover(function() {
+		var status = jQuery('#btn4').val();	
+		if(status==11)jQuery(this).css({'background-image': 'url(../images/4_3.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/4_1.png)'});
+	});
+	
+	jQuery('.btn4').mouseout(function() {
+		var status = jQuery('#btn4').val();	
+		if(status==11)jQuery(this).css({'background-image': 'url(../images/4_2.png)'});
+		else
+		 jQuery(this).css({'background-image': 'url(../images/4.png)'});
+	});
+	
+});
+</script> 

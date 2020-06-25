@@ -1,0 +1,1439 @@
+		
+			<form id="wmform">	
+	          <table width="100%" height="400px" border="0">	          				 
+		
+			  <!--
+				<tr>
+		            <td  class="$image_prex$itemnametd" width="35%">$encoding.rate$</td>
+		            <td align="left" style="padding-left:10px;">
+		              <select name="bitrate" id="bitrate" style="width:100px;" class="encoding">
+		                <option value="768">768 kbps</option>
+		                <option value="1024">1024 kbps</option>
+		                <option value="2048">2048 kbps</option>
+		                <option value="4096">4096 kbps</option>
+		            	</select>
+		            </td>
+					
+					 <td rowspan="4">
+						<div style="width:350px; margin-left:1px; border:1px solid #186FCA; color: #FF0000; margin-bottom:30px; padding:6px; padding-bottom: 6px; width: 370px;"><font style="font-size:12px;">$recordmgr.re_notice$</font></div>
+					 </td>
+		        </tr>
+				 -->
+				 <tr>
+		            <td class="$image_prex$itemnametd" width="35%" height="22px">$videoset.hdvideo$$videoset.resolution$</td>
+		            <td align="left" width="163px" height="22px" style="padding-left:10px;" colspan="1">
+						<select name="resolution" id="resolution" style="width:100px;" class="encoding">
+							<option value="1">720x480</option>
+							<option value="2">704x576</option>
+							<option value="12">960x540</option>
+							<option value="3">1280x720</option>
+							<option value="4">1920x1080</option>
+						</select>
+		            </td>
+					<td align="left" width="401px" height="22px" style="padding-left:0px;" colspan="2">
+					  $videoset.bitrate$<input id="hd_bitrate" class="inputtext1 validate[required, custom[integer], min[768], max[4096]]" name="hd_bitrate" type="text" style="width:50px;padding-left:5px;" maxlength="4"/> (768~4096) kbps
+					  &nbsp;&nbsp;<input id="hd_bitrate_bnt" type="button" class="btn-normal-min" onmouseover="this.className='btn-hover-min';" onmouseout="this.className='btn-normal-min';" value="$btn.save$" style="padding-left:0; margin-left:0;"/>
+		            </td>
+		        </tr>
+		        <tr>
+		            <td class="$image_prex$itemnametd" width="35%">$videoset.sdvideo$$videoset.resolution$</td>
+		            <td align="left" style="padding-left:10px;" colspan="1">
+					  &nbsp&nbsp; 640x360
+		            </td>
+					<td align="left" style="padding-left:0px;" colspan="2">
+					  $videoset.bitrate$<input id="sd_bitrate" class="inputtext1 validate[required, custom[integer], min[256], max[768]]" name="sd_bitrate" type="text" style="width:50px;padding-left:5px;" maxlength="4"/> (256~768) kbps
+					  &nbsp;&nbsp;&nbsp;&nbsp;<input id="sd_bitrate_bnt" type="button" class="btn-normal-min" onmouseover="this.className='btn-hover-min';" onmouseout="this.className='btn-normal-min';" value="$btn.save$" style="padding-left: 0; margin-left: 0;"/>
+		            </td>
+		        </tr>
+					
+				<!--  
+				<tr>
+		          <td  class="$image_prex$itemnametd" width="35%">$recordmgr.videoRate$</td>
+		          <td align="left" style="padding-left:10px;" class="rate" colspan="2">
+		          </td>
+		        </tr>
+				
+				<tr>
+		          <td class="$image_prex$itemnametd" width="35%">$recordmgr.frequency$</td>
+		          <td align="left" style="padding-left:10px;" class="frequency" colspan="2">
+		            
+		          </td>
+		        </tr>
+				-->
+				<tr>
+		          <td class="$image_prex$itemnametd" width="35%">$recordmgr.maxHour$</td>
+		          <td align="left" style="padding-left:10px;" colspan="2">
+		             <select name="maxHour" id="maxHour" style="width:100px;">
+		                <option value="1">1 $recordmgr.Hour$</option>
+		                <option value="2">2 $recordmgr.Hours$</option>
+						<option value="3">3 $recordmgr.Hours$</option>
+		                <option value="4">4 $recordmgr.Hours$</option>
+						<option value="5">5 $recordmgr.Hours$</option>
+						<option value="6">6 $recordmgr.Hours$</option>
+						<option value="7">7 $recordmgr.Hours$</option>
+						<option value="8">8 $recordmgr.Hours$</option>
+						<option value="12">12 $recordmgr.Hours$</option>
+		            </select>
+		          </td>
+		        </tr>
+				
+				<tr>
+		          <td  class="$image_prex$itemnametd" width="35%">$recordmgr.statusU$</td>
+		          <td align="left" style="padding-left:10px;" class="statusU" colspan="2">
+		           		<!-- 已插入/未插入   剩余3.72GB    直刻中.../未直刻/已停止直刻-->
+		          </td>
+		        </tr>
+				
+				<tr>
+					  <td height="10" colspan="3" align="center"><div style="width:500px; height:1px; background-color:#186FCA;"></div></td>
+				 </tr>
+				 <tr>
+					  <td class="$image_prex$itemnametd" width="35%">$recordmgr.Recordprefix$</td> 
+					  <td align="left"  style="padding-left:10px;" colspan="2">
+						<input id="prefixname" class="inputtext1 validate[maxSize[20]]" name="prefixname" type="text" style="width: 160px;padding-left:5px;" maxlength="20"/>&nbsp;&nbsp;
+						<input id="setprefxBtn" type="button" class="$image_prex$click_btn" value="$btn.save$" style="padding-left: 0; margin-left: 0;"/>
+					  </td>
+				 </tr>
+				 <tr>
+		          <td class="$image_prex$itemnametd" width="35%">$recordmgr.fileName$</td>
+		          <td align="left" style="padding-left:10px;" class="recording fileName" colspan="2">
+		          </td>
+		        </tr>
+				
+				<tr>
+		          <td class="$image_prex$itemnametd" width="35%">$recordmgr.startTime$</td>
+		          <td align="left" style="padding-left:10px;" class="recording startTime" colspan="2">
+		          </td>
+		        </tr>
+				
+				<tr>
+		          <td class="$image_prex$itemnametd" width="35%">$recordmgr.recordStatus$</td>
+		          <td align="left" style="padding-left:10px;" class="recording recordStatus" colspan="2">
+		          </td>
+		        </tr>
+				
+				<tr>
+					<td class="$image_prex$itemnametd" width="35%">$recordmgr.appointment$</td>
+					<td align="left" style="padding-left:10px;" colspan="2">
+						
+						<input id="appointmentbox" type="checkbox" style="width:18px;height:18px;" align="center"></input>						
+						<input id="recstarttime" name="recstarttime" style="width:144px;height:23px;padding-left:3px;" type="text" maxlength=20 size=20 class="inputtext1"></input>&nbsp;<font id="labrec">-></font>
+						<input id="recendtime" name="recendtime" style="width:144px;height:23px;padding-left:3px;" type="text" maxlength=20 size=20 class="inputtext1"></input>
+						<input id="appupdate" type="button" class="$image_prex$click_btn" value="$btn.save$" style="padding-left: 0; margin-left: 0;"/>						
+					</td>
+				</tr>
+				 
+				 <tr>
+				 	  <td class="$image_prex$itemnametd" width="35%">$recordmgr.recordOpt$</td>
+			          <td  align="left" style="padding-left:10px; position:relative;" colspan="2">
+			            <span id="startSpan"><img id="startRecord" src="../images/record.png" title="$recordmgr.startRecord$" style="cursor:pointer;"/></span>
+						<span id="stopSpan"><img id="stopRecord" src="../images/stop.png" title="$recordmgr.stopRecord$" style="cursor:pointer;"/></span>
+						<span id="pausSpan"><img id="pausRecord" src="../images/suspend_record.png"  title="$recordmgr.pausRecord$" style="cursor:pointer;"/></span>
+						<span id="conSpan"><img id="conRecord"  src="../images/continue.png"  title="$recordmgr.conRecord$" style="cursor:pointer;"/></span>
+						<span style="position:absolute;left:175px">
+						<input id="refresh" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';"
+						 value="$recordmgr.refresh$"  style="cursor:pointer; height:32px;"/>
+				
+						</span>
+			          </td>
+		         </tr>
+				<tr>
+		          <td class="$image_prex$itemnametd" width="35%">$recordmgr.OpenUni$</td>
+		          <td align="left" style="padding-left:10px;" colspan="2">
+		          <span id="uniSpan"><img id="viewUni"  src="../images/continue.png"  title="$recordmgr.viewUni$" style="cursor:pointer;"/></span>
+		          </td>
+		        </tr>				
+				<tr>
+					<td class="$image_prex$itemnametd" width="35%">$video.changeScreen$</td>
+					<td align="left" style="padding-left:10px;" colspan="2">
+						<input id="switchBtn" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$video.switchbtn$" />&nbsp;&nbsp;&nbsp;$video.fullScreen$
+						<input id="videobtn_1" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$video.videobtn_1$" />
+						<input id="videobtn_2" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$video.videobtn_2$" />
+						<input id="videobtn_3" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$video.videobtn_3$" />
+						<input id="reset" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$video.reset$" />
+					</td>	
+			 </tr>
+
+			 <tr class="PlatformCode">
+					  <td height="10" colspan="3" align="center"><div style="width:500px; height:1px; background-color:#186FCA;"></div></td>
+			</tr>
+			<tr class="PlatformCode">
+				<td class="$image_prex$itemnametd" width="35%">$recordmgr.meetingtype$</td><td align="left" style="padding-left:15px;padding-top:5px;" colspan="2"><input  type="radio" name="meettype" value="0" />$recordmgr.meetingtype1$&nbsp;&nbsp;&nbsp;<input type="radio" name="meettype" value="1" />$recordmgr.meetingtype2$ </td>
+			</tr>
+			<tr id="meettime" class="PlatformCode">
+				<td class="$image_prex$itemnametd" width="35%">$recordmgr.meetingtime$</td><td align="left" style="padding-left:10px; padding-top:5px" colspan="2"><input id="meetdate1" class="inputtext1" style="width:156px;height:24px;padding-left:3px;" type="text" maxlength=20 size=20></input>&nbsp;->&nbsp;<input id="meetdate2" class="inputtext1" style="width:157px;height:23px;padding-left:3px;" type="text" maxlength=20 size=20></input></td>
+			</tr>
+			<tr class="PlatformCode">
+				<td class="$image_prex$itemnametd" width="35%">$recordmgr.meetingname$</td><td align="left" style="padding-left:10px; padding-top:5px" colspan="2"><input id="meetname" style="width:340px;height:24px;border:1px solid #186FCA;font-size:14px;padding-left:3px;" type="text" class="inputtext1 validate[required]"></input></td>
+			</tr>
+			  <tr class="PlatformCode">
+				<td class="$image_prex$itemnametd" width="35%">$recordmgr.meetingtext$</td><td align="left"  style="padding-left:10px;padding-top:5px;padding-bottom:5px;" colspan="2"><textarea style="width:340px;border:1px solid #186FCA;font-size:14px;padding-left:3px;" id="meettext" cols=38 rows=3 ></textarea></td>
+			  </tr>
+			  <tr class="PlatformCode">
+				<td class="$image_prex$itemnametd" width="35%">$recordmgr.meetingstatus$</td>
+				<td id="meetstatus" style="padding-left:10px;padding-top:4px;color:red;font-size:16;">$recordmgr.meetingstatus0$&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td id="meettimeset" style="padding-left:10px;padding-top:4px;color:red;font-size:16;"></td>
+			  </tr>
+			  <tr class="PlatformCode">
+				<td class="$image_prex$itemnametd" width="35%"></td>
+				<td align="left" style="padding-left:10px;padding-top:10px;" colspan="2">
+					<input id="meetplay" name="1" type="button" class="btn-normal-meet" onmouseover="this.className='btn-hover-meet';" onmouseout="this.className='btn-normal-meet';" value="$recordmgr.meetingopen$" />		          
+					<input id="savemeet" type="button" class="btn-normal-meet" value="$recordmgr.meetingupdate$"  onmouseover="this.className='btn-hover-meet';" onmouseout="this.className='btn-normal-meet';"style="display:none;"/>
+				</td>
+			  </tr>
+			
+	          </table>
+			    </form>
+		
+<script>
+var intervalId;
+var win;
+var meetip;
+var meetst;
+var meetcurtime;
+var platformmode;
+var reso;
+var hdbit;
+var sdbit;
+
+function getFormatStatus(){
+	var data = {"actioncode": "113"};
+	jQueryAjaxCmd({
+		"data": data,
+		success: function(ret) {
+			if(ret == "1"){
+				alert('$opt.success$');
+				parent.closeUploading();
+				window.clearInterval(intervalId);
+			}
+			else if(ret == "2"){
+				alert('$opt.faild$');
+				parent.closeUploading();
+				window.clearInterval(intervalId);
+			} 
+		}
+	});
+}
+
+function fix(num, length) {
+  return ('' + num).length < length ? ((new Array(length + 1)).join('0') + num).slice(-length) : '' + num;
+}
+
+function formatSeconds(value) {
+    var sec = parseInt(value);// 秒
+    var min = 0;// 分
+    var hour = 0;// 小时
+	var day = 0;
+
+    if(sec >= 60) {
+        min = parseInt(sec/60);
+        sec = parseInt(sec%60);
+		if(min >= 60) {
+			hour = parseInt(min/60);
+			min = parseInt(min%60);
+		}
+		if(hour >= 24) {
+			day = parseInt(hour/24);
+			hour = parseInt(hour%24);	
+		}
+    }
+
+	var result = '';
+	
+	result = fix(parseInt(min), 2) + ":" + fix(sec, 2);
+	result = fix(parseInt(hour), 2) + ":" + result;
+	
+	if(day > 0 && day < 10)
+		result = fix(parseInt(day), 1) + '$recordmgr.meetingday$' + " " + result;
+	else if(day >= 10 && day < 100)
+		result = fix(parseInt(day), 2) + '$recordmgr.meetingday$' + " " + result;
+
+    return result;
+}
+
+function initMeetingInfo(formData, flag){
+	if(formData){
+		var meetplay = formData['meetplay'];
+		var meetname = formData['meetname'];
+		var meetdate1 = formData['meetdate1'];
+		var meetdate2 = formData['meetdate2'];
+		var meettext = formData['meettext'];
+		var meetoder = formData['meetoder'];
+		var meetsync = formData['meetsync'];
+		var meetopt  = formData['meetopt'];
+		var meettimedif = formData['meettimedif'];
+		
+		meetip = formData['meetip'];				// 全局
+		platformmode = formData['platformmode'];		// 全局
+		meetst = formData['meetst'];				// 全局
+		meetcurtime = formData['meetcurtime'];		// 全局
+		
+		reso = jQuery("#resolution").attr("value");
+
+//		set_meetstatus(meetst);
+
+		jQuery("#meetstatus").css("font-size","16");
+		jQuery("#meetstatus").css("font-weight","1000");
+		if(meetst == 0){		// 未开启会议
+			if(jQuery('input[name=meettype]:checked').val() == 0 || flag == 1){
+				jQuery("#meetplay").val("$recordmgr.meetingopen$").attr("name","0");		// 开启会议
+			}
+			else{
+				jQuery("#meetplay").val("$recordmgr.meetingreserve$").attr("name","0");		// 开启预约
+			}
+			jQuery("#meetstatus").css("color","red");
+			jQuery("#meetstatus").text('$recordmgr.meetingstatus0$');
+			jQuery("#meettimeset").text("");
+			jQuery('input[name=meettype]').removeAttr("disabled");		// 预约类型可设置
+			jQuery("#savemeet").attr("style","display:none");
+	//		jQuery("#meetdate1").removeAttr("readonly");
+			jQuery("#meetdate1").removeAttr("disabled");
+		}
+		else if(meetst == 1){	// 异常
+//			jQuery("#meetplay").val("$recordmgr.meetingopen$").attr("name","0");			// 开启会议
+			jQuery("#meetstatus").css("color","red");
+			jQuery("#meetstatus").text('$recordmgr.meetingstatus1$');
+			jQuery("#meettimeset").text("");
+	//		jQuery('input[name=meettype]').removeAttr("disabled");		// 预约类型可设置
+	//		jQuery("#meetdate1").removeAttr("readonly");
+			jQuery("#meetdate1").removeAttr("disabled");
+		}
+		else if(meetst == 2){	// 会议进行中
+			var mtext = formatSeconds(parseInt(meettimedif));
+			jQuery("#meetplay").val("$recordmgr.meetingclose$").attr("name","1");			// 停止会议
+			jQuery("#meetstatus").css("color","green");
+			jQuery("#meetstatus").text('$recordmgr.meetingstatus2$');
+			jQuery("#meettimeset").text('$recordmgr.meetingtimeset0$' + mtext);
+			jQuery('input[name=meettype]').attr("disabled","disabled");		// 预约类型不可设置
+			jQuery("#savemeet").attr("style","display:yes");
+	//		jQuery("#meetdate1").attr("readonly", true");
+			jQuery("#meetdate1").attr("disabled","disabled")
+		}
+		else if(meetst == 3){	// 已预约
+			var mtext = formatSeconds(parseInt(meettimedif));
+			jQuery("#meetplay").val("$recordmgr.meetingreservecalcel$").attr("name","1");	// 取消预约
+			jQuery("#meetstatus").css("color","green");
+			jQuery("#meetstatus").text('$recordmgr.meetingstatus3$');
+			jQuery("#meettimeset").text('$recordmgr.meetingtimeset1$' + mtext);
+			jQuery('input[name=meettype]').attr("disabled","disabled");		// 预约类型不可设置
+			jQuery("#savemeet").attr("style","display:yes");
+	//		jQuery("#meetdate1").removeAttr("readonly");
+			jQuery("#meetdate1").removeAttr("disabled");
+		}
+		else if(meetst == 4){	//  会议审核中
+			jQuery("#meetplay").val("$recordmgr.meetingabandon$").attr("name","1");	//放弃会议
+			jQuery("#meetstatus").css("color","red");
+			jQuery("#meetstatus").text('$recordmgr.meetingstatus5$');
+			jQuery("#meettimeset").text("");
+			jQuery('input[name=meettype]').attr("disabled","disabled");		// 预约类型不可设置
+			jQuery("#savemeet").attr("style","display:none");
+		}
+		else if(meetst == 5){	//	会议审核拒绝
+			if(jQuery('input[name=meettype]:checked').val() == 0 || flag == 1){
+				jQuery("#meetplay").val("$recordmgr.meetingopen$").attr("name","0");		// 开启会议
+			}
+			else{
+				jQuery("#meetplay").val("$recordmgr.meetingreserve$").attr("name","0");		// 开启预约
+			}
+			jQuery("#meetstatus").css("color","red");
+			jQuery("#meetstatus").text('$recordmgr.meetingstatus6$');
+			jQuery("#meettimeset").text("");
+			jQuery('input[name=meettype]').removeAttr("disabled");		// 预约类型可设置
+			jQuery("#savemeet").attr("style","display:none");
+			jQuery("#meetdate1").removeAttr("disabled");
+		}
+	
+/*	
+		if(meetplay==1 || (meetopt!=0 && meetopt!=3 && meetoder==1 && meetsync==1)){
+			if(meetoder==0){
+				jQuery("#meetplay").val("$recordmgr.meetingclose$").attr("name","1");
+			}
+			else{
+				jQuery("#meetplay").val("$recordmgr.meetingreservecalcel$").attr("name","1");
+			}
+			jQuery('input[name=meettype]').attr("disabled","disabled");		// 预约类型可设置
+			jQuery("#savemeet").attr("style","display:yes");
+		}
+		else{
+			if(meetoder==0){
+				jQuery("#meetplay").val("$recordmgr.meetingopen$").attr("name","0");
+			}
+			else{
+				jQuery("#meetplay").val("$recordmgr.meetingreserve$").attr("name","0");
+			}
+		}
+*/
+		if(flag == 1){	
+			jQuery("#meetname").val(meetname);		
+			jQuery('input[name=meettype]').get(meetoder).checked = true; 
+			jQuery("#meetdate1").val(meetdate1);
+			jQuery("#meetdate2").val(meetdate2);
+			if(meetoder==0){
+				jQuery("#meettime").hide();
+			}
+			else{
+				jQuery("#meettime").show();
+			}
+			jQuery("#meettext").val(meettext);
+		}
+	}
+}
+
+var updateMeetStatus;
+var updateRecRtInfo;
+
+function initPage(formData){
+		
+	if(verType == 0)
+	{
+		jQuery(".PlatformCode").show();
+	}
+	else if(verType == 1)
+	{
+		jQuery(".PlatformCode").hide();
+	}
+	if (formData) {
+		//1.
+		
+		var fileName = formData['fileName'];
+		var startTime = formData['startTime'];
+		var rate = formData['rate'];
+		var frequency = formData['frequency'];
+		var statusU = formData['statusU'];
+		
+		var recordStatus = formData['recordStatus'];
+		var recSize = formData['recSize'];	//MB
+		var usbFreeSize = formData['usbFreeSize'];
+		var recDuration = formData['recDuration'];
+		var usbRemainRecTime = formData['usbRemainRecTime'];	//secord
+		var videobtn_1 = formData['videobtn_1'];
+		var videobtn_2 = formData['videobtn_2'];
+		var videobtn_3 = formData['videobtn_3'];
+		var rec=formData['recenable'];
+		var recstat=formData['recstat'];
+		
+		reso = jQuery("#resolution").attr("value");
+		hdbit = formData['hd_bitrate'];
+		sdbit = formData['sd_bitrate'];
+		
+		
+		//jQuery(".rate").text(rate);
+		//jQuery(".frequency").text(frequency);
+		
+		jQuery(".fileName").text(fileName);
+		jQuery(".startTime").text(startTime);
+		
+		
+		
+		
+		//2.录制状态
+		var tmp = "";
+		var tmpSize = 0;
+		tmpSize = recSize / 1024;
+		
+		if(tmpSize < 1)
+			tmpSize = Math.round(recSize) + "MB";
+		else
+			tmpSize = tmpSize.toFixed(2) + "GB"; //取两位小数
+		
+		if(recordStatus == 0)
+		{
+			tmp = "";
+			tmp = "$recordmgr.stopRecord$";
+			jQuery(".fileName").css("color", "");
+			jQuery(".startTime").css("color", "");
+			jQuery(".statusU").css("color", "");
+			jQuery(".recordStatus").css("color", "");
+			jQuery("#recstarttime").attr("disabled",false);
+		}else if(recordStatus == 1){
+			tmp = "";
+			tmp = "$recordmgr.recording$" + "<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>" + time_To_hhmmss(recDuration) + "<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>" + tmpSize;
+			jQuery(".fileName").css("color", "green");
+			jQuery(".startTime").css("color", "green");
+			jQuery(".statusU").css("color", "green");
+			jQuery(".recordStatus").css("color", "green");
+			jQuery("#recstarttime").val(startTime.substr(0,16));
+			jQuery("#recstarttime").attr("disabled",true);
+		}else if(recordStatus == 2){
+			tmp = "";
+			tmp = "$recordmgr.pausRecord$" + "<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>" + time_To_hhmmss(recDuration) + " <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>" + tmpSize;
+			jQuery(".fileName").css("color", "green");
+			jQuery(".startTime").css("color", "green");
+			jQuery(".statusU").css("color", "green");
+			jQuery(".recordStatus").css("color", "green");
+			jQuery("#recstarttime").val(startTime.substr(0,16));
+			jQuery("#recstarttime").attr("disabled",true);
+		}
+		jQuery(".recordStatus").html(tmp);
+		
+		//3.U盘状态
+		tmpSize = 0;
+		tmpSize = usbFreeSize / 1024;
+		
+		if(tmpSize < 1)
+			tmpSize = Math.round(usbFreeSize) + "MB";
+		else
+			tmpSize = tmpSize.toFixed(2) + "GB"; //取两位小数
+			
+		if(statusU == 0){
+			tmp = "";
+			tmp = "$recordmgr.noU$";
+		}else if(statusU == 1){
+			tmp = "";
+			tmp = "$recordmgr.hasU$<span id='uFreeSize'>&nbsp;" + tmpSize + "</span>" + "&nbsp;$recordmgr.noEtc$";
+		}else if(statusU == 2){
+			tmp = "";
+			tmp = "$recordmgr.hasU$<span id='uFreeSize'>&nbsp;" + tmpSize + "</span>" + "&nbsp;$recordmgr.stopEtc$";
+		}else if(statusU == 3){
+			tmp = "";
+			tmp = "$recordmgr.hasU$<span id='uFreeSize'>&nbsp;" + tmpSize + "</span>" + "&nbsp;$recordmgr.etcing$<span id='etcTime'>&nbsp;" + usbRemainRecTime + "$recordmgr.etcMin$&nbsp;</span>$recordmgr.etcTime$";
+		}else if(statusU == 4){
+			tmp = "";
+			tmp = "$recordmgr.hasU$<span id='uFreeSize'>&nbsp;" + tmpSize + "</span>" + "&nbsp;$recordmgr.pauseRecUsb$";
+		}
+		jQuery(".statusU").html(tmp);
+		
+		if(usbFreeSize / 1024 < 1)
+			jQuery("#uFreeSize").css("color","red");
+			
+		if(usbRemainRecTime < 60)
+			jQuery("#etcTime").css("color","red");
+		
+		if(videobtn_1 == 0)
+			jQuery('#videobtn_1').css('display','none');
+		if(videobtn_2 == 0)
+			jQuery('#videobtn_2').css('display','none');
+		if(videobtn_3 == 0)
+			jQuery('#videobtn_3').css('display','none');
+	}
+	
+	//4.
+	if(recordStatus == 0)//停止录制
+	{
+		jQuery("#startSpan").css("display","");
+		jQuery("#stopSpan").css("display","none");
+		jQuery("#pausSpan").css("display","none");
+		jQuery("#conSpan").css("display","none");
+		jQuery(".recording").text('$recordmgr.noRecord$');
+	}else if(recordStatus == 1)//录制中
+	{
+		jQuery("#startSpan").css("display","none");
+		jQuery("#stopSpan").css("display","");
+		jQuery("#pausSpan").css("display","");
+		jQuery("#conSpan").css("display","none");
+		//jQuery(".recording").text("");
+	}else if(recordStatus == 2)//暂停录制
+	{
+		jQuery("#startSpan").css("display","none");
+		jQuery("#stopSpan").css("display","");
+		jQuery("#pausSpan").css("display","none");
+		jQuery("#conSpan").css("display","");
+		//jQuery(".recording").text("display");
+	}else{
+		alert("Other");
+	}
+	
+	//5.
+	if(recordStatus != 0){
+		jQuery("#resolution").attr("disabled",true);
+	//	jQuery("#hd_bitrate").attr("disabled",true);
+	//	jQuery("#sd_bitrate").attr("disabled",true);
+		jQuery("#maxHour").attr("disabled",true);
+	//	jQuery("#hd_bitrate_bnt").attr("style","display:none");
+	//	jQuery("#sd_bitrate_bnt").attr("style","display:none");
+	}
+	else{
+		jQuery("#resolution").attr("disabled",false);
+		jQuery("#hd_bitrate").attr("disabled",false);
+		jQuery("#sd_bitrate").attr("disabled",false);
+		jQuery("#maxHour").attr("disabled",false);
+		jQuery("#hd_bitrate_bnt").attr("style","display:yes");
+		jQuery("#sd_bitrate_bnt").attr("style","display:yes");
+	}
+	
+	if(rec == 1){
+		jQuery("#appointmentbox").attr("checked",true);
+		//jQuery('input[name=rec]').attr("disabled","disabled");	
+		//jQuery("#savemeet").attr("style","displsy:yes");		
+		if(recstat==1 && recordStatus ==0)
+			document.getElementById("recstarttime").disabled=false;
+
+	}
+	else if(rec == 0){
+		jQuery("#appointmentbox").attr("checked",false);
+		jQuery("#recstarttime").hide();
+		jQuery("#recendtime").hide();
+		jQuery("#appupdate").hide();
+		jQuery("#labrec").hide();
+	}
+	
+	initMeetingInfo(formData, 1);
+
+	updateMeetStatus = clearInterval(updateMeetStatus);
+	updateMeetStatus = setInterval("update_meet_status()",2960);
+	
+	updateRecRtInfo = clearInterval(updateRecRtInfo);
+//	updateRecRtInfo = setInterval("update_rec_rtinfo()",2960);
+}
+function initPage2(formData){
+		
+	if (formData) {
+		//1.	
+		var rate = formData['rate'];
+		var frequency = formData['frequency'];
+		var statusU = formData['statusU'];
+		var fileName = formData['fileName'];
+		var startTime = formData['startTime'];
+		var recordStatus = formData['recordStatus'];
+		var recSize = formData['recSize'];	//MB
+		var usbFreeSize = formData['usbFreeSize'];
+		var recDuration = formData['recDuration'];
+		var usbRemainRecTime = formData['usbRemainRecTime'];	//secord
+		var videobtn_1 = formData['videobtn_1'];
+		var videobtn_2 = formData['videobtn_2'];
+		var videobtn_3 = formData['videobtn_3'];
+		var rec=formData['recenable'];
+		var recstat=formData['recstat'];
+			
+		//jQuery(".rate").text(rate);
+		//jQuery(".frequency").text(frequency);
+		
+		jQuery(".fileName").text(fileName);
+		jQuery(".startTime").text(startTime);		
+		//2.录制状态
+		var tmp = "";
+		var tmpSize = 0;
+		tmpSize = recSize / 1024;
+		
+		if(tmpSize < 1)
+			tmpSize = Math.round(recSize) + "MB";
+		else
+			tmpSize = tmpSize.toFixed(2) + "GB"; //取两位小数
+		
+		if(recordStatus == 0)
+		{
+			tmp = "";
+			tmp = "$recordmgr.stopRecord$";
+			jQuery(".fileName").css("color", "");
+			jQuery(".startTime").css("color", "");
+			jQuery(".statusU").css("color", "");
+			jQuery(".recordStatus").css("color", "");
+			jQuery("#recstarttime").attr("disabled",false);
+		}else if(recordStatus == 1){
+			tmp = "";
+			tmp = "$recordmgr.recording$" + "<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>" + time_To_hhmmss(recDuration) + "<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>" + tmpSize;
+			jQuery(".fileName").css("color", "green");
+			jQuery(".startTime").css("color", "green");
+			jQuery(".statusU").css("color", "green");
+			jQuery(".recordStatus").css("color", "green");
+			jQuery("#recstarttime").val(startTime.substr(0,16));
+			jQuery("#recstarttime").attr("disabled",true);
+		}else if(recordStatus == 2){
+			tmp = "";
+			tmp = "$recordmgr.pausRecord$" + "<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>" + time_To_hhmmss(recDuration) + " <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>" + tmpSize;
+			jQuery(".fileName").css("color", "green");
+			jQuery(".startTime").css("color", "green");
+			jQuery(".statusU").css("color", "green");
+			jQuery(".recordStatus").css("color", "green");
+			jQuery("#recstarttime").val(startTime.substr(0,16));
+			jQuery("#recstarttime").attr("disabled",true);
+		}
+		jQuery(".recordStatus").html(tmp);
+		
+		//3.U盘状态
+		tmpSize = 0;
+		tmpSize = usbFreeSize / 1024;
+		
+		if(tmpSize < 1)
+			tmpSize = Math.round(usbFreeSize) + "MB";
+		else
+			tmpSize = tmpSize.toFixed(2) + "GB"; //取两位小数
+			
+		if(statusU == 0){
+			tmp = "";
+			tmp = "$recordmgr.noU$";
+		}else if(statusU == 1){
+			tmp = "";
+			tmp = "$recordmgr.hasU$<span id='uFreeSize'>&nbsp;" + tmpSize + "</span>" + "&nbsp;$recordmgr.noEtc$";
+		}else if(statusU == 2){
+			tmp = "";
+			tmp = "$recordmgr.hasU$<span id='uFreeSize'>&nbsp;" + tmpSize + "</span>" + "&nbsp;$recordmgr.stopEtc$";
+		}else if(statusU == 3){
+			tmp = "";
+			tmp = "$recordmgr.hasU$<span id='uFreeSize'>&nbsp;" + tmpSize + "</span>" + "&nbsp;$recordmgr.etcing$<span id='etcTime'>&nbsp;" + usbRemainRecTime + "$recordmgr.etcMin$&nbsp;</span>$recordmgr.etcTime$";
+		}else if(statusU == 4){
+			tmp = "";
+			tmp = "$recordmgr.hasU$<span id='uFreeSize'>&nbsp;" + tmpSize + "</span>" + "&nbsp;$recordmgr.pauseRecUsb$";
+		}
+		jQuery(".statusU").html(tmp);
+		
+		if(usbFreeSize / 1024 < 1)
+			jQuery("#uFreeSize").css("color","red");
+			
+		if(usbRemainRecTime < 60)
+			jQuery("#etcTime").css("color","red");
+		
+		if(videobtn_1 == 0)
+			jQuery('#videobtn_1').css('display','none');
+		if(videobtn_2 == 0)
+			jQuery('#videobtn_2').css('display','none');
+		if(videobtn_3 == 0)
+			jQuery('#videobtn_3').css('display','none');
+	}
+	
+	//4.
+	if(recordStatus == 0)//停止录制
+	{
+		jQuery("#startSpan").css("display","");
+		jQuery("#stopSpan").css("display","none");
+		jQuery("#pausSpan").css("display","none");
+		jQuery("#conSpan").css("display","none");
+		jQuery(".recording").text('$recordmgr.noRecord$');
+	}else if(recordStatus == 1)//录制中
+	{
+		jQuery("#startSpan").css("display","none");
+		jQuery("#stopSpan").css("display","");
+		jQuery("#pausSpan").css("display","");
+		jQuery("#conSpan").css("display","none");
+		//jQuery(".recording").text("");
+	}else if(recordStatus == 2)//暂停录制
+	{
+		jQuery("#startSpan").css("display","none");
+		jQuery("#stopSpan").css("display","");
+		jQuery("#pausSpan").css("display","none");
+		jQuery("#conSpan").css("display","");
+		//jQuery(".recording").text("display");
+	}else{
+		alert("Other");
+	}
+	
+	//5.
+	if(recordStatus != 0){
+		jQuery("#resolution").attr("disabled",true);
+	//	jQuery("#hd_bitrate").attr("disabled",true);
+	//	jQuery("#sd_bitrate").attr("disabled",true);
+		jQuery("#maxHour").attr("disabled",true);
+	//	jQuery("#hd_bitrate_bnt").attr("style","display:none");
+	//	jQuery("#sd_bitrate_bnt").attr("style","display:none");
+	}
+	else{
+		jQuery("#resolution").attr("disabled",false);
+		jQuery("#hd_bitrate").attr("disabled",false);
+		jQuery("#sd_bitrate").attr("disabled",false);
+		jQuery("#maxHour").attr("disabled",false);
+		jQuery("#hd_bitrate_bnt").attr("style","display:yes");
+		jQuery("#sd_bitrate_bnt").attr("style","display:yes");
+	}
+	
+	if(rec == 1){
+		jQuery("#appointmentbox").attr("checked",true);
+		//jQuery('input[name=rec]').attr("disabled","disabled");	
+		//jQuery("#savemeet").attr("style","displsy:yes");
+		if(recstat==1)
+		{
+			document.getElementById("recstarttime").disabled=true;
+		}else
+			document.getElementById("recstarttime").disabled=false;
+
+	}
+	else if(rec == 0){
+		jQuery("#appointmentbox").attr("checked",false);
+	}
+}
+
+function rndnum(n){
+	var rnd="";
+	for(var i=0;i<n;i++)
+		rnd+=Math.floor(Math.random()*10);
+	return rnd;
+}
+
+function set_meetstatus(status)
+{
+	jQuery("#meetstatus").css("font-size","16");
+	jQuery("#meetstatus").css("font-weight","1000");
+	if(status == 0){		// 未开启会议
+		jQuery("#meetstatus").css("color","red");
+		jQuery("#meetstatus").text('$recordmgr.meetingstatus0$');
+	}
+	else if(status == 1){	// 异常
+		jQuery("#meetstatus").css("color","red");
+		jQuery("#meetstatus").text('$recordmgr.meetingstatus1$');
+	}
+	else if(status == 2){	// 会议进行中
+		jQuery("#meetstatus").css("color","green");
+		jQuery("#meetstatus").text('$recordmgr.meetingstatus2$');
+	}
+	else if(status == 3){	// 已预约
+		jQuery("#meetstatus").css("color","green");
+		jQuery("#meetstatus").text('$recordmgr.meetingstatus3$');
+	}
+}
+
+function update_meet_status()
+{
+	var data = {"actioncode": "601"};
+	jQueryAjaxCmd({
+		"data": data,
+		success: function(ret) {
+			var obj = strToJson(ret);
+			initMeetingInfo(obj, 0);
+		}
+	});
+}
+
+function update_rec_rtinfo()
+{
+	var data = {"actioncode": "329"};
+	jQueryAjaxCmd({
+		"data": data,
+		success:function(ret) {
+		//	alert(ret);
+			var obj = strToJson(ret);
+			
+			jQuery('#videobtn_1').css('display','');
+			jQuery('#videobtn_2').css('display','');
+			jQuery('#videobtn_3').css('display','');
+			
+			initPage2(obj);
+		}
+	});
+}
+
+function update_meet_status2()
+{
+	var data = {"actioncode": "601"};
+	jQueryAjaxCmd({
+		"data": data,
+		success: function(ret) {
+			var obj = strToJson(ret);
+			initMeetingInfo(obj, 0);
+		}
+	});
+}
+
+
+
+//将秒转换为 hh:mm:ss
+function time_To_hhmmss(seconds){
+	   var hh,mm,ss;
+
+	   //传入的时间为空或小于0
+	   if(seconds==null||seconds<0){
+	       return;
+	   }
+	   //得到小时
+	   hh=seconds/3600|0;
+	   seconds=parseInt(seconds)-hh*3600;
+	   if(parseInt(hh)<10){
+	          hh="0"+hh;
+	   }
+	   //得到分
+	   mm=seconds/60|0;
+	   //得到秒
+	   ss=parseInt(seconds)-mm*60;
+	   if(parseInt(mm)<10){
+	         mm="0"+mm;    
+	   }
+	   if(ss<10){
+	       ss="0"+ss;      
+	   }
+	   return hh+":"+mm+":"+ss;
+}
+
+function strToJson(str){ 
+	var json = eval('(' + str + ')'); 
+	return json; 
+} 
+
+function resetRefresh()
+{
+	jQuery("#refresh").attr("disabled",false);   
+}
+
+function CompareDate(d1,d2)
+{
+  return ((new Date(d1.replace(/-/g,"/"))) > (new Date(d2.replace(/-/g,"/"))));
+}
+	
+jQuery(function() {
+	
+	/*
+	 * 初始化表单验证
+	 */
+	initFormValidation();
+	
+	//码率，分辨率设置
+	jQuery('.encoding').change(function() {
+		if(confirm("$recordmgr.re_notice$")){
+			var data = {"actioncode": "441"};
+			var params = getFormItemValue('wmform');
+			if(params) {
+				jQuery.extend(data, params);
+			}
+			
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					if(ret == 1) {
+						alert('$savesucess$');
+					}else if (ret == 3) {
+						alert('$uploadstateerror$');
+					} else {
+						alert('$savefailed$');
+					}
+				}
+			});
+		}
+		else{
+			jQuery('.encoding').val(reso);
+		}
+	});
+	
+	jQuery('#maxHour').change(function() {
+		var data = {"actioncode": "449"};
+		var params = getFormItemValue('wmform');
+		if(params) {
+			jQuery.extend(data, params);
+		}
+		
+		jQueryAjaxCmd({
+			"data": data,
+			success:function(ret) {
+				if(ret == 1) {
+					alert('$savesucess$');
+				} else {
+					alert('$savefailed$');
+				}
+			}
+		});
+	});
+	
+	jQuery('#switchBtn').click(function() {
+			var data = {"actioncode": "439"};
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					if(ret == 11) {
+						alert('$recordmgr.noReviewOpe$');
+					}
+				}
+			});
+	});
+	
+	jQuery('#videobtn_1').click(function() {
+			var data = {"actioncode": "444"};
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					if(ret == 11) {
+						alert('$recordmgr.noReviewOpe$');
+					}
+				}
+			});
+	});
+	
+	jQuery('#videobtn_2').click(function() {
+			var data = {"actioncode": "445"};
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					if(ret == 11) {
+						alert('$recordmgr.noReviewOpe$');
+					}
+				}
+			});
+	});
+	
+	jQuery('#videobtn_3').click(function() {
+			var data = {"actioncode": "446"};
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					if(ret == 11) {
+						alert('$recordmgr.noReviewOpe$');
+					}
+				}
+			});
+	});
+	
+	jQuery('#reset').click(function() {
+			var data = {"actioncode": "447"};
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					if(ret == 11) {
+						alert('$recordmgr.noReviewOpe$');
+					}
+				}
+			});
+	});
+	
+	/*
+	 * 初始化设置和刷新按钮事件
+	 */
+	jQuery('#startSpan').click(function() {
+		openUploading();
+		
+		var data = {"actioncode": "448"};
+		jQuery.extend(data, {"optType": 1});
+		jQueryAjaxCmd({
+			"data": data,
+			success:function(ret) {
+				closeUploading();
+				
+				if(ret == "1") {
+					jQuery("#refresh").click();
+				}else if(ret == '11'){
+					alert('$recordmgr.noReview$');
+				}else if (ret == '12'){
+					alert('$recordmgr.usbDownload$');
+				}else if (ret == '13') {
+					alert('$recordmgr.noSpace$');
+				}else if (ret == '21') {
+					alert('$recordmgr.noDongle$');
+				}else {
+					alert('$opt.faild$');
+				}
+			}
+		});
+	});
+	
+	jQuery('#stopSpan').click(function() {
+		openUploading();
+		
+		var data = {"actioncode": "448"};
+		jQuery.extend(data, {"optType": 0});
+		jQueryAjaxCmd({
+			"data": data,
+			success:function(ret) {
+				closeUploading();
+
+				if(ret == "1") {
+					jQuery("#refresh").click();
+				}else{
+					alert('$opt.faild$');
+				}
+			}
+		});
+	});
+	
+	jQuery('#pausSpan').click(function() {
+		var data = {"actioncode": "448"};
+		jQuery.extend(data, {"optType": 2});
+		jQueryAjaxCmd({
+			"data": data,
+			success:function(ret) {
+				if(ret == "1") {
+					jQuery("#refresh").click();
+				}else{
+					alert('$opt.faild$');
+				}
+			}
+		});
+	});
+	
+	jQuery('#conSpan').click(function() {
+		var data = {"actioncode": "448"};
+		jQuery.extend(data, {"optType": 1});
+		jQueryAjaxCmd({
+			"data": data,
+			success:function(ret) {
+				if(ret == "1") {
+					jQuery("#refresh").click();
+				}else{
+					alert('$opt.faild$');
+				}
+			}
+		});
+	});
+	
+	jQuery('#refresh').click(function() {
+		var data = {"actioncode": "329"};
+		jQueryAjaxCmd({
+			"data": data,
+			success:function(ret) {
+			//	alert(ret);
+				var obj = strToJson(ret);
+				
+				jQuery('#videobtn_1').css('display','');
+				jQuery('#videobtn_2').css('display','');
+				jQuery('#videobtn_3').css('display','');
+				
+				initPage2(obj);
+				
+				jQuery("#refresh").attr("disabled",true);        
+				setTimeout("resetRefresh()",900); 
+			}
+		});
+	});
+	
+	jQuery('#uniSpan').click(function() {
+		if(!win || win.closed)
+		{
+			if(checkBrowser()){
+				var data = {"actioncode": "517"};
+				jQuery.extend(data, {"user": jQuery.cookies.get("user")});
+				jQueryAjaxCmd({
+					"data": data,
+					success:function(ret) {
+					   if (ret == 1){
+						   win=window.open("encoder.cgi?actioncode=516");
+						 }else if (ret == 5){
+							alert("$user.adminplaying$");	
+						}else if (ret == 6){
+							alert("$user.maxuser$");					;
+						 }else{
+						   alert('$recordmgr.notUni$');
+					   }
+					}
+				});
+			}else{
+				alert('$msg.installPlug$');
+			}
+		}
+		else
+		{
+			alert("$user.alreadyopen$");	
+			return;
+		}
+	});
+	
+	jQuery('#setprefxBtn').click(function() {
+		var re=  /^[a-zA-Z0-9_-]{1,}$/;
+		var txt=jQuery("#prefixname").attr("value");
+		if(!re.test(txt) && txt !=''){alert('$recordmgr.msgcontainschines$');
+		return;}
+		var data = {"actioncode": "457"};			
+		jQuery.extend(data, {"prefixname": jQuery("#prefixname").attr("value")});		
+		jQueryAjaxCmd({
+			"data": data,			
+			success:function(ret) {				
+				if(ret == "1") {
+					alert('$opt.success$');
+				}else{
+					alert('$opt.faild$');
+				}				
+			}
+		});
+	});
+	jQuery('#hd_bitrate_bnt').click(function() {
+		var reg = new RegExp("^[0-9]*$");
+		var bitrate = jQuery("#hd_bitrate").attr("value");
+		
+		if(!reg.test(bitrate)){
+			jQuery("#hd_bitrate").val(hdbit);
+			alert("$opt.inputErr$");
+			return;
+		}
+		
+		if(bitrate < 768 || bitrate > 4096){
+			jQuery("#hd_bitrate").val(hdbit);
+			alert("$opt.inputErr$");
+			return;
+		}
+		
+		hdbit = bitrate;
+	
+		var data = {"actioncode": "467"};			
+		jQuery.extend(data, {"hd_bitrate": bitrate});		
+		jQueryAjaxCmd({
+			"data": data,			
+			success:function(ret) {				
+				if(ret == "1") {
+					alert('$opt.success$');
+				}else{
+					alert('$opt.faild$');
+				}				
+			}
+		});
+	});
+	jQuery('#sd_bitrate_bnt').click(function() {
+		var reg = new RegExp("^[0-9]*$");
+		var bitrate = jQuery("#sd_bitrate").attr("value");
+		
+		if(!reg.test(bitrate)){
+			jQuery("#sd_bitrate").val(sdbit);
+			alert("$opt.inputErr$");
+			return;
+		}
+		
+		if(bitrate < 256 || bitrate > 768){
+			jQuery("#sd_bitrate").val(sdbit);
+			alert("$opt.inputErr$");
+			return;
+		}
+		
+		sdbit = bitrate;
+		
+		var data = {"actioncode": "468"};			
+		jQuery.extend(data, {"sd_bitrate": bitrate});		
+		jQueryAjaxCmd({
+			"data": data,			
+			success:function(ret) {				
+				if(ret == "1") {
+					alert('$opt.success$');
+				}else{
+					alert('$opt.faild$');
+				}				
+			}
+		});
+	});
+	jQuery('input[name=meettype]').click(function(event){
+		if(jQuery('input[name=meettype]:checked').val()==1){
+			jQuery("#meettime").show();
+			jQuery("#meetplay").val("$recordmgr.meetingreserve$").attr("name","1");	
+		}else{
+			jQuery("#meettime").hide();
+			jQuery("#meetplay").val("$recordmgr.meetingopen$").attr("name","0");
+		}
+		
+	});
+	
+	var language = jQuery('#changeLanguage').attr("value");
+	if(language == 1){
+		jQuery("#meetname").addClass("class='validate[maxSize[120]]'");
+		jQuery("#meettext").addClass("class='validate[maxSize[1020]]'");
+	}else{
+		jQuery("#meetname").addClass("class='validate[maxSize[40]]'");
+		jQuery("#meettext").addClass("class='validate[maxSize[250]]'");
+	}
+	
+	if(language == 0){
+		jQuery("#meetdate1").datetimepicker({step:10,lang:'ch',});
+		jQuery("#meetdate2").datetimepicker({step:10,lang:'ch',});
+	}else if(language == 1){
+		jQuery("#meetdate1").datetimepicker({step:10,lang:'en',});
+		jQuery("#meetdate2").datetimepicker({step:10,lang:'en',});
+	}else if(language == 2){
+		jQuery("#meetdate1").datetimepicker({step:10,lang:'ch',});
+		jQuery("#meetdate2").datetimepicker({step:10,lang:'ch',});
+	}else if(language == 3){
+		jQuery("#meetdate1").datetimepicker({step:10,lang:'ja',});
+		jQuery("#meetdate2").datetimepicker({step:10,lang:'ja',});
+	}else if(language == 4){
+		jQuery("#meetdate1").datetimepicker({step:10,lang:'kr',});
+		jQuery("#meetdate2").datetimepicker({step:10,lang:'kr',});
+	}
+
+	jQuery('#savemeet,#meetplay').click(function(event) {
+		var validate = validateFormByID('wmform');
+		if (validate) {
+			if(jQuery(this).attr("id")=="meetplay"){
+				if(platformmode != 2){
+					alert('$recordmgr.meetingnote0$');
+					return;
+				};
+				if(jQuery(this).attr("name")=="0"){
+					if(meetip==''){
+						alert('$recordmgr.meetingnote$');
+						return;
+					};
+				};
+			}
+		
+			var data = {"actioncode": "460"};
+			if(jQuery('input[name=meettype]:checked').val()==1){
+
+				if(jQuery("#meetdate1").val() == '' || jQuery("#meetdate2").val() == ''){
+					alert('$recordmgr.meetingerror2$');
+					return;
+				}
+
+				if(meetst == 2){
+					if(CompareDate(jQuery("#meetdate2").attr("value"), meetcurtime) == false){
+						alert('$recordmgr.meetingdataerror1$');
+						return;
+					}
+				}else{
+					if(CompareDate(jQuery("#meetdate2").attr("value"), meetcurtime) == false
+						|| CompareDate(jQuery("#meetdate1").attr("value"), meetcurtime) == false ){
+						alert('$recordmgr.meetingdataerror1$');
+						return;
+					}
+				}
+
+				if(CompareDate(jQuery("#meetdate2").attr("value"),jQuery("#meetdate1").attr("value")) == false){
+					alert('$recordmgr.meetingdataerror0$');
+					return;
+				}
+			}
+			
+			openUploading();
+			jQuery.extend(data, {"meetname": jQuery("#meetname").attr("value")});	
+			jQuery.extend(data, {"meettype": formSet.getRadioValue('#wmform ', 'meettype')});		
+			jQuery.extend(data, {"meetdate1": jQuery("#meetdate1").attr("value")});
+			jQuery.extend(data, {"meetdate2": jQuery("#meetdate2").attr("value")});
+			jQuery.extend(data, {"meettext": jQuery("#meettext").attr("value")});
+			
+			
+			
+			if(jQuery(this).attr("id")=="savemeet")
+			{
+				jQuery.extend(data, {"optiontype": 2});//保存参数
+			}
+			else
+			{	
+				if(jQuery(this).attr("name")=="1") //1按键显示关闭 0按键显示开启
+					jQuery.extend(data, {"optiontype": 0});//0关闭 1开启
+				else
+					jQuery.extend(data, {"optiontype": 1});//0关闭 1开启
+			}
+			jQueryAjaxCmd({
+				"data": data,			
+				success:function(ret) {
+					closeUploading();
+					if(ret == "0") {
+						alert('$opt.success$');
+					}
+					if(ret == "-2") {
+						alert('$recordmgr.meetingerrorn2$');
+					}
+					else if(ret == "2"){
+						alert('$recordmgr.meetingerror2$');
+					}
+					else if(ret == "3"){
+						alert('$recordmgr.meetingerror3$');
+					}
+					else if(ret == "-3"){
+						alert('$recordmgr.meetingerrorn3$');
+					}
+					else if(ret == "-1"){
+						alert('$opt.faild$');
+					}
+			//		window.location.reload();
+			//		setTimeout("update_meet_status2()",3000);
+				}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+//	jQuery("#recstarttime").datetimepicker({value:'2015/04/10 06:03',step:10,lang:'en',});
+//	jQuery("#recendtime").datetimepicker({value:'2015/04/20 08:01',step:10,lang:'en',});
+	
+	if(language == 0){
+		jQuery("#recstarttime").datetimepicker({step:10,lang:'ch',});
+		jQuery("#recendtime").datetimepicker({step:10,lang:'ch',});
+	}else if(language == 1){
+		jQuery("#recstarttime").datetimepicker({step:10,lang:'en',});
+		jQuery("#recendtime").datetimepicker({step:10,lang:'en',});
+	}else if(language == 2){
+		jQuery("#recstarttime").datetimepicker({step:10,lang:'ch',});
+		jQuery("#recendtime").datetimepicker({step:10,lang:'ch',});
+	}else if(language == 3){
+		jQuery("#recstarttime").datetimepicker({step:10,lang:'ja',});
+		jQuery("#recendtime").datetimepicker({step:10,lang:'ja',});
+	}else if(language == 4){
+		jQuery("#recstarttime").datetimepicker({step:10,lang:'kr',});
+		jQuery("#recendtime").datetimepicker({step:10,lang:'kr',});
+	}
+			
+	jQuery('#appointmentbox').click(function(event) {		
+		var chk=jQuery("#appointmentbox").attr("checked");		
+		if(!(chk=='checked'))
+		{
+			var data = {"actioncode": "465"};					
+			if(!chk=='checked')
+				recopt=1;
+			else
+			  recopt=0;
+			jQuery.extend(data, {"recenable": recopt});	
+			jQuery.extend(data, {"starttime": jQuery("#recstarttime").attr("value")});		
+			jQuery.extend(data, {"endtime": jQuery("#recendtime").attr("value")});				
+				jQueryAjaxCmd({
+				"data": data,			
+				success:function(ret) {				
+					if(ret == "0") {						
+						jQuery("#recstarttime").hide();
+						jQuery("#recendtime").hide();
+						jQuery("#appupdate").hide();
+						jQuery("#labrec").hide();						
+						alert('$opt.success$');					
+					}else{
+						alert('$opt.faild$');
+						jQuery("#appointmentbox").attr("checked",false);
+					}	
+					
+					}
+				});
+				
+		}
+		else
+		{
+						jQuery("#recstarttime").show();
+						jQuery("#recendtime").show();
+						jQuery("#appupdate").show();
+						jQuery("#labrec").show();
+		};
+	});
+	jQuery('#appupdate').click(function(event) {			
+		var chk=jQuery("#appointmentbox").attr("checked");		
+		if(chk=='checked')
+		{
+			if(CompareDate(jQuery("#recendtime").attr("value"),jQuery("#recstarttime").attr("value")) == false){
+					alert('$recordmgr.meetingdataerror0$');
+					//jQuery("#appointmentbox").attr("checked",false);
+					return;
+				}
+				
+
+			if(!(jQuery("#recstarttime").attr("disabled")))
+			{
+				if((new Date(jQuery("#recstarttime").attr("value").replace(/-/g,"/"))) < (new Date()))
+				{
+					alert('$systemalert.startendtime$');
+					//jQuery("#appointmentbox").attr("checked",false);
+					return;
+				}
+			}
+			//alert((new Date(jQuery("#recendtime").attr("value").replace(/-/g,"/"))) - (new Date(jQuery("#recstarttime").attr("value").replace(/-/g,"/"))));
+			//var maxrectime=jQuery("#maxHour").val();
+			//alert(jQuery("#maxHour").val()*3600*1000);
+			//maxrectime=maxrectime*3600*100;
+			//alert(maxtectime);
+			if((new Date(jQuery("#recendtime").attr("value").replace(/-/g,"/"))) - (new Date(jQuery("#recstarttime").attr("value").replace(/-/g,"/"))) >(jQuery("#maxHour").val()*3600*1000))
+			{
+				alert('$systemalert.appotime$');
+				jQuery("#appointmentbox").attr("checked",false);
+				return;
+			}
+		}
+		var data = {"actioncode": "465"};					
+		if(chk=='checked')
+			recopt=1;
+		else
+		  recopt=0;
+		jQuery.extend(data, {"recenable": recopt});	
+		jQuery.extend(data, {"starttime": jQuery("#recstarttime").attr("value")});		
+		jQuery.extend(data, {"endtime": jQuery("#recendtime").attr("value")});
+		
+		jQueryAjaxCmd({
+			"data": data,			
+			success:function(ret) {				
+				if(ret == "0") {
+					alert('$opt.success$');					
+				}else{
+					alert('$opt.faild$');
+					jQuery("#appointmentbox").attr("checked",false);
+				}	
+				
+			}
+		});
+	});
+
+});
+
+</script>
+
+<script type=text/javascript> 
+window.onunload=function() 
+{ 
+	if(win)
+	{
+		//win.close();
+        
+	}
+ } 
+</script>

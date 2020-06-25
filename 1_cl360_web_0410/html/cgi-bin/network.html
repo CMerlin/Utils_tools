@@ -1,0 +1,219 @@
+        <form enctype="multipart/form-data" id="wmform">
+        <table>
+        	<tr>
+        		<td width="150">
+        		<!--
+        		  <table width="375" height="200" border="0">
+					<tr>
+				  		<td colspan="2" style="padding-left: 55px;"><h5>$network.wanip$</h5></td>
+				  	</tr>
+		            <tr>
+		              <td width="28%" height="54" class="$image_prex$itemnametd"></td>
+		              <td width="72%">
+		              </td>
+		            </tr>
+		            <tr>
+		              <td height="44" class="$image_prex$itemnametd">$network.ip$</td>
+		              <td><input id="IPAddress" class="inputtext validate[required, custom[ipv4]]" name="IPAddress" type="text" /></td>
+		            </tr>
+		            <tr>
+		              <td height="48" class="$image_prex$itemnametd">$network.mask$</td>
+		              <td>
+		                <input id="subMask" class="inputtext validate[required, custom[ipv4]]" name="subMask" type="text" />
+		              </td>
+		            </tr>
+					 <tr>
+		              <td height="42" class="$image_prex$itemnametd">$network.gateway$</td>
+		              <td>
+		                <input id="gateWay" class="inputtext validate[required, custom[ipv4]]" name="gateWay" type="text" />
+		              </td>
+		            </tr>
+		          </table>
+				  -->
+        		</td>
+        		<td>
+        		  <table width="375" height="200" border="0">
+        		  	<!--
+					<tr>
+				  		<td colspan="2" style="padding-left: 55px;"><h5>$network.lanip$</h5></td>
+				  	</tr>
+					-->
+		            <tr>
+		              <td width="28%" height="54" class="$image_prex$itemnametd">$network.dhcp$</td>
+		              <td width="72%">
+		                <input id="dhcp1" type="checkbox" name="dhcp1"/>
+		                $network.enable$
+		              </td>
+		            </tr>
+					<tr>
+		              <td height="44" class="$image_prex$itemnametd">$network.macaddr$</td>
+		              <td><input readOnly id="macaddr2" class="show_label" name="macaddr2" type="text" style="text-transform:uppercase;"/></td>
+		            </tr>
+		            <tr>
+		              <td height="44" class="$image_prex$itemnametd">$network.ip$</td>
+		              <td><input id="IPAddress1" class="inputtext1 validate[required, custom[ipv4]]" name="IPAddress1" type="text" /></td>
+		            </tr>
+		            <tr>
+		              <td height="48" class="$image_prex$itemnametd">$network.mask$</td>
+		              <td>
+		                <input id="subMask2" class="inputtext1 validate[required, custom[ipv4]]" name="subMask2" type="text" />
+		              </td>
+		            </tr>
+					 <tr>
+		              <td height="42" class="$image_prex$itemnametd">$network.gateway$</td>
+		              <td>
+		                <input id="gateWay1" class="inputtext1 validate[required, custom[ipv4]]" name="gateWay1" type="text" />
+		              </td>
+		            </tr>
+					<tr>
+		              <td height="42" class="$image_prex$itemnametd">DNS1：</td>
+		              <td>
+		                <input id="dns0" class="inputtext1 validate[custom[ipv4]]" name="dns0" type="text" />
+		              </td>
+		            </tr>
+					<tr>
+		              <td height="42" class="$image_prex$itemnametd">DNS2：</td>
+		              <td>
+		                <input id="dns1" class="inputtext1 validate[custom[ipv4]]" name="dns1" type="text" />
+		              </td>
+		            </tr>
+					
+					<tr>
+					  <td>&nbsp;</td>
+					  <td height="67">
+						<input id="setBtn" type="button" class="$image_prex$click_btn" value="$btn.save$" />
+					  </td>
+					</tr>
+		          </table>
+        		</td>
+        	</tr>
+        </table>
+        </form>
+<script>
+function initDHCPCheckBox() {
+	/*
+	if(jQuery('#dhcp').prop('checked')) {
+		jQuery('#wmform .inputtext').prop('disabled', true);
+	} else {
+		jQuery('#wmform .inputtext').prop('disabled', false);
+	}
+	jQuery('#dhcp').change(function() {
+		if(jQuery(this).prop('checked')) {
+			jQuery('#wmform .inputtext').prop('disabled', true);
+		} else {
+			jQuery('#wmform .inputtext').prop('disabled', false);
+		}
+	});
+	*/
+	
+	if(jQuery('#dhcp1').prop('checked')) {
+		jQuery('#wmform .inputtext1').prop('disabled', true);
+	} else {
+		jQuery('#wmform .inputtext1').prop('disabled', false);
+	}
+	jQuery('#dhcp1').change(function() {
+		if(jQuery(this).prop('checked')) {
+			jQuery('#wmform .inputtext1').prop('disabled', true);
+		} else {
+			jQuery('#wmform .inputtext1').prop('disabled', false);
+		}
+	});
+}
+
+function validateIP(IPstr)
+{
+    if(IPstr.search(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/) == -1)
+		return false;
+
+    var fs = 0,ls = 0;
+    var myArray = IPstr.split(/\./);
+
+    fs = parseInt(myArray[0]);   //取第一位进行校验
+    ls = parseInt(myArray[3]);  //取最后一位进行校验
+
+    /* 主机部分不能全是1和0（第一位不能为255和0），网络部分不能全是0（最后一位不能为0和255）*/
+    if((fs == 255) || (fs ==0) || (ls == 0) || (ls == 255))
+    {
+        return false;
+    }
+    return true;
+}
+
+jQuery(function() {
+	//formBeautify();
+	
+	initFormValidation();
+	
+	jQuery('#setBtn').click(function() {
+		var validate = true;
+		var valInputs = jQuery(":text");
+		var errorip1 = "0.0.0.0";
+		var errorip2 = "255.255.255.255";
+		jQuery.each(valInputs, function(){
+			ipval = jQuery.trim(this.value);
+			if(jQuery('#dhcp1').prop('checked') && !this.id.indexOf("1")){
+				if(ipval == errorip1 || ipval == errorip2){
+					alert("$msg.invalidip$");
+					this.focus();
+					validate = false;
+					return false;
+				}
+			}else{
+				if(ipval == errorip1 || ipval == errorip2){
+					alert("$msg.invalidip$");
+					this.focus();
+					validate = false;
+					return false;
+				}
+
+				if(ipval != '' && this.id.indexOf("2") == -1 && !validateIP(ipval)){
+					alert("$msg.invalidip$");
+					this.focus();
+					validate = false;
+					return false;
+				}
+			}
+		});
+		
+		if (!validate || !validateFormByID('wmform')){
+			return true;
+		}
+		art.dialog({
+			title: '$network.confirm$',
+			okValue: '$network.ok$',
+			cancelValue: '$network.cancel$',
+			lock: true,
+			fixed: true,
+		    background: '#600', // ����ɫ
+		    opacity: 0.87,	// ͸����
+		    content: "$network.networksetfirm$",
+		    ok: function() {
+				var data = {"actioncode": "406"};
+				var params = getFormItemValue('wmform');
+				if(params) {
+					jQuery.extend(data, params);
+					jQueryAjaxCmd({
+						"data": data,
+						success: function(ret) {
+							if(ret == 1) {
+								alert('$savesucess$');
+								window.location.href = 'encoder.cgi';
+							}else if (ret == 3){
+								alert('$uploadstateerror$');
+							}else {
+								alert('$savefailed$');
+							}
+						}
+					});
+					//	window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+					//	window.location.href = "encoder.cgi";
+				}
+		    },
+		    cancel: true
+		});
+	});
+	
+	//initDHCPCheckBox();
+	
+});
+</script> 

@@ -1,0 +1,60 @@
+<html>
+
+<head>
+<title>$ppt.interface.title$</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script type="text/javascript" src="../js/jquery.min.js" ></script>
+<script type="text/javascript" src="../js/utils.js" ></script>
+<script type="text/javascript">
+        var newImg = '';
+		var oldImg = '';
+		var userId = parseInt(Math.floor(Math.random() * 10000 + 1));
+		//alert("User ID : " + userId);
+		
+		imgChange();
+        function imgChange() {
+			var widthS = window.screen.availWidth;
+			var heigthS = window.screen.availHeight;
+			
+			//alert(widthS + ":" + heigthS)
+			var data = {"actioncode": "453","userId": userId };
+			jQueryAjaxCmd({
+				"data": data,
+				success: function(ret) {//alert(ret)
+					var flag = ret.split("#")[0];
+					if(flag == 0){//用户已满
+						alert('$ppt.interface.tip1$');
+					}else{
+						var newImg = ret.split("#")[1];
+					var refreshTime = 1000;
+						
+					if(newImg != oldImg){	//如果有新的图片，则按speed的值发送请求，否则1秒钟取发一次请求
+						document.getElementById("imgSrc").src = "../ppt/" + newImg + "?d=" + new Date();
+						refreshTime = speed;
+						oldImg = newImg;
+							if(widthS >= heigthS){
+								jQuery("#imgSrc").css("height","98%");
+								jQuery("#imgSrc").css("width","auto");
+							}else{
+								jQuery("#imgSrc").css("height","auto");
+								jQuery("#imgSrc").css("width","98%");
+					}
+						}
+            
+					timer = setTimeout("imgChange()",refreshTime);
+					}
+				}
+			});
+        }
+</script>
+	
+</head>
+
+<body>
+
+	<div align="center">
+    	<img id="imgSrc"/>
+    </div>
+
+</body>
+</html>

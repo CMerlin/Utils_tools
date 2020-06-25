@@ -1,0 +1,114 @@
+ <style>
+  .Bars {
+	position: relative;
+	width: 500px;   
+	/* 宽度 */ 
+	border: 0px solid #336af5; 
+	padding: 0px; 
+	background:#FFFFFF/* 进度条背景颜色 */ 
+} 
+.Bars div { 
+	display: block; 
+	position: relative;
+	background:#336af5;/* 进度条前景颜色 */ 
+	height: 20px; /* 高度 */
+	line-height: 20px;  /* 必须和高度一致，文本才能垂直居中 */ 
+}
+.show_space{
+	font-family: 'Lucida Grande','Hiragino Kaku Gothic ProN',Meiryo, sans-serif,Tahoma, Arial, "锟斤拷锟斤拷", Helvetica, sans-serif;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+	color:#5acc8b;/*字的颜色*/
+	font-size:14px;
+	width:150px;
+	}
+</style>
+ <form enctype="multipart/form-data" id="wmform" method="post" target="upload">  
+<table width="700" height="100" border="0">
+<tr>
+<td width="100">
+</td>
+<td>
+        		  <table width="570" height="100" border="0">
+		            <tr>
+		              <td><h5>$leftmenu.diskautoclean$</h5></td>		              
+		            </tr>
+					<tr>
+		              <td width="75%" height="54" style="text-align:left; padding-left:0px;" >$leftmenu.diskstatus$</td>		              
+		           </tr>
+					<tr>
+		              <td width="75%">
+						<div  class="Bars">
+							<div style="width: 9%;" id="process">								
+								<input width="75%"readOnly name="diskspace" type="text" class="show_space" value=""/>
+							</div> 
+						 </div>
+		              </td>
+		           </tr>
+					<tr>
+					<td>&nbsp;</td>
+					</tr>
+					<tr>
+		              <td width="75%">
+		               $leftmenu.diskautocleantxt$ <input name= "autoclean" id="autocleanid" type="checkbox" value="0" />&nbsp; $leftmenu.diskused$
+		              </td>
+		            </tr>
+		            <tr>
+		              <td width="75%">
+		                $leftmenu.disktxt1$&nbsp;<input name="lowsize" id="lowsize" type="text" class="validate[required, custom[integer], min[10], max[100]] inputtext" style="width: 50px" />&nbsp;$leftmenu.disktxt2$
+		              </td>
+		            </tr>					
+					<tr>					
+					  <td height="67">
+						<input id="setBtn" type="button" class="$image_prex$click_btn" value="$btn.save$" style="padding-left: 0; margin-left: 0;"/>
+					  </td>
+					</tr>
+					
+		 </table>  
+		 </td>
+		</tr>
+		
+
+	</table>														
+</form>
+	
+<script>
+function initcheck(pr)
+{
+	jQuery('#process').css("width",pr+"%");	
+	return;
+}
+jQuery(function() {
+	initFormValidation();	
+	jQuery('#setBtn').click(function() {
+		var validate = validateFormByID('wmform');
+		if(validate) {
+			var data = {"actioncode": "456"};
+			var params = getFormItemValue('wmform');
+			if(params) {
+				jQuery.extend(data, params);
+			}
+			var inputcheck = jQuery("#autocleanid").attr("checked");	
+			if (inputcheck == 'checked') {
+				jQuery.extend(data, {"checkenable": 1});
+			}else{
+				jQuery.extend(data, {"checkenable": 0});
+			}			
+			jQueryAjaxCmd({			
+				"data": data,
+				success: function(ret) {
+					if(ret == 1) {
+						alert('$opt.success$');					
+					}
+				}
+			});
+		}
+	});
+	
+
+	
+
+});
+</script> 

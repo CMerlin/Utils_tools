@@ -1,0 +1,81 @@
+        <form id="wmform">
+	          <table width="753" height="120" border="0">
+				<tr>
+					<th style="text-align:right;vertical-align:top;padding-top:5px;color:red;" width="170" rowspan="2">
+						$partition.notice$&nbsp;&nbsp;
+					</th>
+					<td style="text-align:left;color:red;">
+						$partition.notice1$
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align:left;color:red;">
+						$partition.notice2$
+					</td>
+				</tr>
+	            
+	            <tr>
+	              <td colspan="2" style="text-align:center;">
+	                <input id="setbtn" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$partition.btn$" />
+	              </td>
+	            </tr>
+	          </table>
+        </form>
+<script>
+var intervalId;
+	
+function getFormatStatus(){
+	var data = {"actioncode": "113"};
+	jQueryAjaxCmd({
+		"data": data,
+		success: function(ret) {
+			if(ret == "1"){
+				alert('$opt.success$');
+				parent.closeUploading();
+				window.clearInterval(intervalId);
+			}
+			else if(ret == "2"){
+				alert('$opt.faild$');
+				parent.closeUploading();
+				window.clearInterval(intervalId);
+			} 
+		}
+	});
+}
+	
+jQuery(function() {
+	
+	/*
+	 * 初始化表单验证
+	 */
+	initFormValidation();
+	
+	/*
+	 * 初始化设置和刷新按钮事件
+	 */
+	jQuery('#setbtn').click(function() {
+		var isOK = window.prompt('$partition.confirm$','$partition.confirmlable$');
+		
+		if(isOK.toLowerCase() == 'ok')
+		{
+			
+			var data = {"actioncode": "442"};
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					if(ret == "1") {
+						openUploading();
+						intervalId = setInterval("getFormatStatus()", 2000);
+					}else if (ret == "5"){
+						alert('$uploadstateerror$');
+					}else{
+						alert('$opt.faild$');
+					}
+				}
+			});
+		}else{
+			alert('$opt.inputErr$');
+		}
+	});
+});
+</script>

@@ -1,0 +1,165 @@
+        <form id="wmform">
+	          <table width="753" height="120" border="0">
+				<tr height="50">
+					<td style="text-align:center;">
+						$usbexport.title$
+						<input type="radio" name="usbexport" id="usbexport1" value="1" /> $usbexport.enable$
+						<input type="radio" name="usbexport" id="usbexport2" value="2" style="margin-left: 20px;" /> $usbexport.disable$
+					</td>
+				</tr>
+	            
+	            <tr>
+	              <td style="text-align:center;">
+	                <input id="setbtn" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$video.save$" />
+	              </td>
+	            </tr>
+	          </table>
+        </form>
+<script>
+function initSceneSet() {
+	if(jQuery('#sceneSet').val()==3) {
+		jQuery('#advancedSet').prop('disabled', false).css({'color': '#276CD7'});
+	} else {
+		jQuery('#advancedSet').prop('disabled', true). css({'color': '#808080'});
+	}
+}
+
+function initUIEnable(quality){
+	if(quality == "2"){
+		jQuery("select[name='resolution']").attr("disabled","disabled");
+		jQuery("input[name='zoomModel']").attr("disabled","disabled");
+		jQuery("select[name='sceneSet']").attr("disabled","disabled");
+		jQuery("input[name='caption']").attr("disabled","disabled");
+		jQuery("input[name='logo']").attr("disabled","disabled");
+	}else{
+		jQuery("select[name='resolution']").removeAttr("disabled");
+		jQuery("input[name='zoomModel']").removeAttr("disabled");
+		jQuery("select[name='sceneSet']").removeAttr("disabled");
+		jQuery("input[name='caption']").removeAttr("disabled");
+		jQuery("input[name='logo']").removeAttr("disabled");
+	}
+}
+
+function changeQuality(q){
+	if(q == "2"){
+		jQuery("select[name='resolution']").attr("disabled","disabled");
+		jQuery("input[name='zoomModel']").attr("disabled","disabled");
+		jQuery("select[name='sceneSet']").attr("disabled","disabled");
+		jQuery("input[name='caption']").attr("disabled","disabled");
+		jQuery("input[name='logo']").attr("disabled","disabled");
+	}else{
+		jQuery("select[name='resolution']").removeAttr("disabled");
+		jQuery("input[name='zoomModel']").removeAttr("disabled");
+		jQuery("select[name='sceneSet']").removeAttr("disabled");
+		jQuery("input[name='caption']").removeAttr("disabled");
+		jQuery("input[name='logo']").removeAttr("disabled");
+	}
+	jQueryAjaxHtml({
+		data: {"actioncode": 305, "quality": q, "input": inputTab},
+		effectsOn: true
+	});
+}
+
+jQuery(function() {
+	//表单赋值操作必须在表单美化之前，所以美化代码放置在cgi中
+	
+	//初始化sceneSet事件
+	jQuery('#sceneSet').change(initSceneSet);
+	
+	/*
+	 * 初始化设置和刷新按钮事件
+	 */
+	jQuery('#setbtn').click(function() {
+		var validate = validateFormByID('wmform');
+		if(validate) {
+			var data = {"actioncode": "432"};
+			var params = getFormItemValue('wmform');
+			if(params) {
+				jQuery.extend(data, params);
+			}
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					//alert(ret);
+					if(ret == 1) {
+						alert('$opt.success$');
+					}
+				}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	jQuery('#refreshbtn').click(function() {
+		jQuery('#menub').click();
+	});
+	
+	/*
+	 * 初始化表单验证
+	 */
+	initFormValidation();
+	
+	jQuery('#advancedSet').click(function() {
+		closeAllPrompt();
+		jQueryAjaxHtml({
+			data: {"actioncode": "318"},
+			success: function(innerStr) {
+				art.dialog({
+					title: '$video.advancedsettitle$',
+					okValue: '$video.ok$',
+					cancelValue: '$video.cancel$',
+					lock: true,
+					fixed: true,
+					background: '#600', // 背景色
+					opacity: 0.87, // 透明度
+					content: innerStr,
+					ok: function(){
+						var validate = validateFormByID('wmform_videoAdvancedSet');
+						if(validate) {
+							var data = {"actioncode": "415"};
+							var params = getFormItemValue('wmform_videoAdvancedSet');
+							if(params) {
+								jQuery.extend(data, params);
+							}
+							jQueryAjaxCmd({
+								"data": data,
+								success: function(ret) {
+									if(ret == 1) {
+										alert('$opt.success$');
+										closeAllPrompt();
+										return true;
+									} else {
+										return false;
+									}
+								}
+							});
+						} else {
+							return false;
+						}
+					},
+					cancel: function(){
+						closeAllPrompt();
+						return true;
+					}
+				});
+				
+				initFormValidation();
+				
+				/*
+				 * request data for the form 
+				 */
+				jQueryAjaxCmd({
+					"data": {"actioncode": "414"},
+					success: function(retscript) {
+						eval(retscript);
+					}
+				});
+			}
+			
+		});
+		
+	});
+	//changeQuality(jQuery("input[name='quality']:checked").val());
+});
+</script>

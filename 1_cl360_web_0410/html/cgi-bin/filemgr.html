@@ -1,0 +1,520 @@
+<form id="wmform">
+<div style="width: 900px; height: 35px; padding: 5px 10px; text-align: left;margin: 0;">
+$filemgr.filename$ &nbsp; <input type="text" name="txtSearch" id="txtSearch" style="width: 240px; padding: 2px;" />
+<input id="searchBtn" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$filemgr.search$" /><font id="ff">
+| </font><input id="delBtn" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$output.remove$" /> 
+	<font id="delbat"size="3" color="red"></font>
+</div>
+
+<div>
+<table>
+	<tr>
+		<td>
+			<div style="width:920px; height:28px;padding: 0px 0px;">
+				<table id="tablehd" >
+					<thead>
+						<tr style="text-align:left; padding: 0px; height: 25px;">			
+							<th  class="remove sorter-false" id="selectallh">$select.all$&nbsp&nbsp<input name= "checkall" id="checkall" type="checkbox" value="0"/></th>
+							<th  class="remove sorter-false" id="filenameh">$filemgr.filename$</th>
+							<th  id="sortdateh">$filemgr.date$</th>
+							<th  id="sortsizeh">$filemgr.size$</th>
+							<th  class="remove sorter-false" id="fileopth">$filemgr.op$</th>
+						</tr>
+					</thead>
+					<tbody id="onlyhead" style="display:none; height: 0px;">
+					<tr style="text-align:left; padding: 2px; height: 35px;">
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</td>
+	</tr>
+</table>
+</div>
+<div id="deleteingDiv"  style="display:none"                                        
+style"position:absolute;z-index:888;left:0px;top:0px;width:100%;height:100%;background-color:#000000;opacity:0.7;filter:alpha(opacity=70);display:none;"><img	   style="position:absolute;left:46%; top:35%;" src="../images/uploading.gif"/></div>
+<div style="width:940px; height:410px; overflow:scroll; overflow-x:hidden;">
+<table>
+	<tr>
+		<td>
+			<div style="width:30px; height:406px;" id="maintab0div">
+				<table id="maintab0" class="tablesorter">	
+					<thead style="display:none; height: 0px;">
+						<tr style="text-align:center; padding: 0px; height: 0px;">
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="filelist0"></tbody>	
+				</table>
+			</div>
+		</td>
+		
+		<td>
+			<div style="width:890px; height:406px;" id="maintabdiv">
+				<table id="maintab" class="tablesorter">	
+					<thead style="display:none; height: 0px;">
+						<tr style="text-align:center; padding: 0px; height: 0px;">
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="filelist"></tbody>
+				</table>
+			</div>
+		</td>
+	</tr>
+</table>
+</div>
+
+</form>
+<script>
+var user;
+var intervalid;
+
+jQuery(function(){
+	initFormValidation();
+	
+	user = jQuery.cookies.get("user");	
+	buildHTML(formData, user);
+	initPaper(user);
+	
+  jQuery("#searchBtn").click(function(){	
+  	var filename = jQuery("#txtSearch").val();
+  	//jQuery("#filelist tr").hide();
+  	var tempData = new Array();
+  	jQuery.each(formData, function(i, itemTr){
+  		if(itemTr && itemTr.courseName && itemTr.courseName.indexOf(filename) >= 0){
+  			tempData.push(itemTr);
+  		}
+  	});
+	jQuery("#filelist0").html("");
+  	jQuery("#filelist").html("");
+  	if(tempData.length == 0){
+  		return;
+  	}
+  	//去掉tablesorter控件，重新初始化tablesorter
+  	jQuery("table").trigger("destroy");
+		buildHTML(tempData, user);
+		initPaper(user);
+  });
+   jQuery("#delBtn").click(function(){
+		var fcount = 0;		
+		for(var i=1;i<document.getElementById("maintab").rows.length;i++){				
+			if(jQuery("#check"+i).attr("checked")){
+				fcount++;
+			}
+		}
+		
+		if(fcount <= 0){
+			alert("$filemgr.selectrmfile$");
+			return;
+		}
+		
+		if(confirm("$filemgr.deleteconfirm2$")){
+			delSelectedFiles();
+		}
+  });
+  jQuery("#checkall").click(function(){ 
+	  if(jQuery("#checkall").attr("checked")){ 	
+		jQuery("[name='checkone']").attr("checked",'true');//全选
+		  }
+		  else
+		  {
+		jQuery("[name='checkone']").removeAttr("checked");//取消全选
+		}
+  });
+
+  clearInterval(intervalid);
+  intervalid = setInterval(checkdeling,3000);
+});
+function checkdeling(){
+	var data = {"actioncode": "462"};
+			jQueryAjaxCmd({
+			"data": data,
+			success:function(ret) {				
+					if(ret == 1) {
+						jQuery('#deleteingDiv').show();	
+						jQuery('#delbat').html("批量删除中...");
+					} else{
+						jQuery('#deleteingDiv').hide();
+						jQuery('#delbat').html("");
+						
+					};
+				}
+	});
+}
+function initPaper(user){
+  jQuery("#tablehd")
+    .tablesorter({
+      theme: 'blue',
+      widthFixed: true,
+      widgets: ['zebra'],
+      headers: {
+      	1: { sortInitialOrder: "desc" }
+      }
+    });
+
+  jQuery("#maintab")
+    .tablesorter({ 
+	  theme:'onlybody',
+      widthFixed: true,
+      widgets: ['zebra'],
+      headers: {
+      	1: { sortInitialOrder: "desc" }
+      }
+    });
+
+/*	
+	jQuery("#maintab0")
+    .tablesorter({ 
+	  theme:'onlybody',
+      widthFixed: true,
+      widgets: ['zebra'],
+      headers: {
+      	1: { sortInitialOrder: "desc" }
+      }
+    });
+*/
+	
+	//jQuery("#tablehd").bind("sortStart",function(e,u){    
+		//alert(e);
+		//jQuery("#maintab").trigger("sorton",[[[2,1]]]); 
+		//jQuery("#maintab").trigger("sorton",[[[3,0]]]); 
+   // });      
+   if(user != "admin"){
+	jQuery("#ff").html("");
+	jQuery("#maintab").trigger("sorton",[[[1,1]]]);
+	jQuery("#sortdateh").click(function(){   
+		if(jQuery("#sortdateh").attr("class").indexOf("tablesorter-headerAsc")>0)
+		{			
+			jQuery("#maintab").trigger("sorton",[[[1,0]]]);
+		}
+		else if(jQuery("#sortdateh").attr("class").indexOf("tablesorter-headerDesc")>0)
+		{		
+			jQuery("#maintab").trigger("sorton",[[[1,1]]]);
+		}
+		else
+		{			
+			jQuery("#maintab").trigger("sorton",[[[1,0]]]);
+		}						 		
+    });
+	jQuery("#sortsizeh").click(function(){   			 
+		if(jQuery("#sortsizeh").attr("class").indexOf("tablesorter-headerAsc")>0)
+		{			
+			jQuery("#maintab").trigger("sorton",[[[2,0]]]);
+		}
+		else if(jQuery("#sortsizeh").attr("class").indexOf("tablesorter-headerDesc")>0)
+		{		
+			jQuery("#maintab").trigger("sorton",[[[2,1]]]);
+		}
+		else
+		{			
+			jQuery("#maintab").trigger("sorton",[[[2,0]]]);
+		}
+    });
+   }else
+	{
+		jQuery("#maintab").trigger("sorton",[[[2,1]]]);
+		jQuery("#sortdateh").click(function(){   
+			if(jQuery("#sortdateh").attr("class").indexOf("tablesorter-headerAsc")>0)
+			{			
+				jQuery("#maintab").trigger("sorton",[[[2,0]]]);
+			}
+			else if(jQuery("#sortdateh").attr("class").indexOf("tablesorter-headerDesc")>0)
+			{		
+				jQuery("#maintab").trigger("sorton",[[[2,1]]]);
+			}
+			else
+			{			
+				jQuery("#maintab").trigger("sorton",[[[2,0]]]);
+			}						 		
+		});
+		jQuery("#sortsizeh").click(function(){   			 
+			if(jQuery("#sortsizeh").attr("class").indexOf("tablesorter-headerAsc")>0)
+			{			
+				jQuery("#maintab").trigger("sorton",[[[3,0]]]);
+			}
+			else if(jQuery("#sortsizeh").attr("class").indexOf("tablesorter-headerDesc")>0)
+			{		
+				jQuery("#maintab").trigger("sorton",[[[3,1]]]);
+			}
+			else
+			{			
+				jQuery("#maintab").trigger("sorton",[[[3,0]]]);
+			}
+		});
+	}
+}
+function downloadDialog(courseName,fileList){
+
+		fileList = fileList.substring(0,fileList.length-1);
+		var files = fileList.split(",");
+		var listContent = "<div style='color:red'>$filemgr.save$</div><br/><ul>";
+		//由于fileList没有按大小排序，所以先通过冒泡排序按从小到大排好序
+		var temp = 0;
+		
+		var files_hd = new Array();
+		var files_sd = new Array();
+
+
+		j = 0;
+		for (var i = 0; i < files.length; i++)
+		{
+			if(files[i].lastIndexOf("HD_") > 0){
+				files_hd[j] = files[i];
+				j++;
+			}
+		}
+		
+		for (var i = 0; i < files_hd.length; i++)
+		{
+			for (var j = 0; j < files_hd.length - i; j++)
+			{
+				if(files_hd[i].lastIndexOf("HD_") > 0){
+					if(files_hd[j] && files_hd[j+1]){
+						if (parseInt(files_hd[j].substring(files_hd[j].lastIndexOf("_")+1, files_hd[j].lastIndexOf("."))) > parseInt(files_hd[j+1].substring(files_hd[j+1].lastIndexOf("_")+1, files_hd[j+1].lastIndexOf("."))))
+						{
+							temp = files_hd[j+1];
+							files_hd[j+1] = files_hd[j];
+							files_hd[j] = temp;
+						}
+					}
+				}
+			}
+		}
+/*
+		for(var i = 0; i < files_hd.length; i++){
+			if(files_hd[i].lastIndexOf("HD_") > 0){
+				listContent += "<li><a href=\"../Rec/"+ courseName + "/" + files_hd[i] + "\" target=\"_blank\">" + files_hd[i].substring(files_hd[i].lastIndexOf("D_")-1) + "</a></li>";
+			}
+		}
+	*/	
+		j = 0;
+		for (var i = 0; i < files.length; i++)
+		{
+			if(files[i].lastIndexOf("SD_") > 0){
+				files_sd[j] = files[i];
+				j++;
+			}
+		}
+	
+		for (var i = 0; i < files_sd.length; i++)
+		{
+			for (var j = 0; j < files_sd.length - i; j++)
+			{
+				if(files_sd[i].lastIndexOf("SD_") > 0){
+					if(files_sd[j] && files_sd[j+1]){
+						if (parseInt(files_sd[j].substring(files_sd[j].lastIndexOf("_")+1, files_sd[j].lastIndexOf("."))) > parseInt(files_sd[j+1].substring(files_sd[j+1].lastIndexOf("_")+1, files_sd[j+1].lastIndexOf("."))))
+						{
+							temp = files_sd[j+1];
+							files_sd[j+1] = files_sd[j];
+							files_sd[j] = temp;
+						}
+					}
+				}
+			}
+		}
+		
+			var flength = 0;
+		
+		if(files_hd.length > files_sd.length){
+			flength = files_hd.length;
+		}
+		else{
+			flength = files_sd.length;
+		}
+
+		for(var i = 0; i < flength; i++){
+			listContent += "<li>";
+			if(i < files_hd.length){
+				if(files_hd[i].lastIndexOf("HD_") > 0){
+					listContent += "<a href=\"../Rec/"+ courseName + "/" + files_hd[i] + "\" target=\"_blank\">" + files_hd[i].substring(files_hd[i].lastIndexOf("D_")-1) + "</a>";
+				}else{
+					listContent += "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+				}
+			}else{
+				listContent += "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+			}
+			
+			listContent += "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+			
+			if(i < files_sd.length){
+				if(files_sd[i].lastIndexOf("SD_") > 0){
+					listContent += "<a href=\"../Rec/"+ courseName + "/" + files_sd[i] + "\" target=\"_blank\">" + files_sd[i].substring(files_sd[i].lastIndexOf("D_")-1) + "</a>";
+				}
+			}
+			listContent += "</li>";
+		}
+
+		listContent += "</ul>";
+		art.dialog({
+			title: courseName + ' $filemgr.download$',
+			lock: true,
+			fixed: true,
+	    background: '#600',
+	    opacity: 0.87,
+	    content: listContent,
+	    style:'succeed noClose'
+		});	
+}
+
+function buildHTML(dataArray, user){
+		if(dataArray && typeof dataArray == 'object') {
+			rowCount = dataArray.length;			
+			for(var i=0; i<dataArray.length; i++) {
+				var item = dataArray[i];
+				if(item) {
+					var index = i + 1;
+					var courseName = item['courseName'];
+					var createDate = item['createDate'];
+					var size = item['size'];
+					var download = item['download'];
+					var rowIndex = item['rowIndex'];	// 440
+					var trInnerStr = '';
+				
+					if(user != "admin"){
+						jQuery('#checkall').css('display','none');
+						jQuery('#delBtn').css('display','none');
+						jQuery('#maintab0div').css('width','43px');
+						jQuery('#maintabdiv').css('width','877px');
+						jQuery("#tablehd th:eq(0)").html('');
+					}
+					
+					if(user == "admin")
+						trInnerStr = '<tr style="text-align:center; height: 25px;"><td id="selectallb">&nbsp<input name= "checkone" id="check'+ index +'" type="checkbox" value="0"/></td>';
+					else
+						trInnerStr = '<tr style="text-align:center; height: 25px;">';
+					
+					trInnerStr += '<td id="filenameb"><input name="courseName'+ index +'" id="courseName'+ index +'" type="text" readonly="readonly" class="show_label validate[maxSize[48]]" style="width:$filemgr.textpx$"; padding: 1px;text-align:left" value="' + courseName + '"/></td>';
+					
+					trInnerStr += '<td id="sortdateb">' + createDate + '</td>';
+					trInnerStr += '<td  id="sortsizeb">' + size.toFixed(1) + ' MB</td>';
+			/*		
+					if(size < 1024) {
+						trInnerStr += '<td  id="sortsizeb">' + size.toFixed(2) + 'MB</td>';
+					}
+					else {
+						var newsize
+						trInnerStr += '<td  id="sortsizeb">' + (size/1024).toFixed(2) + 'GB</td>';
+					}
+			*/
+					if(user == "admin")
+						trInnerStr += '<td id="fileoptb"><a href="javascript:renameFile(\'courseName'+ index +'\')">$filemgr.rename$</a> <a href="javascript:delFile(\''+ courseName +'\')">$filemgr.delete$</a> <a href=\'javascript:downloadDialog("'+ courseName +'", "' + download + '")\'>$filemgr.download$</a></td></tr>';
+					else
+						trInnerStr += '<td id="fileoptb"><a href=\'javascript:downloadDialog("'+ courseName +'", "' + download + '")\'>$filemgr.download$</a></td></tr>';
+
+					jQuery("#filelist").append(trInnerStr);
+					
+					var numInnerStr = '<tr style="text-align:left; height:25px;"><td>'+ index +'</td></tr>';
+					jQuery("#filelist0").append(numInnerStr);
+				}
+			}
+	}
+}
+
+function delFile(courseName){
+	var data = {"actioncode": "437","courseName": courseName};
+	if(confirm("$filemgr.deleteconfirm$")){
+		jQueryAjaxCmd({
+			"data": data,
+			success:function(ret) {
+				//alert(ret);
+				if(ret == 1) {
+					alert('$deletesuccess$');
+					jQuery("#nav_filemgr").click();
+				} else if(ret == 4){
+					alert('$opefailed_uploading$');
+				} else if(ret == 5){
+					alert('$fileRecording$');
+				}
+				else {
+					alert('$deletefailed$');
+				}
+			}
+		});
+	}
+}
+function renameFile(courseIndex){
+	
+	var sourceName = jQuery("#"+courseIndex).val();
+	
+	jQuery("#"+courseIndex).removeAttr('readonly').css({border:"1px solid red", backgroundColor:"#FFFFFF"}).focus();
+	jQuery("#"+courseIndex).blur(function(){
+			if (!validateFormByID('wmform')){
+				return true;
+			}
+			jQuery(this).attr("readonly","readonly");
+			this.style.border="0";
+			this.style.backgroundColor="";
+			if(this.value == sourceName)
+				return false;
+			if(!(/^[\w\-]{1,80}$/.test(this.value))){
+				alert("$filemgr.msgcontainschines$");
+				this.value = sourceName;
+				return false;
+			}
+
+			var data = {"actioncode": "438","courseName": sourceName, "newCourseName": this.value};
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					//alert(ret);
+					if(ret == 1) {
+						alert('$savesucess$');
+						jQuery("#nav_filemgr").click();
+					} else if(ret == 4){
+						alert('$opefailed_uploading$');
+						jQuery("#nav_filemgr").click();
+					}else if(ret == 6){
+						alert('$SameName$');
+						jQuery("#nav_filemgr").click();
+					}
+					 else {
+						alert('$savefailed$');
+					}
+				}
+			});
+	});
+}
+
+function delSelectedFiles(){
+	var course="";
+	//openUploading();	
+	for(var i=1;i<document.getElementById("maintab").rows.length;i++)
+	{				
+		if(jQuery("#check"+i).attr("checked")){						
+			//alert(jQuery("#courseName"+i).val());
+			course+=jQuery("#courseName"+i).val()+",";
+			
+		}
+	}	
+	var data = {"actioncode": "461","courseName": course};
+			jQueryAjaxCmd({
+			"data": data,
+			success:function(ret) {				
+					if(ret == 1) {
+						//alert('$deletesuccess$');						
+					} else if(ret == 7){
+						alert('$filemgr.deleteing$');
+						return;
+					} else if(ret == 5){
+						alert('$fileRecording$');
+						return;
+					}
+					else {
+						alert('$deletefailed$');
+						return;
+					}
+				}
+	});
+	//closeUploading();
+	//alert('$deletesuccess$');
+	jQuery("#nav_filemgr").click();
+	//jQuery("#maintab tr:gt(0):eq(0) td:eq(2)").text();	
+	
+}
+</script>

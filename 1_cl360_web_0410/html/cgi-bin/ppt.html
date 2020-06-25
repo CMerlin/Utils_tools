@@ -1,0 +1,241 @@
+        <!--	1.PPT推送	 -->
+        <form id="wmform">
+	          <table width="753" border="0">
+	          	<tr>
+							<td width="198">&nbsp;</td>
+						    <td align="left"><h5>$ppt.title$</h5></td>
+						  </tr>
+							<tr>
+								<td height="35" align="right" width="198">$ppt.status$</td>
+								<td><input type="checkbox" name="pptstatus" id="pptstatus" value="1" /></td>
+							</tr>
+							<tr>
+								<td height="35" align="right"  width="198">$ppt.cur.clients$</td>
+								<td name="curClients" id="curClients"></td>
+							</tr>
+							<tr style="display:none;">
+								<td height="35" align="right" width="198">$ppt.interval.time$</td>
+								<td>
+									<select name="interTime" id="interTime" style="width:150px;">
+						                <option value="3">3</option>
+						                <option value="4">4</option>
+						                <option value="5">5</option>
+						                <option value="6">6</option>
+						            </select>
+								</td>
+							</tr>
+							<tr style="display:none;">
+								<td height="35" align="right" width="198">$ppt.refresh.time$</td>
+								<td>
+									<select name="refreshTime" id="refreshTime" style="width:150px;">
+						                <option value="2">2</option>
+						                <option value="3">3</option>
+						                <option value="4">4</option>
+						                <option value="5">5</option>
+						            </select>
+								</td>
+							</tr>
+							<tr>
+								<td height="35" align="right" width="198">$ppt.client.max$</td>
+								<td><input type="text" name="clientMax" id="clientMax" class="validate[required, custom[integer], min[1], max[40]] inputtext" />(1~40)</td>
+							</tr>
+	            <tr>
+	            	<td height="35"></td>
+	                <td style="text-align:left;">
+					  <input id="setbtn" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$video.save$" />
+	                </td>
+	                <td>&nbsp;</td>
+	            </tr>
+				<tr>
+				  <td height="16" colspan="2"><div style="width:700px; height:1px; margin-left:25px; background-color:#186FCA;"></div></td>
+				</tr>
+	          </table>
+        </form>
+		<!--	2.生成二维码	 -->
+		<form id="wmform2">
+		<table style="width:753" border="0">
+			<tr>
+			  <!--<td width="184" height="37">&nbsp;</td>-->
+			  <td colspan="2" style="padding-left:210px"><h5>$ppt.makeQr$</h5></td>
+			</tr>
+			<tr>
+				<td width="500">
+					<table border="0" width="100%" >
+						<tr>
+							<td height="35" align="right" class="$image_prex$itemnametd">$ppt.makeWay$</td>
+							<td>
+								<input type="radio" name="method" id="method" class="method" value="1" /> $ppt.manual$
+								<input type="radio" name="method" id="method" class="method" value="0" style="margin-left: 20px;" /> $ppt.auto$
+							</td>
+						</tr>
+						<tr>
+							<td height="35" align="right" class="$image_prex$itemnametd">$ppt.ipSet$</td>
+							<td>
+								<input id="ipaddr" class="inputtext1 validate[required, custom[ipv4]]" name="ipaddr" type="text" />
+							</td>
+						</tr>
+						<tr>
+							<td height="35" align="right" class="$image_prex$itemnametd">$ppt.sendContent$</td>
+							<td id="pptUrl" style="width:60%">
+							</td>
+						</tr>
+						<tr>
+						  <td>&nbsp;</td>
+						  <td height="45px" align="center" style="padding-top: 10px; text-align: left;">
+								<input id="createBtn" type="button" class="btn-normal-ll" onmouseover="this.className='btn-hover-ll';" onmouseout="this.className='btn-normal-ll';" value="$ppt.makeQr$" />
+								<!-- <input id="copyBtn" type="button" class="btn-normal-long" onmouseover="this.className='btn-hover-long';" onmouseout="this.className='btn-normal-long';" value="$ppt.copyContent$" /> -->
+						  </td>
+						</tr>
+						<tr>
+						  <td>&nbsp;</td>
+						  <td height="45px" align="center" style="padding-top: 10px; text-align: left; color:red">
+						  <div class="resetdefault" style="width: 270px;">
+						  <h6>$sysupgrade.note$</h6>
+						  $ppt.saveQr$
+						  </div>
+						  </td>
+						</tr>
+					</table>
+				</td>
+				<td valign="top">
+					<img src="../images/2code.jpg" id="2code" width="200" height="200" style="padding-top: 12px;">
+				</td>
+			</tr>
+		  </table>
+		  </form>
+<script>
+function initCheckBox() {
+	if(jQuery('#pptstatus').prop('checked')) {
+		jQuery('#wmform .inputtext').prop('disabled', false);
+		jQuery('#wmform select').prop('disabled', false);
+	} else {
+		jQuery('#wmform .inputtext').prop('disabled', true);
+		jQuery('#wmform select').prop('disabled', true);
+	}
+	jQuery('#pptstatus').change(function() {
+		if(jQuery(this).prop('checked')) {
+			jQuery('#wmform .inputtext').prop('disabled', false);
+			jQuery('#wmform select').prop('disabled', false);
+		} else {
+			jQuery('#wmform .inputtext').prop('disabled', true);
+			jQuery('#wmform select').prop('disabled', true);
+		}
+	});
+}
+function init2Code(flag){
+	if(flag == 1){//已生成二维码
+		jQuery('#2code').attr('src','../images/reach_qr.png?d=' + new Date());
+	}else{//未生成二维码
+		jQuery('#2code').attr('src','../images/2code.jpg?d=' + new Date());
+	}
+}
+jQuery(function() {
+	
+	/*
+	 * 初始化表单验证
+	 */
+	initFormValidation();
+	
+	/*
+	 * 初始化设置和刷新按钮事件
+	 */
+	jQuery('#setbtn').click(function() {
+		var validate = validateFormByID('wmform');
+		if(validate) {
+			var interTime = jQuery('#interTime').val();
+			var refreshTime = jQuery('#refreshTime').val();
+			
+			if(interTime <= refreshTime){
+				alert('$ppt.tip.interTime$' + '$ppt.tip.larger$' + '$ppt.tip.refreshTime$');
+				return false;
+			}
+			 
+			
+			
+			var data = {"actioncode": "900228521"};
+			var params = getFormItemValue('wmform');
+			if(params) {
+				jQuery.extend(data, params);
+			}
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					//alert(ret);
+					if(ret == 1) {
+						alert('$opt.success$');
+					}
+				}
+			});
+		} else {
+			return false;
+		}
+	});
+	
+	/**
+	 * 动态获取IP和URL
+	 */
+	jQuery('.method').click(function(){
+		 var method = jQuery('input:radio[name="method"]:checked').val();
+		 jQuery('#2code').attr('src','../images/2code.jpg');
+		 if(method == 0){//自动
+		 	jQuery('#ipaddr').attr('disabled',true);
+			//jQuery('#createBtn').click();
+		 }else{
+		 	jQuery('#ipaddr').attr('disabled',false);
+		 }
+		 jQuery('#ipaddr').val(ipaddrOrg);
+		 jQuery('#pptUrl').html(pptUrl);
+	});
+	/**
+	 * URL随IP变化
+	 */
+	jQuery('#ipaddr').change(function(){
+		var ipaddr = jQuery('#ipaddr').val();
+		var url = "http://" + ipaddr + "/cgi-bin/encoder.cgi?actioncode=2014";
+		jQuery('#pptUrl').html(url);
+	});
+	/**
+	 * 生成二维码
+	 */
+	jQuery('#createBtn').click(function() {
+		var validate = validateFormByID('wmform2');
+		if(validate) {
+			var data = {"actioncode": "454"};
+			var params = getFormItemValue('wmform2');
+			if(params) {
+				jQuery.extend(data, params);
+			}
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(result) {
+					var ret = result.split("#");
+					if(ret[0] == 1) {
+						//alert('$opt.success$');
+						jQuery('#2code').attr('src','../images/reach_qr.png?d=' + new Date());
+						jQuery('#ipaddr').val(ret[1]);
+		 				jQuery('#pptUrl').html("http://" + ret[1] + "/cgi-bin/encoder.cgi?actioncode=2014");
+					}
+				}
+			});
+		} else {
+			return false;
+		}
+	});
+	/**
+	 * 下载二维码
+	 */
+	jQuery('#downBtn').click(function() {
+		//window.open("../images/reach_qr.png");
+		var url = "http://192.168.8.151/cgi-bin/encoder.cgi?actioncode=455";
+		window.open(url);
+	});
+	/**
+	 * COPY URL
+	 */
+	jQuery('#copyBtn').click(function() {
+		var pptUrl = jQuery('#pptUrl').html();
+		window.clipboardData.setData('text', pptUrl); 
+		alert('复制推送地址成功！');
+	});
+});
+</script>

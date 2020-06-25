@@ -1,0 +1,464 @@
+        <form enctype="multipart/form-data" id="wmform" action="encoder.cgi" method="post" target="upload">
+          <table width="753" height="327" border="0">
+            <tr>
+              <td width="148" height="50" class="$image_prex$itemnametd">&nbsp;</td>
+              <td width="565"><h5>$sysupgrade.title$</h5></td>
+            </tr>
+            <tr>
+              <td height="50" class="$image_prex$itemnametd">&nbsp;</td>
+              <td>
+              	$sysupgrade.file$
+              	<input type="file" name="file" />
+				<input type="hidden" name="actioncode" value="110">
+				<input id="submitBtn" type="button" style="margin-left:70px;margin-top:-10px;" class="click_btn_long" value="$sysupgrade.upgrade$" />
+			  </td>
+            </tr>
+			<tr>
+				<td height="50" class="$image_prex$itemnametd">&nbsp;</td>
+				<td height="35"><div class="$image_prex$resetdefault"><h6>$sysupgrade.note$</h6><font style="font-size:12px;">$sysupgrade.notecontent2$</font></div></td>
+			</tr>
+			<tr>
+              <td height="10" colspan="2">
+				<div style="width:610px; height:1px; margin-left:85px; background-color:#186FCA;"></div>
+			  </td>
+            </tr>
+            <tr>
+              <td height="50" class="$image_prex$itemnametd">&nbsp;</td>
+              <td><h5>$systemset.timeset$</h5></td>
+            </tr>
+            <tr>
+              <td width="148" height="50" class="$image_prex$itemnametd">&nbsp;</td>
+              <td width="565">$systemset.encodertime$<label id="show_time"></label><input style="margin-left:10px;" id="saveBtn" type="button" class="click_btn_long" value="$systemset.timesynch$" /></td>
+            </tr>
+			<tr>
+              <td height="10" colspan="2">
+				<div style="width:610px; height:1px; margin-left:85px; background-color:#186FCA;"></div>
+			  </td>
+            </tr>
+		  </table>
+		  <table style="width:753" border="0">
+            <tr>
+              <td height="50" class="$image_prex$itemnametd">&nbsp;</td>
+              <td width="315"><h5>$reboottactic.title$</h5></td>
+			  <td width="248" rowspan="5" align="center">
+			  <div class="$image_prex$resetdefault" style="width: 225px; height: 100px" align="left"><h6>$sysupgrade.note$</h6><font style="font-size:12px;">$reboottactic.notecontent$</font></div>
+			  </td>
+            </tr>
+			<tr>
+				<td height="30" class="$image_prex$itemnametd">&nbsp;</td>
+				<td width="315">$reboottactic.enable$<input type="checkbox" name="rebootEnable" id="rebootEnable" value="1" />	</td>
+			</tr>
+			<tr>
+				<td height="30" class="$image_prex$itemnametd">&nbsp;</td>
+				<td width="315">$reboottactic.actiontype$
+					<input type="radio" name="rebootActionType" id="rebootActionType0" value="0" /> $reboottactic.timely$&nbsp;
+					<input type="radio" name="rebootActionType" id="rebootActionType1" value="1" /> $reboottactic.dayly$&nbsp;
+					<input type="radio" name="rebootActionType" id="rebootActionType2" value="2" /> $reboottactic.weekly$&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td height="30" class="$image_prex$itemnametd">&nbsp;</td>
+				<td width="315">$reboottactic.actiontime$
+					<input id="rebootActionTime0" name="rebootActionTime0" class="inputtext1" style="width:156px;height:24px;padding-left:3px;" type="text"></input>
+					<input id="rebootActionTime1" name="rebootActionTime1" class="inputtext1" style="width:70px;height:24px;padding-left:3px;" type="text"></input>
+					<select name="rebootWeekDay" id="rebootWeekDay" style="width:80px;">
+		                <option value="1">$reboottactic.monday$</option>
+		                <option value="2">$reboottactic.tuesday$</option>
+						<option value="3">$reboottactic.wednesday$</option>
+		                <option value="4">$reboottactic.thursday$</option>
+						<option value="5">$reboottactic.friday$</option>
+						<option value="6">$reboottactic.saturday$</option>
+						<option value="0">$reboottactic.sunday$</option>
+		            </select>
+					<input id="rebootActionTime2" name="rebootActionTime2" class="inputtext1" style="width:70px;height:24px;padding-left:3px;" type="text"></input>
+				</td>
+			</tr>
+            <tr>
+              <td width="148" height="35" class="$image_prex$itemnametd"></td>
+              <td>
+				<input style="margin-left:0px;" id="restartBtn" type="button" class="click_btn_long" value="$resetdefault.reboot$" />
+                <input style="margin-left:0px;" id="rebootSaveBtn" type="button" class="click_btn_long" value="$btn.save$" />
+			  </td>
+            </tr>
+          </table>
+        </form>
+		<iframe name="upload" style="display:none"></iframe>
+<script>
+var intervalId;
+
+function initCheckBox() {
+	if(jQuery('#rebootEnable').prop('checked')) {
+		jQuery('#wmform :radio').prop('disabled', false);
+		jQuery('#wmform .inputtext1').prop('disabled', false);
+		jQuery('#wmform select').prop('disabled', false);
+	} else {
+		jQuery('#wmform :radio').prop('disabled', true);
+		jQuery('#wmform .inputtext1').prop('disabled', true);
+		jQuery('#wmform select').prop('disabled', true);
+	}
+	
+	if(jQuery('input[name=rebootActionType]:checked').val()==0){
+		jQuery('#rebootActionTime0').show();
+		jQuery('#rebootActionTime1').hide();
+		jQuery('#rebootActionTime2').hide();
+		jQuery('#rebootWeekDay').hide();
+	}
+	else if(jQuery('input[name=rebootActionType]:checked').val()==1)
+	{
+		jQuery('#rebootActionTime0').hide();
+		jQuery('#rebootActionTime1').show();
+		jQuery('#rebootActionTime2').hide();
+		jQuery('#rebootWeekDay').hide();
+	}else if(jQuery('input[name=rebootActionType]:checked').val()==2)
+	{
+		jQuery('#rebootActionTime0').hide();
+		jQuery('#rebootActionTime1').hide();
+		jQuery('#rebootActionTime2').show();
+		jQuery('#rebootWeekDay').show();
+	}
+}
+
+function formatTime(date) {
+	var year = date.getFullYear();
+	var month = date.getMonth() + 1;
+	var day = date.getDate();
+	var hours = date.getHours();
+	var minutes = date.getMinutes();
+	var seconds = date.getSeconds();
+	return year + "/" + month + "/" + day + "/" + hours + "/" + minutes + "/" + seconds;
+}
+
+function formatNumber(number) {
+	if(number < 10) {
+		number = '0' + number;
+	}
+	return number;
+}
+
+function initPageTime(timeStr, language) {
+	var formatStr = "";
+	if(timeStr && language) {
+		var timeStrArr = timeStr.split("/");
+		if(timeStrArr && timeStrArr.length==6) {
+			switch(language) {
+				case "cn": {
+					formatStr = timeStrArr[0] + "年" + formatNumber(timeStrArr[1]) + "月" + formatNumber(timeStrArr[2]) + "日 " + formatNumber(timeStrArr[3]) + ":" + formatNumber(timeStrArr[4]) + ":" + formatNumber(timeStrArr[5]);
+					break;
+				}
+				case "us": {
+					formatStr = formatNumber(timeStrArr[1]) + "/" + formatNumber(timeStrArr[2]) + "/" + timeStrArr[0] + " " + formatNumber(timeStrArr[3]) + ":" + formatNumber(timeStrArr[4]) + ":" + formatNumber(timeStrArr[5]);
+					break;
+				}
+				case "hk": {
+					formatStr = timeStrArr[0] + "年" + formatNumber(timeStrArr[1]) + "月" + formatNumber(timeStrArr[2]) + "日 " + formatNumber(timeStrArr[3]) + ":" + formatNumber(timeStrArr[4]) + ":" + formatNumber(timeStrArr[5]);
+					break;
+				}
+				case "jp": {
+					formatStr = timeStrArr[0] + "/" + formatNumber(timeStrArr[1]) + "/" + formatNumber(timeStrArr[2]) + " " + formatNumber(timeStrArr[3]) + ":" + formatNumber(timeStrArr[4]) + ":" + formatNumber(timeStrArr[5]);
+					break;
+				}
+				case "ko": {
+					formatStr = timeStrArr[0] + "/" + formatNumber(timeStrArr[1]) + "/" + formatNumber(timeStrArr[2]) + " " + formatNumber(timeStrArr[3]) + ":" + formatNumber(timeStrArr[4]) + ":" + formatNumber(timeStrArr[5]);
+					break;
+				}
+			}
+		}
+	}
+	jQuery('#show_time').html(formatStr);
+}
+
+function getUpgradeStatus(){
+	var data = {"actioncode": "112"};
+	jQueryAjaxCmd({
+		"data": data,
+		success: function(ret) {
+			if(ret == "1"){
+				alert('$uploadFileSuccess$');
+				parent.closeUploading();
+				window.clearInterval(intervalId);
+				window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+			}
+			else if(ret == "2"){
+				alert('$uploadFileFail$');
+				parent.closeUploading();
+			} 
+			else if (ret == "3") {
+				alert('$uploadstateerror$');
+				parent.closeUploading();
+			}
+		}
+	});
+}
+
+function getRollbackStatus(){
+	var data = {"actioncode": "112"};
+	jQueryAjaxCmd({
+		"data": data,
+		success: function(ret) {
+			if(ret == "1"){
+				alert('$sysupgrade.rollbacksuccess$');
+				parent.closeUploading();
+				window.clearInterval(intervalId);
+				window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+			}
+			else if(ret == "2"){
+				alert('$sysupgrade.rollbackfailed$');
+				parent.closeUploading();
+			} 
+			else if (ret == "3") {
+				alert('$uploadstateerror$');
+				parent.closeUploading();
+			}
+		}
+	});
+}
+
+jQuery(function() {
+	jQuery("input[type=file]").filestyle({ 
+	     image: "../fileStyle/css/choose-file.png",
+	     imageheight : 22,
+	     imagewidth : 52,
+	     width : 180
+	 });
+	
+	jQuery('#submitBtn').click(function() {
+		jQuery('#wmform').submit();
+		openUploading();
+		intervalId = setInterval("getUpgradeStatus()", 2000);
+	});
+	
+	jQuery('#saveBtn').click(function() {
+		var data = {"actioncode": "436"};
+		var nowTimeStr = formatTime(new Date());
+		data['clienttime'] = nowTimeStr;
+		//alert(data.clienttime)
+		jQueryAjaxCmd({
+			"data": data,
+			success: function(ret) {
+				if(ret == 1) {
+					alert('$savesucess$');
+				}else if (ret == 3) {
+					alert('$uploadstateerror$');
+				} else if(ret == 80) {
+					alert('$recordmgr.meetingerror5$');
+				} else if(ret == 81) {
+					alert('$recordmgr.meetingerror6$');
+				} else if(ret == 82) {
+					alert('$ftp.error$');
+				} else if(ret == 83) {
+					alert('$uploadstateerror2$');
+				}else {
+					alert('$savefailed$');
+				}
+				jQuery('#menud').click();
+			}
+		});
+	});
+	
+	jQuery('#restoreBtn').click(function() {
+		art.dialog({
+			title: '$resetdefault.confirm$',
+			okValue: '$resetdefault.ok$',
+			cancelValue: '$resetdefault.cancel$',
+			lock: true,
+			fixed: true,
+		    background: '#600', // 背景色
+		    opacity: 0.87,	// 透明度
+		    content: "$resetdefault.restoreconfirm$",
+		    ok: function() {
+				openUploading();
+				
+				var data = {"actioncode": "418"};
+				jQueryAjaxCmd({
+					"data": data,
+					success: function(ret) {
+						//closeUploading();
+						/*
+						if(ret == "1"){
+							alert('$sysupgrade.rollbacksuccess$');
+							window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+						}
+						else if(ret == "3")
+						{
+							alert('$uploadstateerror$');
+						}
+						else{
+							alert('$sysupgrade.rollbackfailed$');
+						}
+						*/
+					}
+				});
+				
+				intervalId = setInterval("getRollbackStatus()", 2000);
+				//window.location.href = "encoder.cgi";
+				//window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+		    },
+		    cancel: true
+		});
+	});
+	
+	jQuery('#restartBtn').click(function() {
+		art.dialog({
+			title: '$resetdefault.reboot$',
+			okValue: '$resetdefault.ok$',
+			cancelValue: '$resetdefault.cancel$',
+			lock: true,
+			fixed: true,
+		    background: '#600', // 背景色
+		    opacity: 0.87,	// 透明度
+		    content: "$resetdefault.rebootconfirm$",
+		    ok: function() {
+				var data = {"actioncode": "215"};
+				jQueryAjaxCmd({
+					"data": data,
+					success: function(ret) 
+					{ 
+						if(ret == "1")
+						{
+							alert('$resetdefault.rebootsuccess$');
+							window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+						}
+						else
+						{
+							alert('$uploadstateerror$');
+							//window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+						}
+					}
+				});
+				//window.location.href = "encoder.cgi";
+			//	window.setTimeout('window.location.href = "encoder.cgi"', 1000);
+		    },
+		    cancel: true
+		});
+	});
+	
+	jQuery('#rebootEnable').change(function() {
+		if(jQuery('#rebootEnable').prop('checked')) {
+			jQuery('#wmform :radio').prop('disabled', false);
+			jQuery('#wmform .inputtext1').prop('disabled', false);
+			jQuery('#wmform select').prop('disabled', false);
+		} else {
+			jQuery('#wmform :radio').prop('disabled', true);
+			jQuery('#wmform .inputtext1').prop('disabled', true);
+			jQuery('#wmform select').prop('disabled', true);
+		}
+	});
+
+	var language = jQuery('#changeLanguage').attr("value");
+	if(language == 0){
+		jQuery("#rebootActionTime0").datetimepicker({step:10,lang:'ch',});
+		jQuery("#rebootActionTime1").datetimepicker({datepicker:false,format:'H:i',step:10,lang:'ch',});
+		jQuery("#rebootActionTime2").datetimepicker({datepicker:false,format:'H:i',step:10,lang:'ch',});
+	}else if(language == 1){
+		jQuery("#rebootActionTime0").datetimepicker({step:10,lang:'en',});
+		jQuery("#rebootActionTime1").datetimepicker({datepicker:false,format:'H:i',step:10,lang:'en',});
+		jQuery("#rebootActionTime2").datetimepicker({datepicker:false,format:'H:i',step:10,lang:'en',});
+	}else if(language == 2){
+		jQuery("#rebootActionTime0").datetimepicker({step:10,lang:'ch',});
+		jQuery("#rebootActionTime1").datetimepicker({datepicker:false,format:'H:i',step:10,lang:'ch',});
+		jQuery("#rebootActionTime2").datetimepicker({datepicker:false,format:'H:i',step:10,lang:'ch',});
+	}else if(language == 3){
+		jQuery("#rebootActionTime0").datetimepicker({step:10,lang:'ja',});
+		jQuery("#rebootActionTime1").datetimepicker({datepicker:false,format:'H:i',step:10,lang:'ja',});
+		jQuery("#rebootActionTime2").datetimepicker({datepicker:false,format:'H:i',step:10,lang:'ja',});
+	}else if(language == 4){
+		jQuery("#rebootActionTime0").datetimepicker({step:10,lang:'kr',});
+		jQuery("#rebootActionTime1").datetimepicker({datepicker:false,format:'H:i',step:10,lang:'kr',});
+		jQuery("#rebootActionTime2").datetimepicker({datepicker:false,format:'H:i',step:10,lang:'kr',});
+	}
+
+	jQuery('input[name=rebootActionType]:radio').change(function(event){
+		if(jQuery('input[name=rebootActionType]:checked').val()==0){
+			jQuery('#rebootActionTime0').show();
+			jQuery('#rebootActionTime1').hide();
+			jQuery('#rebootActionTime2').hide();
+			jQuery('#rebootWeekDay').hide();
+		}
+		else if(jQuery('input[name=rebootActionType]:checked').val()==1)
+		{
+			jQuery('#rebootActionTime0').hide();
+			jQuery('#rebootActionTime1').show();
+			jQuery('#rebootActionTime2').hide();
+			jQuery('#rebootWeekDay').hide();
+		}else if(jQuery('input[name=rebootActionType]:checked').val()==2)
+		{
+			jQuery('#rebootActionTime0').hide();
+			jQuery('#rebootActionTime1').hide();
+			jQuery('#rebootActionTime2').show();
+			jQuery('#rebootWeekDay').show();
+		}
+	});	
+
+	jQuery('#rebootSaveBtn').click(function() {
+		var data = {"actioncode": "472"};
+		var rebootActionTime;
+		var rebootEnable = jQuery("#rebootEnable").attr("checked");	
+		if (rebootEnable == 'checked') {
+			jQuery.extend(data, {"rebootEnable": 1});
+
+			var rebootActionType = jQuery('input:radio[name=rebootActionType]:checked').val();
+			if(rebootActionType == 0)	//定时
+			{
+				jQuery.extend(data, {"rebootActionType": 0});
+				rebootActionTime = jQuery("#rebootActionTime0").attr("value");
+			}
+			else if(rebootActionType == 1)	//每天
+			{
+				jQuery.extend(data, {"rebootActionType": 1});
+				rebootActionTime = jQuery("#rebootActionTime1").attr("value");
+			}
+			else if(rebootActionType == 2)	//每周
+			{
+				jQuery.extend(data, {"rebootActionType": 2});
+				var rebootWeekDay = jQuery('select[name="rebootWeekDay"] option:selected').val();
+				var rebootActionTime2 = jQuery("#rebootActionTime2").attr("value");
+				if(rebootActionTime2 == "")
+				{
+					rebootActionTime = "";
+				}
+				else
+				{
+					rebootActionTime = rebootWeekDay + " " + rebootActionTime2;
+				}
+			}
+			else
+			{
+				alert('$reboottactic.notecontent1$');
+				return;
+			}
+			
+			if(rebootActionTime != "")
+			{
+				jQuery.extend(data, {"rebootActionTime": rebootActionTime});
+			}
+			else
+			{
+				alert('$reboottactic.notecontent2$');
+				return;
+			}
+
+		}else{
+			jQuery.extend(data, {"rebootEnable": 0});
+		}
+
+		jQuery.extend(data, {"rebootForce": 1});
+
+		jQueryAjaxCmd({
+			"data": data,
+			success: function(ret) {
+				if(ret == "1"){
+					alert('$savesucess$');
+				}else {
+					alert('$savefailed$');
+				}
+			}
+		});
+
+	});
+	
+	initFormValidation();
+	
+	
+	
+});
+</script> 

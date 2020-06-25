@@ -1,0 +1,52 @@
+
+<form id="wmform">
+	<table width="753"  border="0">	          	
+		  <tr>
+			  <td height="35" width="200" align="right"><h4>$serialcontrol.mode2$</h4></td>
+			<td text-align: right;="left"><input type="radio" id="rd1"  name="platformsel" value="0"></input></td>													
+		  </tr>
+		  <tr>
+			  <td height="35" width="200" align="right" ><h4>$serialcontrol.mode1$</h4></td>
+			<td text-align: right;="left"><input type="radio" id="rd2" name="platformsel" value="1"></input></td>				
+		  </tr>						  
+	</table>
+</form>
+<script type='text/javascript'>
+jQuery(function() {
+	//initTableData();
+	//formBeautify();
+	initFormValidation();	
+});
+
+jQuery('input[name=platformsel]:radio').change(function(event){		
+		var data = {"actioncode": "470"};			
+		jQuery.extend(data, {"sermod": jQuery('input[name=platformsel]:checked').val()});					
+		jQueryAjaxCmd({
+			"data": data,			
+			success:function(ret) {
+				if(ret == "0") {
+					alert('$opt.success$');					
+				}				
+				else {
+					alert('$savefailed$');					
+					
+				}	
+				return;
+			}
+		});	
+		
+	});
+
+
+function initCheckBox(num){
+		
+	if(num==0)
+	{			
+		jQuery('input[name=platformsel]:radio').get(0).checked=true;
+	}else if(num==1)
+	{			
+		jQuery('input[name=platformsel]:radio').get(1).checked=true;
+	}
+	
+}
+</script>

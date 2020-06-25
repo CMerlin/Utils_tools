@@ -1,0 +1,175 @@
+        <form id="wmform">
+	          <table width="753" height="500" border="0">
+
+				<tr>
+				  <td width="184" height="28">&nbsp;</td>
+				  <td align="left" style="padding-left: 20px;"><h5>$audio.input$</5></td>
+				</tr>
+				<tr>
+					<td style="text-align: center;" colspan="2">
+						<table style="margin-left: 210px;">
+							<tr>
+								<td><img src="../images/auto_in.png" height="80" /></td>
+							</tr>
+							<tr>
+								<td>
+								<table>
+									<tr>
+										<!--
+										<td width="55" align="center"><input type="checkbox" name="audio" value="1" /></td>
+										-->
+										<td width="52" align="right"><input type="checkbox" name="audio" value="2" /></td>
+										<td width="120" align="right"><input type="checkbox" name="audio" value="3" />&nbsp;&nbsp;&nbsp;</td>
+										<!--
+										<td width="65" align="right"><input type="checkbox" name="audio" value="4" /></td>
+										-->
+									</tr>
+								</table>
+								</td>
+							</tr>
+						</table>
+					  </td>
+				</tr>
+				<tr>
+					<td height="45px" colspan="2" style="padding: 5px 0 0 270px;">
+						<input id="saveBtn" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" type="button" value="$btn.save$" />
+					</td>
+				</tr>
+				
+				<tr>
+				  <td height="16" colspan="2"><div style="width:515px; height:1px; margin-left:75px; background-color:#186FCA;"></div></td>
+				</tr>
+				
+			  	<tr>
+				  <td width="235" height="28">&nbsp;</td>
+				  <td align="left" style="padding-left: 20px;"><h5>$video.inputtitle$</5></td>
+				</tr>
+	            <tr>
+	              <td class="$image_prex$itemnametd">$video.signalsearch_1$</td>
+	              <td>
+	                <input type="radio" name="signalsearch_1" value="2" />
+	                $video.cvbs$
+	                <input style="margin-left:15px;" type="radio" name="signalsearch_1" value="1" />
+	                $video.hd$
+	              </td>
+	            </tr>
+				<!--
+				<tr>
+	              <td class="$image_prex$itemnametd">$video.signalsearch_2$</td>
+	              <td>
+	                <input type="radio" name="signalsearch_2" value="2" />
+	                $video.cvbs$
+	                <input style="margin-left:15px;" type="radio" name="signalsearch_2" value="1" />
+	                $video.hd$
+	              </td>
+	            </tr>
+				-->
+				<tr>
+				  <td width="184" height="28">&nbsp;</td>
+				  <td align="left" style="padding-left: 20px;"><h5>$video.outputtitle$</5></td>
+				</tr>
+	            <tr>
+	              <td class="$image_prex$itemnametd">$video.resolution$</td>
+	              <td>
+	                <select name="resolution" id="resolution" style="width:150px;">
+						<option value="1">1440x900</option>
+						<option value="2">1400x1050</option>
+						<option value="3">1366x768</option>
+						<option value="4">1280x1024</option>
+						<option value="5">1280x800</option>
+						<option value="6">1280x720</option>
+						<option value="7">1024x768</option>
+	                </select>
+	              </td>
+	            </tr>
+	            <tr>
+	              <td colspan="2" style="padding: 5px 0 0 270px;">
+	                <input id="setbtn" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$btn.save$" />
+	              </td>
+	            </tr>
+				<tr>
+				<td colspan="2">
+					<div class="$image_prex$resetdefault" style="margin-left:145px;width:350px;"><h6>$sysupgrade.note$</h6><font style="font-size:12px;">$video.notice$</font></div>
+					</td>
+				</tr>
+			</table>
+        </form>
+<script>
+function initInputs(checkedAutos, checkedVideo){
+	if(checkedAutos){
+		var autos = checkedAutos.split(",");
+		if(autos && autos.length > 0){
+			var autoCbx = document.getElementsByName("audio");
+			for(var i=0; i < autos.length; i++){
+				if(parseInt(autos[i]) == 1){
+					autoCbx[0].checked = "checked";
+				}
+				if(parseInt(autos[i]) == 2){
+					autoCbx[1].checked = "checked";
+				}
+			}
+		}
+	}
+}
+
+jQuery(function() {
+	
+	jQuery('#saveBtn').click(function() {
+		var check = jQuery("input[name=audio]:checked");
+		var videoinput = jQuery("input[name=videoinput]:checked").val();
+		var audio_config;
+		var audio_sel = "";
+		check.each(function(i){
+			audio_sel = audio_sel+','+jQuery(this).val();
+		});
+		if(audio_sel != ""){
+			audio_sel = audio_sel.substring(1,audio_sel.length);
+		}
+		var data = {"actioncode": "410", "audio": audio_sel, "videoinput": videoinput};
+		jQueryAjaxCmd({
+			"data": data,
+			success: function(ret) {
+				if(ret == 1) {
+					alert('$opt.success$');
+				}
+			}
+		});
+	});
+	
+	/*
+	 * 初始化设置和刷新按钮事件
+	 */
+	jQuery('#setbtn').click(function() {
+			var data = {"actioncode": "401"};
+			var params = getFormItemValue('wmform');
+			if(params) {
+				jQuery.extend(data, params);
+			}
+			if(confirm("$opt.confirm$")){
+				jQueryAjaxCmd({
+					"data": data,
+					success:function(ret) {
+						//alert(ret);
+						if(ret == 1) {
+							alert('$opt.warning$');
+							window.location.href = 'encoder.cgi';
+						} else if (ret == 3) {
+							alert('$uploadstateerror$');
+						} else {
+							alert('$savefailed$');
+						}
+					}
+				});
+			}
+	});
+	
+	jQuery('#refreshbtn').click(function() {
+		jQuery('#menub').click();
+	});
+	
+	/*
+	 * 初始化表单验证
+	 */
+	initFormValidation();
+});
+</script> 

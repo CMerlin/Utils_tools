@@ -1,0 +1,119 @@
+ <style>
+  .Bars {
+	position: relative;
+	width: 500px;   
+	/* 宽度 */ 
+	border: 0px solid #336af5; 
+	padding: 0px; 
+	background:#FFFFFF/* 进度条背景颜色 */ 
+} 
+.Bars div { 
+	display: block; 
+	position: relative;
+	background:#336af5;/* 进度条前景颜色 */ 
+	height: 20px; /* 高度 */
+	line-height: 20px;  /* 必须和高度一致，文本才能垂直居中 */ 
+}
+.show_space{
+	font-family: 'Lucida Grande','Hiragino Kaku Gothic ProN',Meiryo, sans-serif,Tahoma, Arial, "锟斤拷锟斤拷", Helvetica, sans-serif;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+	color:#5acc8b;/*字的颜色*/
+	font-size:14px;
+	width:150px;
+	}
+</style>
+ <form enctype="multipart/form-data" id="wmform" method="post" target="upload">  
+<table width="700" height="100" border="0">
+<tr>
+<td width="100">
+</td>
+<td>
+        		  <table width="570" height="100" border="0">
+					<tr>
+		              <td><h5>$autoswms.title$</h5></td>		              
+		           </tr>
+					<tr>
+		              <td width="75%" height="40">
+							$autoswms.enable$<input name= "autodirect" id="autodirect" type="checkbox" value="0" />
+		              </td>
+		           </tr>
+		            <tr>
+		              <td width="75%">
+							$autoswms.time1$&nbsp;
+							<input name="directtime1" id="directtime1" type="text" class="validate[required, custom[integer], min[5], max[30]] inputtext" style="width: 50px" maxlength="3"/>
+							$autoswms.timelimit1$
+		              </td>
+		            </tr>	
+					 <tr>
+		              <td width="75%">
+							$autoswms.time2$&nbsp;
+							<input name="directtime2" id="directtime2" type="text" class="validate[required, custom[integer], min[5], max[20]] inputtext" style="width: 50px"  maxlength="3"/>
+							$autoswms.timelimit2$
+		              </td>
+		            </tr>
+					 <tr>
+						<td width="75%"  height="25" colspan="2" style="text-align: left;"><font style="color:#FF0000; font-size:12px;" id="directprompt">$autoswms.notices$</font></td>
+		            </tr>
+					<tr>
+					  <td height="67">
+						<input id="setBtn" type="button" class="$image_prex$click_btn" value="$btn.save$" style="padding-left: 0; margin-left: 0;"/>
+					  </td>
+					</tr>
+		 </table>
+		 </td>
+		</tr>
+	</table>
+</form>
+	
+<script>
+
+function initCheckBox() {
+	if(jQuery('#autodirect').prop('checked')) {
+		jQuery('#wmform .inputtext').prop('disabled', false);
+	} else {
+		jQuery('#wmform .inputtext').prop('disabled', true);
+	}
+	
+	jQuery('#autodirect').change(function() {
+		if(jQuery(this).prop('checked')) {
+			jQuery('#wmform .inputtext').prop('disabled', false);
+		} else {
+			jQuery('#wmform .inputtext').prop('disabled', true);
+		}
+	});
+}
+
+jQuery(function() {
+	initFormValidation();	
+	jQuery('#setBtn').click(function() {
+		var validate = validateFormByID('wmform');
+		if(validate) {
+			var data = {"actioncode": "458"};
+			var params = getFormItemValue('wmform');
+			if(params) {
+				jQuery.extend(data, params);
+			}
+			var inputcheck = jQuery("#autodirect").attr("checked");	
+			if (inputcheck == 'checked') {
+				jQuery.extend(data, {"adirect": 0});
+			}else{
+				jQuery.extend(data, {"adirect": 1});
+			}			
+			jQueryAjaxCmd({			
+				"data": data,
+				success: function(ret) {
+					if(ret == 1) {
+						alert('$opt.success$');					
+					}
+				}
+			});
+		}
+	});
+	
+
+	
+});
+</script> 

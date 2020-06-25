@@ -1,0 +1,621 @@
+        <form id="wmform">
+          <table style="table-layout:fixed;" id="streamTable" width="763" border="0" cellpadding="0" cellspacing="0" class="stream_table">
+            <tr>              
+              <td width="$stream.titlelen$" class="$image_prex$itemnametd"><div align="center"><h6>$output.protocal$</h6></div></td>
+              <td width="$stream.urllen$" class="$image_prex$itemnametd"><div align="center">
+                <h6>$output.broadcast$</h6>
+              </div></td>
+			  <td width="$stream.permislen$" class="itemnametd"><div align="center">
+                <h6>$output.permissions$</h6>
+              </div></td>
+			  <td width="$stream.statuslen$" class="itemnametd"><div align="center">
+                <h6>$output.status$</h6>
+              </div></td>
+              <td width="$stream.operationlen$" class="itemnametd"><div align="center">
+                <h6>$output.operating$</h6>
+              </div></td>
+            </tr>          
+			<tr id="addSetTr">
+			
+			  <td width="$stream.titlelen$" height="30" rowspan="2"><div align="left">$output.rtmp$
+			  </td>
+			  <td width='$stream.urllen$' height="30" class="$image_prex$itemnametd"><div align="left">
+					&nbsp&nbspHD:&nbsp<input id="rtmpurl1" name="rtmpurl1" type="text" style="width:88%;height:22px;padding-left:6px;"/>
+			  </td>
+			  <td width="$stream.permislen$" class="$image_prex$itemnametd"><div align="center">N/A    
+              </div></td>
+			  <td width="$stream.statuslen$" align="center"><input id="rtmp1" readonly class="show_label" value="" />   
+              </td>
+              <td width="$stream.operationlen$" class="itemnametd"><div style="margin-right:$stream.statusMarginLen$;">
+					<select id="switch1" style="width:60px;" align="right" class="switchBtn">
+					  <option selected value="1">$output.active$</option>
+					  <option selected value="0">$output.stop$</option>
+				  </select>
+				</td>
+			</tr>
+			<tr>			  
+			  <td width="$stream.urllen$" height="30" class="$image_prex$itemnametd"><div align="left">
+					&nbsp&nbspSD:&nbsp<input id="rtmpurl2" name="rtmpurl2" type="text" style="width:88%;height:22px;padding-left:6px;" />
+			  </td>
+			  <td width="$stream.permislen$" class="$image_prex$itemnametd"><div align="center">N/A 
+              </div></td>
+			  <td width="$stream.statuslen$" align="center"><input id="rtmp2" readonly class="show_label" value="" /> </td>
+              <td width="$stream.operationlen$" class="itemnametd"><div style="margin-right:$stream.statusMarginLen$;">
+					<select id="switch2" style="width:60px;" align="right" class="switchBtn">
+					  <option selected value="1">$output.active$</option>
+					  <option selected value="0">$output.stop$</option>
+				  </select>
+				</td>
+			</tr>
+          </table>
+		  <tr>&nbsp</tr>
+		  <input id="logsee" type="button" class="btn-normal-long" value="$rtmplog.logsee$" onmouseover="this.className='btn-hover-long';" onmouseout="this.className='btn-normal-long';" style="margin:12px"/>
+		  <input id="logdownload" type="button" class="btn-normal-long" value="$rtmplog.logdownload$" onmouseover="this.className='btn-hover-long';" onmouseout="this.className='btn-normal-long';" style="margin:12px"/>
+		  <div style="width: 700px;margin-left:10px;color: red"><h6>$output.notice_title$</h6><font style="font-size:12px;">$output.notice$</font></div>
+      </form>
+		
+<script type='text/javascript'>
+	
+/*
+ * 初始化表格行数据
+ */
+
+var rowCount = 0;
+function initTableData(dataArray) {	
+	if(dataArray && typeof dataArray == 'object') {
+		rowCount = dataArray.length;	
+		for(var i=0; i<dataArray.length; i++) {
+			var item = dataArray[i];
+			if(item) {			
+				//增加行
+//				for (var i = 0; i < 2; i++) {
+//				var item = {'rowIndex': '1', 'type': '2', 'ip': '192.168.0.3', 'videoPort':'1260', 'status': '3'};
+					var index = i + 1;
+					var inputStream = item['inputStream'];
+					var playurl = item['playurl'];
+					var rowIndex = item['rowIndex'];
+					var protocal = '';
+					var type = item['type'];
+					var ip = item['ip'];
+					var videoPort = item['videoPort'];
+					var audioPort = item['audioPort'];
+					var status = item['status'];
+					var permissions = item['permissions'];
+					var permis = "";
+					
+					if(permissions){
+						permis = "$outputdetailset.permissionsEnable$";
+					}else{
+						permis = "$outputdetailset.permissionsDisable$";
+					}
+
+					var playurTd = '<td style="width: 250px;"> ' + playurl + '</td>';
+
+					switch(type) {
+						case '0': {
+							protocal = 'INVALID';
+							break;
+						}
+						case '1': {
+							protocal = 'TS';
+							break;
+						}
+						case '2': {
+							protocal = 'RTP';
+							playurTd = '<td><a href="encoder.cgi?actioncode=420&ip='+ ip +'&vPort='+videoPort+'&aPort='+audioPort+'&iStream=' + inputStream +'">SDP Download</a></td>';
+							break;
+						}
+						case '3': {
+							protocal = 'RTSP';
+							break;
+						}
+						case '4': {
+							protocal = 'TS_OVER_RTP';
+							break;
+						}
+					}									
+					var trInnerStr = '<tr>';
+					//trInnerStr += '<td><input name="inputStream' + index + '" readonly class="show_label" value="' + inputStream + '" /></td>';
+					trInnerStr += '<td align="left"><div align="left"><input name="protocal' + index + '" readonly class="show_label" value="' + protocal + '" /><dvi><input type="hidden" name="rowIndex' + index + '" value="' + rowIndex + '"/><input type="hidden" name="type' + index + '" value="' + type + '"/></td>';
+					trInnerStr += playurTd;
+					trInnerStr += '<td style="display:none"><input name="ip' + index + '" readonly class="show_label" value="' + ip + '" /></td>';
+					trInnerStr += '<td style="display:none"><input name="videoPort' + index + '" readonly class="show_label" value="' + videoPort + '" /></td>';
+					trInnerStr += '<td ><input name="permissions' + index + '" readonly class="show_label" value="' + permis + '" /></td>';
+					trInnerStr += '<td><input id="rtspst" readonly class="show_label" value="" /></td>';
+					trInnerStr += '<td class="itemnametd"><div style="margin-right:$stream.statusMarginLen$;"><select id="switch3" style="width:60px;" name="status' + index + '" align="left" class="switchBtn">';
+					
+					switch(status) {
+						case '1':{
+							trInnerStr += '<option selected value="1">$output.active$</option><option value="3">$output.stop$</option>';
+							break;
+						}
+						case '3':{
+							trInnerStr += '<option value="1">$output.active$</option><option selected value="3">$output.stop$</option>';
+							break;
+						}
+						case '4':{
+							trInnerStr += '<option value="1">$output.active$</option><option selected value="3">$output.stop$</option>';
+							break;
+						}
+					}
+					trInnerStr += '</select></div><a class="detailSet" style="margin-right:$stream.operationSet$;" href="#">$output.detail$</a></td></tr>';					
+					jQuery(trInnerStr).insertBefore('#addSetTr');					
+
+			}
+		}
+		
+		
+	}
+}
+
+
+/*
+ * 修改弹出层初始化
+*/
+
+function logFilesDownload(){
+	jQueryAjaxCmd({
+		"data": {"actioncode": "476"},
+		success: function(fileList) {
+			fileList = fileList.substring(0,fileList.length-1);
+			var files = fileList.split(",");
+			var listContent = "<div style='color:red'>$rtmplog.save$</div><br/>";
+			var temp = 0;
+			
+			var files_unknow_time = new Array();
+			var files_time = new Array();
+			
+			var j = 0;
+			var k = 0;
+			for (var i = 0; i < files.length; i++){
+				var ret = files[i].lastIndexOf("notime");
+				if(ret != -1) {
+					files_unknow_time[j] = files[i];
+					j++;
+				}
+				else {
+					files_time[k] = files[i];
+					k++;
+				}
+			}
+
+			for (var i = 0; i < files_time.length; i++){
+				for (var j = 0; j < files_time.length - i; j++){
+					if(files_time[j] && files_time[j+1]){
+						var a_year = parseInt(files_time[j].substring(14, 22));		// 年比较   rtmp_log_from_20160703_034535
+						var b_year = parseInt(files_time[j+1].substring(14, 22));
+						if(a_year < b_year) {
+							temp = files_time[j+1];
+							files_time[j+1] = files_time[j];
+							files_time[j] = temp;
+						}
+						else if(a_year == b_year) {
+							var a_time = parseInt(files_time[j].substring(23, 29));		// 时间比较
+							var b_time = parseInt(files_time[j+1].substring(23, 29));
+							if(a_time < b_time) {
+								temp = files_time[j+1];
+								files_time[j+1] = files_time[j];
+								files_time[j] = temp;
+							}
+						}
+					}
+				}
+			}
+/*			
+			for (var i = 0; i < files_unknow_time.length; i++){
+				for (var j = 0; j < files_unknow_time.length - i; j++){
+					if(files_unknow_time[j] && files_unknow_time[j+1]){
+						var a_num = parseInt(files_unknow_time[j].substring(21, 23));		// rtmp_log_from_notime_01.log
+						var b_num = parseInt(files_unknow_time[j+1].substring(21, 23));
+						if(a_num < b_num) {
+							temp = files_unknow_time[j+1];
+							files_unknow_time[j+1] = files_unknow_time[j];
+							files_unknow_time[j] = temp;
+						}
+					}
+				}
+			}
+*/
+			
+			// <a href="../rtmp_log/xxxx.log" target="_blank" controls="controls">xxxx.log</a>
+			
+			var column_count = 1;		// 列数
+			
+			if(files_time.length > 25 && files_time.length <= 50) {
+				column_count = 2;
+			}
+			else if(files_time.length > 50 && files_time.length <= 75) {
+				column_count = 3;
+			}
+			else if(files_time.length > 75) {
+				column_count = 4;
+			}
+			
+			listContent += "<div style=\"WIDTH: 104%;  HEIGHT: 600px; overflow-x:hidden; overflow-y:auto\">";
+			listContent += "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
+
+			for(var i = 0; i < files_time.length && i <= 100; i++){
+				listContent += "<tr><td>"
+				listContent += "<a href=\"../rtmp_log/" + files_time[i] + "\" target=\"_blank\" controls=\"controls\">" + files_time[i] +"</a>";
+				listContent += "</td></tr>"
+			}
+/*			
+			for(var i = 0; i < files_unknow_time.length; i++){
+				listContent += "<li>";
+				listContent += "<a href=\"../rtmp_log/" + files_unknow_time[i] + "\" target=\"_blank\">" + files_unknow_time[i] +"</a>";
+				listContent += "</li>";
+			}
+	*/
+			listContent += "</table></div>"
+
+			art.dialog({
+				title: '$rtmplog.logdownloadtitle$',
+				lock: true,
+				fixed: true,
+				background: '#600', // 背景色
+				opacity: 0.87,	// 透明度
+				content: listContent
+			});
+		}
+	});
+}
+
+function initRtmpLogProcess()
+{	
+	jQuery('#flushBtn').click(function() {
+		jQueryAjaxCmd({
+			'data': {"actioncode":"475"},
+			success: function(ret){
+				jQuery('#logtext').val(ret);
+			}
+		});
+	});
+}
+
+function initDetailSetHandler() {
+	jQuery('.detailSet').click(function() {
+		var jQueryThis = jQuery(this);
+		var trObj = jQueryThis.parent().parent();
+		var rowIndex = trObj.find('input[name^="rowIndex"]').val();
+		var type = trObj.find('input[name^="type"]').val();
+		var ip = trObj.find('[name^="ip"]').val();
+		var videoPort = trObj.find('[name^="videoPort"]').val();
+		var status = trObj.find('[name^="status"]').val();
+		
+		var data = {"actioncode": "404","rowIndex": rowIndex, "type": type, "ip": ip, "videoPort": videoPort, "status": status};
+		closeAllPrompt();
+		jQueryAjaxHtml({
+			"data": {"actioncode": "316"},
+			success: function(innerStr) {
+				art.dialog({
+					title: '$output.detail$',
+					okValue: '$output.ok$',
+					cancelValue: '$output.cancel$',
+					lock: true,
+					fixed: true,
+				    background: '#600', // 背景色
+				    opacity: 0.87,	// 透明度
+				    content: innerStr,
+				    ok: function() {
+				        var validate = validateFormByID('wmform_outputAdvancedSet');
+						if(validate) {
+							var data = {"actioncode": "405"};
+							var params = getFormItemValue('wmform_outputAdvancedSet');
+							if(params) {
+								jQuery.extend(data, params);
+								jQueryAjaxCmd({
+									'data': data,
+									success: function(ret) {
+										if(ret == 1) {
+											alert('$opt.success$');
+											//refresh output page
+											//setTimeout("jQuery('#menud').click();", 100);
+					        				return true;	
+											//closeAllPrompt();
+										} else {
+											return false;
+										}
+									}
+								});
+							}
+						} else {
+							return false;
+						}
+				    },
+				    cancel: function() {
+				    	closeAllPrompt();
+				    	return true;
+				    }
+				});
+				
+				initFormValidation();			
+				//填充表单
+				jQueryAjaxCmd({
+					"data": data,
+					success: function(retScript) {
+						//alert(retScript);
+						eval(retScript);
+						// 在chrome中有点不兼容
+						var browser = navigator.userAgent.toLowerCase();
+						if(browser.indexOf('chrome')!=-1 || browser.indexOf('safari')!=-1) {
+							//setTimeout('formBeautify();', 300);
+						} else {
+							//formBeautify();
+						}
+						
+						
+						if(jQuery('#tc_flag').prop('checked')) {
+							jQuery('#tc_rate').prop('disabled', false);
+						} else {
+							jQuery('#tc_rate').prop('disabled', true);
+						}
+						
+						jQuery('#tc_flag').change(function() {
+							var browser = navigator.userAgent.toLowerCase();
+							if(jQuery(this).prop('checked')) {
+								if (browser.indexOf('chrome') != -1 || browser.indexOf('safari') != -1) {
+									jQuery('#tc_rate').prop('disabled', true);
+								} else {
+									jQuery('#tc_rate').prop('disabled', false);
+								}
+							} else {
+								if (browser.indexOf('chrome') != -1 || browser.indexOf('safari') != -1) {
+									jQuery('#tc_rate').prop('disabled', false);
+								} else {
+									jQuery('#tc_rate').prop('disabled', true);
+								}
+							}
+						});
+						
+						
+						/*if(jQuery('#type').val()=='1' || jQuery('#type').val()=='4') {
+							jQuery('#audioPort').prop('disabled', true);
+						} else {
+							jQuery('#audioPort').prop('disabled', false);
+						}
+						
+						if(jQuery('#type').val()=='3') {
+							jQuery('#ip').prop('disabled', true);
+							jQuery('#ip').val('127.0.0.1');
+						} else {
+							jQuery('#ip').prop('disabled', false);
+							jQuery('#ip').val('');
+						}
+						jQuery('#type').change(function() {
+							if(jQuery('#type').val()=='1' || jQuery('#type').val()=='4') {
+								jQuery('#audioPort').prop('disabled', true);
+							} else {
+								jQuery('#audioPort').prop('disabled', false);
+							}
+							
+							if(jQuery('#type').val()=='3') {
+								jQuery('#ip').prop('disabled', true);
+								jQuery('#ip').val('127.0.0.1');
+							} else {
+								jQuery('#ip').prop('disabled', false);
+								jQuery('#ip').val('');
+							}
+						});*/
+					}
+				});
+				
+			}
+		});        
+	});
+	
+	jQuery('#logsee').click(function() {
+		closeAllPrompt();
+		jQueryAjaxHtml({
+			"data": {"actioncode": "474"},
+			success: function(innerStr) {
+				art.dialog({
+					title: '$rtmplog.logseetitle$',
+					lock: true,
+					fixed: true,
+				    background: '#600', // 背景色
+				    opacity: 0.87,	// 透明度
+				    content: innerStr
+				});
+
+				//initFormValidation();
+				initRtmpLogProcess();
+
+				jQueryAjaxCmd({
+					'data': {"actioncode":"475"},
+					success: function(ret){
+						jQuery('#logtext').val(ret);
+					}
+				});
+			}
+		});        
+	});
+	
+	jQuery('#logdownload').click(function() {
+		closeAllPrompt();
+		logFilesDownload();
+	});
+}
+
+jQuery(function() {
+	//initTableData();
+	//formBeautify();
+	initFormValidation();
+	
+	/*
+	 * 按钮事件初始化
+	 */
+	
+	jQuery('#setBtn').click(function() {
+		var validate = validateFormByID('wmform');
+		if (validate) {
+			var data = {"actioncode": "402", "rowCount": rowCount};
+			var params = getFormItemValue('wmform');
+			
+			if(params) {
+				jQuery.extend(data, params);
+			}
+			
+			jQueryPostAjaxCmd({
+				'data': data,
+				success: function(ret) {
+					if(ret == 1) {
+						alert('$opt.success$');
+						//刷新
+						jQuery('#menud').click();
+					}
+				}
+			});
+		} else {
+			return false;
+		}
+		
+	});
+	
+///////
+});
+function initrtmpbuttonval(btn1,btn2){
+	document.getElementById("switch1").value=btn1;
+	document.getElementById("switch2").value=btn2;
+	if(btn1)
+	{		
+		document.getElementById("rtmpurl1").readOnly=true;
+//		jQuery("#rtmp1").css("color","green");
+	}
+	else
+	{
+		 document.getElementById("rtmpurl1").readOnly=false;
+//		 jQuery("#rtmp1").css("color","red");
+	}
+	if(btn2)
+	{	
+		document.getElementById("rtmpurl2").readOnly=true;
+//		jQuery("#rtmp2").css("color","green");
+	}
+	else
+	{	
+		document.getElementById("rtmpurl2").readOnly=false;
+//		jQuery("#rtmp2").css("color","red");
+	}
+
+	//开关事件
+	jQuery('select').change(function() {		
+		var subid=jQuery(this).attr("id");
+		var status=jQuery(this).val();
+		var reg=/^rtmp:\/\/([a-zA-Z0-9]|\-)+\.[a-zA-Z0-9]+[\/=\?%\&_~`@[\]\':+!]*([^<>\"\"])*$/;
+	//	var reg=/^rtmp:\/\/[a-zA-Z0-9]+\.[a-zA-Z0-9]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/;
+		if(subid=='switch3')
+		{
+				var validate = validateFormByID('wmform');
+			if (validate) {
+				var data = {"actioncode": "402", "rowCount": rowCount};
+				var params = getFormItemValue('wmform');
+				
+				if(params) {
+					jQuery.extend(data, params);
+				}
+				
+				jQueryPostAjaxCmd({
+					'data': data,
+					success: function(ret) {
+						if(ret == 1) {
+							alert('$opt.success$');
+							//刷新
+							jQuery('#menud').click();
+						}
+					}
+				});
+			} else {
+				return false;
+			};
+		}
+		else
+		{
+			var data = {"actioncode": "459"};
+			var params = getFormItemValue('wmform');			
+			if(params) {
+				jQuery.extend(data, params);
+			}
+			jQuery.extend(data, {"status": status});
+			if(subid=='switch1'){
+				var url=jQuery("#rtmpurl1").val();					
+				if(status==1)
+				{
+					if(!reg.test(url)){document.getElementById("rtmpurl1").disabled=false;alert('$opt.inputErr$');return;}
+				}
+				jQuery.extend(data, {"chanid": 0});
+			}
+			if(subid=='switch2'){
+				var url=jQuery("#rtmpurl2").val();	
+				if(status==1)
+				{
+					if(!reg.test(url)){document.getElementById("rtmpurl2").disabled=false;alert('$opt.inputErr$');return;}
+				}
+				jQuery.extend(data, {"chanid": 1});
+			}
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					if(ret == 0) {
+						if(subid=='switch1'){
+							document.getElementById("rtmpurl1").readOnly=true;
+					//		jQuery("#rtmp1").css("color","green");
+						}
+						else{
+							document.getElementById("rtmpurl2").readOnly=true;
+				//			jQuery("#rtmp2").css("color","green");
+						}
+						alert('$opt.success$');
+						//刷新
+						jQuery('#menud').click();
+					}else if (ret == 0xF13) {
+						if(subid=='switch1') {
+							document.getElementById("rtmpurl1").readOnly=false;
+					//		jQuery("#rtmp1").css("color","red");
+						}
+						else {
+							document.getElementById("rtmpurl2").readOnly=false;
+					//		jQuery("#rtmp2").css("color","red");
+						}
+						alert('$opt.faild$');
+						//刷新
+						jQuery('#menud').click();
+					} else {
+						alert(ret);
+					}
+				}
+			});
+		};
+		
+		
+	});
+}
+function initstreamstat(rtspstat,rtmp1stat,rtmp2stat)
+{
+	if(rtspstat){
+		document.getElementById("rtspst").value="$stream.connect$";
+		jQuery("#rtspst").css("color","green");
+	}
+	else{
+		document.getElementById("rtspst").value="$stream.noconnect$";
+		jQuery("#rtspst").css("color","red");
+	}
+		
+	if(rtmp1stat) {
+		document.getElementById("rtmp1").value="$stream.connect$";
+		jQuery("#rtmp1").css("color","green");
+	}
+	else {
+		document.getElementById("rtmp1").value="$stream.noconnect$";
+		jQuery("#rtmp1").css("color","red");
+	}
+		
+	if(rtmp2stat){
+		document.getElementById("rtmp2").value="$stream.connect$";
+		jQuery("#rtmp2").css("color","green");
+	}
+	else {
+		document.getElementById("rtmp2").value="$stream.noconnect$";
+		jQuery("#rtmp2").css("color","red");
+	}
+}
+</script> 

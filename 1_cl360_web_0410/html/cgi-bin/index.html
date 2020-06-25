@@ -1,0 +1,145 @@
+<!--[if IE]>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$login.title$</title>
+$index.include$
+<!--link rel="stylesheet" type="text/css" href="../CSS/main.css" />
+<link rel="stylesheet" type="text/css" href="../artDialog/skins/default.css" />
+<link rel="stylesheet" type="text/css" href="../ValidationEngine/css/validationEngine.jquery.css" />
+<link rel="stylesheet" type="text/css" href="../zebraTransform/css/zebra_transform.css" /-->
+
+<link rel="stylesheet" type="text/css" href="../css/jquery.datetimepicker.css"/>
+<script type="text/javascript" src="../artDialog/artDialog.min.js" ></script>
+<script type="text/javascript" src="../artDialog/artDialog.plugins.min.js" ></script>
+<script type="text/javascript" src="../js/myCommon.js" ></script>
+<script type="text/javascript" src="../js/myDrag.js" ></script>
+
+<script type="text/javascript" src="../js/jquery.min.js" ></script>
+<script type="text/javascript" src="../js/jquery.tablesorter.min.js" ></script>
+<script type="text/javascript" src="../js/jquery.tablesorter.pager.min.js" ></script>
+<script type="text/javascript" src="../js/jquery.cookies.2.2.0.min.js" ></script>
+<script type="text/javascript" src="../js/roller_leftMenu.js" ></script>
+<script type="text/javascript" src="../ValidationEngine/js/jquery.validationEngine.js"></script>
+<script type="text/javascript" src="../zebraTransform/js/zebra_transform.js"></script>
+<script type="text/javascript" src="../fileStyle/js/jquery.filestyle.min.js"></script>
+
+<script type="text/javascript" src="../js/utils.js" ></script>
+<script type="text/javascript" src="../js/custom.js" ></script>
+<script type="text/javascript" src="../js/jquery.datetimepicker.js"></script>
+</head>
+
+<body>
+<div id="uploadingDiv"><img style="position:absolute;left:46%; top:35%;" src="../images/uploading.gif"/></div>
+<div id="div"> 
+  <!-----------top start---------->
+  <div id="wm-main">
+    <div id="top">
+    	<span class="top_left_span"><label id="loginUserName">admin</label>, <a id="logoutLink" style="text-decoration:underline;" href="#">$index.logout$</a></span>
+    	<span class="top_center1_span"><a href="../downPath/VLC Player.exe">$index.DownPlay$</a></span>
+    	<span class="top_center_span"><a href="../downPath/Manager Lite Install.msi" id="manageLiteDownload">$index.manageDownload$</a></span>
+    	<span class="top_right_span">
+    	  $language$:
+    		<select id="changeLanguage" style="width:80px;">
+    			<option value="0">简体中文</option>
+    			<option value="2">繁體中文</option>
+    			<option value="1">English</option>
+				<option value="3">日本語</option>
+				<option value="4">한국어</option>
+    		</select>
+    	</span>
+    </div>
+    <div class="logo"><img src="../logo/logo.png" height="40" /></div>
+    <div id="wm-main-top">
+      <ul>
+        <li><a class="$image_prex$top_menu" id="nav_sysinfo" href="#">$index.systeminfo$</a></li>
+        <li><a class="$image_prex$top_menu" id="nav_sysset" href="#">$index.administration$</a></li>
+        <li><a class="$image_prex$top_menu" id="nav_paramset" href="#">$index.settings$</a></li>
+        <li><a class="$image_prex$top_menu" id="nav_filemgr" href="#">$index.filemgr$</a></li>
+		<li><a class="$image_prex$top_menu" id="nav_recordmgr" href="#">$index.recordmgr$</a></li>
+        <!-- <li><a class="$image_prex$top_menu" id="nav_paramset" href="#">$index.settings$ - $index.administration$</a></li> -->
+      </ul>
+    </div>
+  </div>
+  <!-----------top end---------->
+ 
+  <div id="wm-header">
+    <!-----------left munu start------->
+    <div id="menu">
+      <div id="menu-left">
+        <ul id="nav" class="list-nav"></ul>
+      </div>
+    </div>
+	<!-----------left munu end------->
+	<!-----------main content start------->
+    <div id="menu-right">
+      <div id="maincontent" class="header-right-a">
+      	<form id="wmform"><img src="../images/uploading.gif"/></form>
+      </div>
+    </div>
+	<!-----------main content end------->
+	
+  </div>
+</div>
+
+<script>
+function setLanguageType(type,verType,exeType) {
+	if(type == "cn") {
+		jQuery('#changeLanguage').val(0);
+	}else if (type=="hk"){
+		jQuery('#changeLanguage').val(2);
+	}else if (type=="us"){
+		jQuery('#changeLanguage').val(1);
+	}else if (type=="jp"){
+		jQuery('#changeLanguage').val(3);
+	}else if (type=="ko"){
+		jQuery('#changeLanguage').val(4);
+	}else {
+		jQuery('#changeLanguage').val(1);
+	}
+	
+	if(exeType == 1)
+		jQuery('#manageLiteDownload').attr('href','../downPath/Manager Lite Install.exe');
+	else
+		jQuery('#manageLiteDownload').attr('href','../downPath/Manager Lite Install.msi');
+	
+	if(verType == 1){
+		document.title = "$login.title.overSea$";
+	}else{
+	   // jQuery("#changeLanguage option[value='3']").remove();
+	   // jQuery("#changeLanguage option[value='4']").remove();
+		document.title = "$login.title$";
+	}
+}
+jQuery(function() {
+	//初始化抬头信息
+	initTopInfo();
+	//初始化表单验证
+	initFormValidation();
+	//美化首页表单
+	//formBeautify();
+	//初始化菜单导航
+	initPageMenu();
+	//初始化窗口缩放事件
+	//jQuery(window).resize(function() {
+		//formBeautify();
+	//});
+	//初始化语言切换事件
+	jQuery("#changeLanguage").change(function() {
+		var local = jQuery(this).val();
+		var data = {"actioncode": "24", "local": local};
+		jQueryAjaxCmd({
+			"data": data,
+			success: function(ret) {
+				eval(ret);
+			}
+		});
+	});
+	
+});
+</script> 
+
+</body>
+</html>

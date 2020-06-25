@@ -1,0 +1,208 @@
+<form enctype="multipart/form-data" id="wmform" method="post" target="upload" action="encoder.cgi">
+	<table width="753" border="0" cellpadding="5">
+      <tr>
+        <td class="$image_prex$itemnametd" width="184" height="35"></td>
+        <td><h5>$remotectrl.control$</h5></td>
+      </tr>
+      <tr>
+      	<td class="$image_prex$itemnametd" height="35">$remotectrl.input$</td>
+      	<td colspan="2">
+      	<input type="radio" name="inputVideo" value="1" checked />&nbsp;$video.input$1&nbsp;&nbsp;
+      	<input type="radio" name="inputVideo" value="2" />&nbsp;$video.input$2&nbsp;&nbsp;
+      	<input type="radio" name="inputVideo" value="3" />&nbsp;$video.input$3
+      	</td>
+      </tr>
+      <tr>
+        <td height="67" colspan="2">
+        <div class="remotectrl">
+        	<div class="up"></div>
+					<div class="down"></div>
+					<div class="left"></div>
+					<!--div class="middle"></div-->
+					<div class="right"></div>
+          <div class="range"><label style="width:77px;margin-right:3px;position:absolute;left:0px;top:0px;text-align:right;">$remotectrl.speed$</label>
+            <input style="margin-left:81px; margin-right:5px;" type="radio" name="speed" value="1" checked />$remotectrl.low$
+            <input style="margin-left:10px; margin-right:5px;" type="radio" name="speed" value="6" />$remotectrl.mid$
+            <input style="margin-left:10px; margin-right:5px;" type="radio" name="speed" value="10" />$remotectrl.high$
+          </div>
+        </div>
+        </td>
+      </tr>
+    </table>
+</form>
+<iframe name="upload" style="display:none"></iframe>
+<script>
+var clickFlag = 0;//0 ok, 1 no
+var disableTime = 1000;
+function setFlag(){
+	clickFlag = 0;
+}
+jQuery(function() {
+	initFormValidation();
+	
+	jQuery('#saveBtn').click(function() {
+		var data = {"actioncode": "412"};
+		var params = getFormItemValue('wmform');
+		if(params) {
+			jQuery.extend(data, params);
+		}
+		jQueryAjaxCmd({
+			"data": data,
+			success: function(ret) {
+				if(ret == 1) {
+					alert('$opt.success$');
+				}
+			}
+		});
+	});
+	
+	/*
+	 * init the click event handlers for the PTZ button. 
+	 */
+	jQuery('.left').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate && clickFlag == 0) {
+			clickFlag = 1;
+			setTimeout(setFlag, disableTime);
+			jQuery(this).css({'background-image': 'url(../images/remotectrl_left1.png)'});
+			var data = {"actioncode": "440", "type": "1"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			data['speed'] = speed;
+			data['inputVideo'] = inputVideo;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {
+				}
+			});
+		} else {
+			//alert("$common.clickToMany$");
+			return false;
+		}
+	});
+	
+	jQuery('.left').mouseup(function() {
+		jQuery(this).css({'background-image': 'url(../images/remotectrl_left.png)'});
+	});
+	
+	jQuery('.left').mouseout(function() {
+		jQuery(this).css({'background-image': 'url(../images/remotectrl_left.png)'});
+	});
+	
+	jQuery('.right').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate && clickFlag == 0) {
+			clickFlag = 1;
+			setTimeout(setFlag, disableTime);
+			jQuery(this).css({'background-image': 'url(../images/remotectrl_right1.png)'});
+			var data = {"actioncode": "440", "type": "2"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			data['speed'] = speed;
+			data['inputVideo'] = inputVideo;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {}
+			});
+		} else {
+			//alert("$common.clickToMany$");
+			return false;
+		}
+	});
+	
+	jQuery('.right').mouseup(function() {
+		jQuery(this).css({'background-image': 'url(../images/remotectrl_right.png)'});
+	});
+	
+	jQuery('.right').mouseout(function() {
+		jQuery(this).css({'background-image': 'url(../images/remotectrl_right.png)'});
+	});
+	
+	jQuery('.up').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate && clickFlag == 0) {
+			clickFlag = 1;
+			setTimeout(setFlag, disableTime);
+			jQuery(this).css({'background-image': 'url(../images/remotectrl_up1.png)'});
+			var data = {"actioncode": "440", "type": "3"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			data['speed'] = speed;
+			data['inputVideo'] = inputVideo;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {}
+			});
+		} else {
+			//alert("$common.clickToMany$");
+			return false;
+		}
+	});
+	
+	jQuery('.up').mouseup(function() {
+		jQuery(this).css({'background-image': 'url(../images/remotectrl_up.png)'});
+	});
+	
+	jQuery('.up').mouseout(function() {
+		jQuery(this).css({'background-image': 'url(../images/remotectrl_up.png)'});
+	});
+	
+	jQuery('.down').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate && clickFlag == 0) {
+			clickFlag = 1;
+			setTimeout(setFlag, disableTime);
+			jQuery(this).css({'background-image': 'url(../images/remotectrl_down1.png)'});
+			var data = {"actioncode": "440", "type": "4"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			data['speed'] = speed;
+			data['inputVideo'] = inputVideo;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {}
+			});
+		} else {
+			//alert("$common.clickToMany$");
+			return false;
+		}
+	});
+	
+	jQuery('.down').mouseup(function() {
+		jQuery(this).css({'background-image': 'url(../images/remotectrl_down.png)'});
+	});
+	
+	jQuery('.down').mouseout(function() {
+		jQuery(this).css({'background-image': 'url(../images/remotectrl_down.png)'});
+	});
+	
+	jQuery('.middle').mousedown(function() {
+		var validate = validateFormByID('wmform');
+		if (validate && clickFlag == 0) {
+			clickFlag = 1;
+			setTimeout(setFlag, disableTime);
+			jQuery(this).css({'background-image': 'url(../images/adjust_screen_middle1.png)'});
+			var data = {"actioncode": "440", "type": "0"};
+			var speed = formSet.getRadioValue('#wmform ', 'speed');
+			var inputVideo = formSet.getRadioValue('#wmform ', 'inputVideo');
+			data['speed'] = speed;
+			data['inputVideo'] = inputVideo;
+			jQueryAjaxCmd({
+				"data": data,
+				success: function() {}
+			});
+		} else {
+			//alert("$common.clickToMany$");
+			return false;
+		}
+	});
+	
+	jQuery('.middle').mouseup(function() {
+		jQuery(this).css({'background-image': 'url(../images/adjust_screen_middle.png)'});
+	});
+	
+	jQuery('.middle').mouseout(function() {
+		jQuery(this).css({'background-image': 'url(../images/adjust_screen_middle.png)'});
+	});
+});
+</script>

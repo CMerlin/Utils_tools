@@ -1,0 +1,159 @@
+<form id="wmform">
+  <table height="366" border="0" class="sysinfo_table">
+    <tr>
+      <td width="880" colspan="3" style="text-align:center; padding-right:80px;"><h5>$sysinfo.title$</h5></td>
+    </tr>
+    <tr>
+      <td width="399" class="$image_prex$itemnametd">$sysinfo.seriesno$</td>
+      <td width="180"><input readOnly name="serialNO" type="text" class="show_label" /></td>
+	  <td></td>
+    </tr>
+
+<!--
+	<tr>
+      <td class="$image_prex$itemnametd">$sysinfo.macaddr$</td>
+      <td><input style="width:300px;" readOnly name="macaddr" type="text" class="show_label" /></td>
+    </tr>
+-->
+    <tr>
+      <td class="$image_prex$itemnametd">$sysinfo.model$</td>
+      <td><input readOnly name="deviceModelNO" type="text" class="show_label" /></td>
+    </tr>
+	<tr>
+      <td class="$image_prex$itemnametd">$sysinfo.sysversion$</td>
+      <td><input readOnly name="sysVersion" type="text" class="show_label" /></td>
+    </tr>
+    <tr>
+      <td class="$image_prex$itemnametd">$sysinfo.webversion$</td>
+      <td><input style="width:180px;" readOnly name="webVersion" type="text" class="show_label" /></td>
+    </tr>
+	<tr>
+      <td class="$image_prex$itemnametd">$sysinfo.kernelversion$</td>
+      <td><input style="width:180px;" readOnly name="kernelversion" type="text" class="show_label" /></td>
+    </tr>
+    <tr>
+      <td class="$image_prex$itemnametd">$sysinfo.encversion$</td>
+      <td><input style="width:180px;" readOnly name="encVersion" type="text" class="show_label" /></td>
+    </tr>
+    <tr>
+      <td class="$image_prex$itemnametd">$sysinfo.enckernelversion$</td>
+      <td><input style="width:180px;" readOnly name="encKernelVersion" type="text" class="show_label" /></td>
+    </tr>
+    <tr>
+      <td class="$image_prex$itemnametd">$sysinfo.fpgaversion$</td>
+      <td><input style="width:180px;" readOnly name="FPGAVersion" type="text" class="show_label" /></td>
+    </tr>
+    <tr>
+      <td class="$image_prex$itemnametd">$sysinfo.harddiskspace$</td>
+      <td><input readOnly name="hardDiskSpace" type="text" class="show_label"/></td>
+    </tr>
+    <tr>
+      <td class="$image_prex$itemnametd">$sysinfo.freediskspace$</td>
+      <td><input readOnly name="freeDiskSpace" type="text" class="show_label"/></td>
+    </tr>
+    <tr>
+      <td class="$image_prex$itemnametd">$sysinfo.mediaip$</td>
+      <td><input readOnly name="mediaIp" type="text" class="show_label" /></td>
+	  <td rowspan="6" class="notice" style="display: none;">
+		<div style="height: 150px; width: 280px; border: #186fca 1px solid; padding: 10px; color: red;"><h6>$sysupgrade.note$</h6><font style="font-size:12px;">$sysinfo.notice$</font></div>
+	  </td>
+    </tr>
+    <tr>
+      <td class="$image_prex$itemnametd">$sysinfo.ip$</td>
+      <td><input readOnly name="IPAddress" type="text" class="show_label" /></td>
+    </tr>
+	<tr class="serialTd" style="display: none;">
+      <td width="180" class="$image_prex$itemnametd">$sysinfo.seriesno$</td>
+      <td><input name="serialNumber" id="serialNumber" type="text" class="inputtext1 validate[maxSize[20]]" /></td>
+    </tr>
+	<tr class="serialTd" style="display: none;" id="deviceTr">
+      <td width="180" class="$image_prex$itemnametd">$sysinfo.model$</td>
+      <td><input name="deviceModel" id="deviceModel" type="text" class="inputtext1 validate[maxSize[20]]" /></td>
+    </tr>
+	<tr class="serialTd" style="display: none;">
+      <td width="180" class="$image_prex$itemnametd">$sysinfo.version$</td>
+      <td>
+	      <input name="versionType" type="radio" value="0"/>$sysinfo.inland$ &nbsp;&nbsp;
+		  <input name="versionType" type="radio" value="1"/>$sysinfo.overseas$
+	  </td>
+    </tr>
+	<tr class="serialTd" style="display: none;">
+      <td width="180" class="$image_prex$itemnametd">$sysinfo.audiosamplerate$</td>
+      <td>
+	      <input name="audiosamplerate" type="radio" value="0"/>16KHz &nbsp;&nbsp;
+		  <input name="audiosamplerate" type="radio" value="1"/>44.1KHz
+	  </td>
+    </tr>
+	<tr class="serialTd" style="display: none;">
+		<td width="180"></td>
+		<td><input id="btnSetSerialNo" type="button" class="$image_prex$click_btn" value="$btn.save$" /></td>
+	</tr>
+  </table>
+</form>
+<iframe name="upload" style="display:none"></iframe>
+<script>
+function initPage(verType)
+{
+	if(verType == 1)
+	 jQuery("#deviceTr").css("display","none");
+}
+
+jQuery(function() {
+	initFormValidation();
+	
+	jQuery("input[type=file]").filestyle({ 
+	     image: "../fileStyle/css/choose-file.png",
+	     imageheight : 22,
+	     imagewidth : 52,
+	     width : 150
+	});
+	/*
+	jQuery('#submitBtn').click(function() {
+		jQuery('#wmform').submit();
+		openUploading();
+	});
+	*/
+	var user = jQuery.cookies.get("user");
+	if(user == "reachadministrator"){
+		jQuery(":input[name='serialNumber']").css({"background": "#ffffff"});
+		jQuery(".serialTd").css({"display": "table-row"});
+		jQuery(".notice").show();
+	}
+	jQuery("#btnSetSerialNo").click(function(){
+		if(!validateFormByID('wmform')){
+			alert(22);
+			return true;
+		}
+		var serialNumber = jQuery(":input[name='serialNumber']").val();
+		var deviceModel = jQuery(":input[name='deviceModel']").val();
+		var versionType = formSet.getRadioValue('#wmform ', 'versionType');
+		var audioSamplerate = formSet.getRadioValue('#wmform ', 'audiosamplerate');
+		var serialNO =jQuery(":input[name='serialNO']").val();
+		
+		if(serialNumber == '')//add by chengp
+		{
+			serialNumber = serialNO ;
+		}else{
+			if(!(/^[\w\-]{1,80}$/.test(serialNumber))){
+				alert("$seialNumber.msgcontainschines$");
+				return false;
+			}
+		}
+		
+		if(serialNumber) {
+			var data = {"actioncode": "420", "serialNumber": serialNumber, "deviceModel": deviceModel, "verType":versionType, "audioSamplerate":audioSamplerate};
+			jQueryAjaxCmd({
+				"data": data,
+				success: function(ret) {
+					//alert(ret)
+					alert("$savesucess$");
+					jQuery("#nav_sysinfo").click();
+				}
+			});
+			
+		} else {
+			return false;
+		}
+	});
+});
+</script>

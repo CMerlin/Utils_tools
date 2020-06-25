@@ -1,0 +1,28 @@
+CC = gcc
+#CC = arm-hisiv200-linux-gcc 
+#CC = arm-linux-gcc
+
+src = $(wildcard  src/*.c)
+
+#LDFLAGS = -lmxml -lpthread
+ifeq "$(CC)" "gcc"
+LDFLAGS = -L ./lib/mxml_2.9/x86 -lmxml -lpthread
+bin = ./bin/X86_HTTP_SLAVE_20160620
+else
+LDFLAGS = -L ./lib/mxml_2.9/arm -lmxml -lpthread
+bin = ./bin/ARM_HTTP_SLAVE_20160620
+endif
+
+CFLAGS += -I./include -I./lib/mxml_2.9/include
+CFLAGS += -Wall
+
+#bin = ./bin/HTTP_SLAVE_20160620
+all:$(bin)
+	@echo "****** Building an executable:"$(bin) "******"
+$(bin) : $(src)
+	$(CC) -o $@ $^ $(LDFLAGS) $(CFLAGS)
+
+clean:
+	-rm -rf $(bin)
+
+.PHONY:clean

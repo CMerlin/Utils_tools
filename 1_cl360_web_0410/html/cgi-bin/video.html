@@ -1,0 +1,362 @@
+        <form id="wmform">
+	      <table width="753" border="0" cellpadding="5">
+				<tr>
+				  <td width="184" height="28">&nbsp;</td>
+				  <td align="left" colspan="2"><h5>$video.outputtitle$</h5></td>
+				</tr>
+        <tr>
+          <td class="$image_prex$itemnametd">$video.resolution$</td>
+          <td colspan="2">
+            <select name="resolution" id="resolution" style="width:150px;">            
+            </select>
+          </td>
+        </tr>
+        
+        <tr>
+	        <td colspan="3">
+	            &nbsp;
+	        </td>
+        </tr>
+        
+        <tr>
+              <td height="28">&nbsp;</td>
+              <td align="left" style="padding-left: 10px;" colspan="2"><h5>$video.inputtitle$</5></td>
+        </tr>
+
+        <tr>
+          <td width="300" colspan="2" align="center"><!--$video.catch$:--></td>
+		  <td>
+		  	<input type="radio" name="adaFlag" value="0" class="forceSwitch"/>$video.byManual$&nbsp;&nbsp;
+			<input type="radio" name="adaFlag" value="1" class="forceSwitch"/>$video.byAuto$
+			<span style="margin-right:60px;"></span>
+		  </td>
+        </tr>
+        <tr>
+          <td class="$image_prex$itemnametd">$video.signalsearch_1$</td>
+          <td>
+				<input type="radio" name="signalsearch_1" value="1" />$video.hd$
+				<input style="margin-left:15px;" type="radio" name="signalsearch_1" value="2" />$video.cvbs$
+				<input style="margin-left:15px;" type="radio" name="scmode_1" value="1" />$video.scmode0$
+				<input style="margin-left:15px;" type="radio" name="scmode_1" value="0" />$video.scmode1$
+          </td>
+          <td align="left"><input class="byManual" type="checkbox" name="inputVideo0" id="inputVideo0" value="1" /></td>
+		  
+	    </tr>
+		<tr>
+          <td class="$image_prex$itemnametd">$video.signalsearch_2$</td>
+          <td>
+				<input type="radio" name="signalsearch_2" value="1" />$video.hd$
+				<input style="margin-left:15px;" type="radio" name="signalsearch_2" value="2" />$video.cvbs$
+				<input style="margin-left:15px;" type="radio" name="scmode_2" value="1" />$video.scmode0$
+				<input style="margin-left:15px;" type="radio" name="scmode_2" value="0" />$video.scmode1$
+          </td>
+          <td align="left"><input class="byManual" type="checkbox" name="inputVideo1" id="inputVideo1" value="1" /></td>
+	    </tr>
+	    <tr>
+          <td class="$image_prex$itemnametd">$video.signalsearch_3$</td>
+          <td>
+				<input type="radio" name="vga" value="2" checked readonly />$video.hd$
+				<input style="margin-left:$video.num$;" type="radio" name="scmode_3" value="1" />$video.scmode0$
+				<input style="margin-left:15px;" type="radio" name="scmode_3" value="0" />$video.scmode1$
+		  </td>
+          <td align="left"><input class="byManual" type="checkbox" name="inputVideo2" id="inputVideo2" value="1" /></td>
+	      </tr>
+		  
+	      <tr>
+          <td colspan="3" align="center">
+          <div style="display: none; width: 750px;" id="mergeList2">
+          	<div style="text-align:left; padding-left: 35px; padding-bottom: 1px;">$video.merge$</div>
+            <ul style="width: 750px; list-style-type: none;">
+                <li style="display: block; width: 180px; height: 118px; float: left;">
+                <div style="width: 154px; height: 88px; background-image: url(../images/merge_icon.png); background-position:0px 0px;"></div>
+                &nbsp;&nbsp;<input type="radio" name="layout" value="21" />$video.layouttext$1
+                </li>
+                <li style="display: block; width: 180px; height: 118px; float: left;">
+                <div style="width: 154px; height: 88px; background-image: url(../images/merge_icon.png); background-position:-161px 0px;"></div>
+                &nbsp;&nbsp;<input type="radio" name="layout" value="22" />$video.layouttext$2
+                </li>
+                <li style="display: block; width: 180px; height: 118px; float: left;">
+                <div style="width: 154px; height: 88px; background-image: url(../images/merge_icon.png); background-position:-325px 0px;"></div>
+                &nbsp;&nbsp;<input type="radio" name="layout" value="23" />$video.layouttext$3
+                </li>
+                <li style="display: block; width: 180px; height: 118px; float: left;">
+                <div style="width: 154px; height: 90px; background-image: url(../images/merge_icon.png); background-position:0px -99px;"></div>
+                &nbsp;&nbsp;<input type="radio" name="layout" value="25" />$video.layouttext$4
+                </li>
+                <li style="display: block; width: 180px; height: 118px; float: left;">
+                <div style="width: 154px; height: 90px; background-image: url(../images/merge_icon.png); background-position:-161px -99px;"></div>
+                &nbsp;&nbsp;<input type="radio" name="layout" value="24" />$video.layouttext$5
+                </li>
+                <li style="display: block; width: 180px; height: 118px; float: left;">
+                <div style="width: 154px; height: 90px; background-image: url(../images/merge_icon.png); background-position:-325px -99px;"></div>
+                &nbsp;&nbsp;<input type="radio" name="layout" value="26" />$video.layouttext$6
+                </li>
+				</li>
+                <li style="display: block; width: 180px; height: 118px; float: left;">
+                <div style="width: 154px; height: 90px; background-image: url(../images/merge_icon.png); background-position:-325px -203px;"></div>
+                &nbsp;&nbsp;<input type="radio" name="layout" value="27" />$video.layouttext$7
+                </li>
+            </ul>
+           </div>
+           
+           <div style="display: none; width: 750px;" id="mergeList3">
+            <div style="text-align:left; padding-left: 35px; padding-bottom: 5px;">$video.merge$</div>
+          	<ul style="width: 750px; list-style-type: none;">
+                <li style="display: block; width: 180px; height: 118px; float: left;">
+                <div style="width: 154px; height: 90px; background-image: url(../images/merge_icon.png); background-position:0px -203px;"></div>
+                &nbsp;&nbsp;<input type="radio" name="layout" value="31" />$video.layouttext$1
+                </li>
+                <li style="display: block; width: 180px; height: 118px; float: left;">
+                <div style="width: 154px; height: 90px; background-image: url(../images/merge_icon.png); background-position:-161px -203px;"></div>
+                &nbsp;&nbsp;<input type="radio" name="layout" value="32" />$video.layouttext$2
+                </li>
+            </ul>
+           </div>
+          </td>
+	    </tr>
+		
+		<tr>
+	        <td colspan="3" align="center">
+	          <input id="setbtn" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$btn.save$" />
+	        </td>
+			<!--<td class="$image_prex$itemnametd"></td>
+			<td colspan="2" id="setTd">
+				<input id="setbtn" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$btn.save$" />
+			</td>-->	
+	    </tr>
+		
+		<tr class="mergeSwitch" style="display: none;">
+			<td class="$image_prex$itemnametd">$video.changeScreen$</td>
+			<td colspan="2">
+				<input id="switchBtn" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$video.switchbtn$" />
+			</td>	
+		</tr>
+      
+	  <tr class="mergeSwitch" style="display: none;">
+			<td class="$image_prex$itemnametd">$video.fullScreen$</td>
+			<td colspan="2">
+				<input id="videobtn_1" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$video.videobtn_1$" />
+				<input id="videobtn_2" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$video.videobtn_2$" />
+				<input id="videobtn_3" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$video.videobtn_3$" />
+				<input id="reset" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$video.reset$" />
+			</td>	
+	 </tr>
+	  
+	  
+    </table>
+        </form>
+<script>
+function switchAppear(){
+	var inputVideo0 = jQuery("#inputVideo0").attr("checked");
+	var inputVideo1 = jQuery("#inputVideo1").attr("checked");
+	var inputVideo2 = jQuery("#inputVideo2").attr("checked");
+	
+	if (inputVideo0 == 'checked') {
+		jQuery("#videobtn_1").css("display","");
+	}else{
+		jQuery("#videobtn_1").css("display","none");
+	}
+	
+	if (inputVideo1 == 'checked') {
+		jQuery("#videobtn_2").css("display","");
+	}else{
+		jQuery("#videobtn_2").css("display","none");
+	}
+	
+	if (inputVideo2 == 'checked') {
+		jQuery("#videobtn_3").css("display","");
+	}else{
+		jQuery("#videobtn_3").css("display","none");
+	}
+}
+function setOutPutmode(mode){	
+	if(mode==0){	
+		jQuery("#resolution").append("<option value='1'>1440x900</option>");
+		jQuery("#resolution").append("<option value='2'>1400x1050</option>");
+		jQuery("#resolution").append("<option value='3'>1366x768</option>");
+		jQuery("#resolution").append("<option value='5'>1280x800</option>");
+		jQuery("#resolution").append("<option value='6'>1280x720</option>");
+		jQuery("#resolution").append("<option value='7'>1024x768</option>");
+		jQuery("#resolution").append("<option value='4'>1280x1024</option>");
+	}
+	else
+	{
+		jQuery("#resolution").append("<option value='6'>1280x720</option>");
+		jQuery("#resolution").append("<option value='7'>1024x768</option>");
+		jQuery("#resolution").append("<option value='4'>1280x1024</option>");
+		jQuery("#resolution").append("<option value='8'>1920x1080</option>");
+	}
+	
+}
+function toggleMergeModel(){
+		var selectedVedios = jQuery(":checkbox[checked]").length;
+		
+		if(selectedVedios == 2){
+			jQuery("#mergeList3").hide();
+			jQuery("#mergeList2").show();
+//			jQuery(".mergeSwitch").show();
+		}else if(selectedVedios == 3){
+			jQuery("#mergeList2").hide();
+			jQuery("#mergeList3").show();
+//			jQuery(".mergeSwitch").show();
+		}else{
+			jQuery("#mergeList2").hide();
+			jQuery("#mergeList3").hide();
+//			jQuery(".mergeSwitch").hide();
+		}
+			
+		//switchAppear();
+}
+
+function forceSwitch()
+{
+	var adaFlag = formSet.getRadioValue('#wmform ', 'adaFlag');
+		
+	if(adaFlag == "1")
+	{
+		jQuery("#mergeList2").hide();
+		jQuery("#mergeList3").hide();
+//		jQuery(".mergeSwitch").hide();
+		
+		jQuery(".byManual").attr("disabled",true);
+		
+	}else{
+		toggleMergeModel();
+		
+		jQuery(".byManual").attr("disabled",false);
+	}
+}
+
+jQuery(function() {	
+	jQuery('#setbtn').click(function() {	
+			var selectedVedios = jQuery(":checkbox[checked]").length;
+			if(selectedVedios < 1){
+				alert("$video.selectonemorevideo$");
+				return;
+			}
+			var data = {"actioncode": "401"};
+			var params = getFormItemValue('wmform');
+			if(params) {
+				jQuery.extend(data, params);
+			}
+			if(params.adaFlag != adaFlag || params.inputVideo0 != inputVideo0 || params.inputVideo1 != inputVideo1 || params.inputVideo2 != inputVideo2){
+				jQuery.extend(data, {"adaFlagModify": 1});
+			}
+			
+			if(params.scmode_1 != scmode_1 || params.scmode_2 != scmode_2 || params.scmode_3 != scmode_3){
+				jQuery.extend(data, {"isModify2": 1});	
+			}
+			
+			//判断是否发生变化
+			if(params.resolution != resolution || params.signalsearch_1 != signalsearch_1 || params.signalsearch_2 != signalsearch_2){
+				jQuery.extend(data, {"isModify1": 1});
+
+				if(confirm("$opt.confirm$")){
+					jQueryAjaxCmd({
+						"data": data,
+						success:function(ret) {
+							if(ret == 1) {
+								alert('$opt.warning$');
+								window.location.href = 'encoder.cgi';
+							} else if (ret == 3) {
+								alert('$uploadstateerror$');
+							} else if (ret == 11) {
+								alert('$recordmgr.noReviewOpe$');
+							} else {
+								alert('$savefailed$');
+							}
+						}
+					});
+				}
+			}else{
+				jQueryAjaxCmd({
+					"data": data,
+					success:function(ret) {
+						if(ret == 1) {
+							var adaFlag = formSet.getRadioValue('#wmform ', 'adaFlag');
+							if (adaFlag == "1") {
+								setTimeout(function(){
+									jQuery('#menua').click();
+									alert('$savesucess$');
+									}, 500);
+							}else{
+								jQuery('#menua').click();
+								alert('$savesucess$');
+							}
+							
+						} else if (ret == 3) {
+							alert('$uploadstateerror$');
+						} else if (ret == 11) {
+							alert('$recordmgr.noReviewOpe$');
+							setTimeout(function(){
+								jQuery('#menua').click();
+							}, 500);
+						} else {
+							alert('$savefailed$');
+						}
+					}
+				});
+			}
+			
+	});
+	
+	jQuery(":checkbox").bind("click", toggleMergeModel);
+	
+	jQuery(".forceSwitch").bind("click",forceSwitch);
+	
+	jQuery('#switchBtn').click(function() {
+			var data = {"actioncode": "439"};
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					
+				}
+			});
+	});
+	
+	jQuery('#videobtn_1').click(function() {
+			var data = {"actioncode": "444"};
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					
+				}
+			});
+	});
+	
+	jQuery('#videobtn_2').click(function() {
+			var data = {"actioncode": "445"};
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					
+				}
+			});
+	});
+	
+	jQuery('#videobtn_3').click(function() {
+			var data = {"actioncode": "446"};
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					
+				}
+			});
+	});
+	
+	jQuery('#reset').click(function() {
+			var data = {"actioncode": "447"};
+			jQueryAjaxCmd({
+				"data": data,
+				success:function(ret) {
+					
+				}
+			});
+	});
+	
+	/*
+	 * 初始化表单验证
+	 */
+	initFormValidation();
+});
+</script> 

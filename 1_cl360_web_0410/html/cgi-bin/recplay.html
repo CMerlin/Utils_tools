@@ -1,0 +1,123 @@
+<html>
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+  <script type="text/javascript" src="../js/jquery.min.js" ></script>
+  <script type="text/javascript" src="../js/utils.js" ></script>
+<script type="text/javascript" src="../js/custom.js" ></script>
+<script type="text/javascript" src="../js/jquery.cookies.2.2.0.min.js" ></script>
+ </head>
+ <body>
+
+<div id="play">
+       <OBJECT classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" width="720" height="540" id="vlc" events="true">
+			<param name="MRL" value="" />
+			<param name="ShowDisplay" value="true" />
+			<param name="AutoLoop" value="false" />
+			<param name="AutoPlay" value="true" />
+			<param name="Volume" value="100" />
+			<param name="toolbar" value="false" />
+			<param name="StartTime" value="0" />
+			<EMBED pluginspage="http://www.videolan.org"
+			       type="application/x-vlc-plugin"
+			       version="VideoLAN.VLCPlugin.2"
+			       width="720"
+			       height="540"
+			       toolbar="false"
+			       text="Waiting for video"
+			       name="vlc"> </EMBED>
+</OBJECT>
+</div>
+<br/>
+<input type=button id="btn_hign" value="$High.stream$" > 
+<input type=button id="btn_low" value="$low.stream$" style="display: none;"> 
+<!-- <input type=button value="$Mute.switch$" onclick='onMute()'> 
+<input type=button value="$cut.Volume$" onclick='updateVolume(-10)'> 
+<input type=button value="$add.Volume$" onclick='updateVolume(+10)'> -->
+ </body>
+ <script type="text/javascript">
+ jQuery(function() {
+		jQuery('#btn_hign').click();
+		
+ });
+ 
+
+ 
+function play(playURL){ 
+    var vlc = getVLC("vlc");
+    vlc.playlist.items.clear();
+    var itemId= vlc.playlist.add(playURL);
+    vlc.playlist.playItem(itemId);
+
+} 
+//高码流
+jQuery('#btn_hign').click(function() {
+	var data = {"actioncode": "515"};
+	jQueryAjaxCmd({
+		"data": data,
+		success:function(ret) {
+			var rtspMrl = ret+"high/";	
+			var user = jQuery.cookies.get("user");
+			if(user !="guest")
+			{
+				rtspMrl= rtspMrl+"a";
+			}
+			play(rtspMrl);
+			jQuery('#btn_hign').hide();
+			jQuery('#btn_low').show();
+		}
+	});
+});
+
+//低码流
+jQuery('#btn_low').click(function() {
+	var data = {"actioncode": "515"};
+	jQueryAjaxCmd({
+		"data": data,
+		success:function(ret) {
+			var rtspMrl = ret+"low/";
+			var user = jQuery.cookies.get("user");
+			if(user !="guest")
+			{
+				rtspMrl= rtspMrl+"a";
+			}
+			play(rtspMrl);
+			jQuery('#btn_hign').show();
+			jQuery('#btn_low').hide();
+		}
+	});
+});
+
+function updateVolume(deltaVol) 
+{ 
+        var vlc = getVLC("vlc"); 
+        vlc.audio.volume += deltaVol; 
+} 
+//静音切换
+function onMute() 
+{ 
+	var vlc = getVLC("vlc"); 
+	vlc.audio.toggleMute();    
+} 
+function getVLC(name)
+{
+    if (window.document[name])
+    {
+        return window.document[name];
+    }
+    if (navigator.appName.indexOf("Microsoft Internet")==-1)
+    {
+        if (document.embeds && document.embeds[name])
+            return document.embeds[name];
+    }
+    else // if (navigator.appName.indexOf("Microsoft Internet")!=-1)
+    {
+        return document.getElementById(name);
+    }
+}
+ </script>
+ 
+
+</html>
+
+

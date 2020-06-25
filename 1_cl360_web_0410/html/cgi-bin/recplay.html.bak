@@ -1,0 +1,58 @@
+<html>
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+  <title></title>
+  <script type="text/javascript" src="../js/jquery.min.js" ></script>
+ </head>
+ <body>
+
+<div id="play">
+       <object classid="clsid:9be31822-fdad-461b-ad51-be1d1c159921"  width="640"  height="480"  id="vlc" events="true">
+        <param name="mrl" value="" />
+        <param name="showdisplay" value="false" /> 
+        <param name="autoloop" value="false" /> 
+        <param name="autoplay" value="true" /> 
+        <param name="volume" value="100" /> 
+		<param name="uiMode" value="None"> 
+        <embed type="application/x-vlc-plugin" width="640"  height="480" name="vlc" autoplay="true" controller="true" volume="100" loop="false"/> 
+       </object>  
+</div>
+
+ </body>
+ <script type="text/javascript">
+/*  jQuery(function() {
+	var playStr ="<object classid='clsid:9be31822-fdad-461b-ad51-be1d1c159921'  width='640'  height='480'  id='vlc' events='true'> ";
+	playStr += "<param name='mrl' value='' /> ";
+	playStr += "<param name='showdisplay' value='false' /> ";
+	playStr += "<param name='autoloop' value='false' /> ";
+	playStr += "<param name='autoplay' value='true' /> ";
+	playStr += "<param name='volume' value='100' /> ";
+	playStr +="<embed type='application/x-vlc-plugin' width='640'  height='480' name='vlc' /> ";
+	playStr +="</object>";
+	jQuery("#play").html(playStr);
+	alert(jQuery("#play").html());
+ 
+ }); */
+
+var vlc; // VLC对象
+var itemId;  // 播放列表中播放节目的id
+function play(playURL){ 
+    if (window.document["vlc"]){ 
+               vlc = window.document["vlc"]; 
+    } 
+    if (navigator.appName.indexOf("Microsoft Internet")==-1) { 
+               if (document.embeds && document.embeds["vlc"]) 
+                       vlc = document.embeds["vlc"];    
+    } 
+   else  { 
+              vlc = document.getElementById("vlc"); 
+   }
+    itemId= vlc.playlist.add(playURL);
+    vlc.playlist.playItem(itemId);
+
+} 
+ </script>
+
+</html>
+
+

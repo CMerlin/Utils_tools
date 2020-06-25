@@ -1,0 +1,117 @@
+<!--[if IE]>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<![endif]-->
+<html>
+<head>
+<!--meta http-equiv="Content-Type" content="text/html; charset=utf-8" /-->
+<title>$login.title$</title>
+$login.include$
+<script type="text/javascript" src="../js/jquery.min.js" ></script>
+<script type="text/javascript" src="../js/jquery.cookies.2.2.0.min.js" ></script>
+<script type="text/javascript" src="../ValidationEngine/js/jquery.validationEngine.js"></script>
+<script type="text/javascript" src="../js/utils.js" ></script>
+<script type="text/javascript">
+function submitForm() {
+	var validate = validateFormByID('loginform');
+	if(validate) {
+		jQuery('#loginform').submit();
+	} else {
+		return false;
+	}
+}
+
+jQuery(function() {
+	//表单验证
+	initFormValidation();
+	
+	//用户名和密码框获取焦点和失去焦点事件
+	jQuery('#textusername').focus(function() {
+		var jQueryThis= jQuery(this);
+		if(jQuery.trim(jQueryThis.val())==jQuery.trim('$login.username$')) {
+			jQuery('#textusername').css({'z-index':'99'});
+			jQuery('#username').css({'z-index':'999'});
+			jQuery('#username').focus();
+		}
+	});
+	
+	jQuery('#username').blur(function() {
+		var jQueryThis= jQuery(this);
+		if(!jQueryThis.val()) {
+			jQuery('#textusername').css({'z-index':'999'});
+			jQuery('#username').css({'z-index':'99'});
+		}
+	});
+	
+	jQuery('#textpwd').focus(function() {
+		var jQueryThis= jQuery(this);
+		if(jQuery.trim(jQueryThis.val())==jQuery.trim('$login.password$')) {
+			jQuery('#textpwd').css({'z-index':'99'});
+			jQuery('#password').css({'z-index':'999'});
+			jQuery('#password').focus();
+		}
+	});
+	
+	jQuery('#password').blur(function() {
+		var jQueryThis= jQuery(this);
+		if(!jQueryThis.val()) {
+			jQuery('#textpwd').css({'z-index':'999'});
+			jQuery('#password').css({'z-index':'99'});
+		}
+	});
+	
+	//初始化按钮的单击和键盘事件
+	jQuery('#submitbtn').click(submitForm);
+	jQuery('#username, #password').keydown(function(evt) {
+		if(evt.keyCode == 13) {
+			submitForm();
+		}
+	});
+
+});
+
+function setLogoI18n(verType,lang){
+	if(verType == 1)
+	{
+		jQuery('#logoContainer').addClass("logoOverSea");
+		
+		document.title = "$login.title.overSea$";
+	}else{
+		if(lang=="cn"){
+			jQuery('#logoContainer').addClass("logoCn");
+		}else if(lang=="hk"){
+			jQuery('#logoContainer').addClass("logoHk");
+		}else if(lang=="us"){
+			jQuery('#logoContainer').addClass("logoEn");
+		}else{
+			jQuery('#logoContainer').addClass("logoCn");
+		}
+		
+		document.title = "$login.title$";
+	}
+	
+	//alert(jQuery("title").html());
+}
+</script>
+
+</head>
+
+<body>
+<div class="container">
+<form id="loginform" name="loginform" action="encoder.cgi" method="post">
+	<div id="logoContainer"></div>
+	<div class="inputConn">
+		<div class="modelText"><div style="width:1px;height:7px; text-align:center;"></div></div>
+		<div class="inputTextConn">
+			<input type="hidden" name="actioncode" value="120">
+			<input id="textusername" name="textusername" type="text" value="$login.username$"/>
+			<input id="username" class="validate[required]" name="username" type="text"/>
+			<input id="textpwd" name="textpwd" type="text" value="$login.password$"/>
+			<input id="password" class="validate[required]" name="password" type="password"/>
+			<input id="submitbtn" class="$image_prex$click_btn_long" type="button" value="$login.button$"/>
+		</div>
+	</div>
+	<div class="copyrightConn">$ini.companyname$</div>
+</form>
+</div>
+</body>
+</html>

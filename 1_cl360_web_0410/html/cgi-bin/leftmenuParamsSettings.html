@@ -1,0 +1,27 @@
+<li><a href="#" actionCode="305" id="menua">$leftmenu.videosource$</a></li>
+<!--<li><a href="#" actionCode="326" id="menub">$leftmenu.videoencoding$</a></li>-->
+<li><a href="#" actionCode="306" id="menuc">$leftmenu.audio$</a></li>
+<li><a href="#" actionCode="307" id="menud">$leftmenu.streams$</a></li>
+<li><a href="#" actionCode="309" id="menuf">$leftmenu.cameracontrol$</a></li>
+<li><a href="#" actionCode="325" id="menuf">$leftmenu.ajust$</a></li>
+<li><a href="#" actionCode="308" id="menue">$leftmenu.titlelogo$</a></li>
+<li><a href="#" actionCode="331" id="menue">$leftmenu.diskmgmt$</a></li>
+<li><a href="#" actionCode="332" id="menue">$leftmenu.autoswms$</a></li>
+<script type="text/javascript">
+jQuery('#nav li a').click(function() {
+	var actionCode = jQuery(this).attr('actionCode');
+	closeAllPrompt();
+	if(actionCode) {
+		jQueryAjaxHtml({
+			data: {"actioncode": actionCode}
+		});
+		/*if(!roller.firstClicked) {
+			showMainContentAnimate();
+		} else {
+			roller.firstClicked = false;
+		}*/
+	}
+});
+
+leftMenu.init('nav', 1);
+</script>

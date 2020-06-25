@@ -1,0 +1,64 @@
+        <form enctype="multipart/form-data" id="wmform" method="post" target="upload">
+        <table width="753" border="0" cellpadding="5" cellspacing="5">
+        	<tr>
+            <td class="$image_prex$itemnametd">$encoding.rate$</td>
+            <td>
+              <select name="bitrate" id="bitrate" style="width:150px;">
+                <option value="768">768kbps</option>
+                <option value="1024">1024kbps</option>
+                <option value="2048">2048kbps</option>
+                <option value="4096">4096kbps</option>
+            	</select>
+            </td>
+          </tr>
+        <tr>
+          <td class="$image_prex$itemnametd">$encoding.resolution$</td>
+          <td>
+            <select name="resolution" id="resolution" style="width:150px;">
+                <option value="1">720x480</option>
+                <option value="2">704x576</option>
+                <option value="3">1280x720</option>
+                <option value="4">1920x1080</option>
+            </select>
+          </td>
+        </tr>
+				<tr>
+					<td>&nbsp;</td>
+					  <td height="67">
+						<input id="setBtn" type="button" class="btn-normal" onmouseover="this.className='btn-hover';" onmouseout="this.className='btn-normal';" value="$btn.save$" style="padding-left: 0; margin-left: 0;"/>
+					  </td>
+					</tr>
+        </table>
+		<input type="hidden" name="actioncode" value="441">
+        </form>
+		<iframe name="upload" style="display:none"></iframe>
+<script>
+jQuery(function() {
+	initFormValidation();
+	
+	jQuery('#setBtn').click(function() {
+		var data = {"actioncode": "441"};
+		var params = getFormItemValue('wmform');
+		if(params) {
+			jQuery.extend(data, params);
+		}
+		
+		jQueryAjaxCmd({
+			"data": data,
+			success:function(ret) {
+				if(ret == 1) {
+					alert('$savesucess$');
+				}else if (ret == 3) {
+								alert('$uploadstateerror$');
+				} else {
+					alert('$savefailed$');
+				}
+			}
+		});
+		
+	});
+	
+	//initDHCPCheckBox();
+	
+});
+</script> 
