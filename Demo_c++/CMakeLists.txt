@@ -18,6 +18,7 @@ include_directories(${cursrc_include_path})
 include_directories(${lib_ffmpeg_oath})
 #include_directories(${cur_http_path1})
 #include_directories(${cur_http_path1})
+message(STATUS "cursrc_include_path = ${cursrc_include_path}")
 
 set(DIR_SRCS ${cur_srcs_path})
 message(STATUS "DIR_SRCS = ${DIR_SRCS}")
