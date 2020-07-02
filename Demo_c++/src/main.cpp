@@ -14,7 +14,8 @@ int test_STLTest(){
 
 int main(int argc, const char *argv[])
 {
-	test_STLTest();	
+	test_STLTest();
+	test_myString();
 	return 0;
 }
 
