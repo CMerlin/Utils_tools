@@ -20,9 +20,13 @@ include_directories(${lib_ffmpeg_oath})
 #include_directories(${cur_http_path1})
 message(STATUS "cursrc_include_path = ${cursrc_include_path}")
 
+# 允许c++11标准、O3优化、多线程。match选项可避免一些cpu上的问题
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -march=native -O3 -pthread")
+
 set(DIR_SRCS ${cur_srcs_path})
 message(STATUS "DIR_SRCS = ${DIR_SRCS}")
 
+#target_link_libraries(pthread)
 #6.add executable file，添加要编译的可执行文件
 add_executable(${PROJECT_NAME} ${DIR_SRCS})
 #ADD_EXECUTABLE(${PROJECT_NAME} ${TEST_MATH})

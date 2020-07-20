@@ -176,7 +176,7 @@ int test_myString()
 	String str4 = str1 + str2;
 	cout << "str4: " << str4 << endl;
 	
-	system("pause");
+	//system("pause");
 	return EXIT_SUCCESS;
 }
 #endif

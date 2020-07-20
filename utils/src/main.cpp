@@ -4,6 +4,7 @@
 #include "com_utils.h"
 #include "stl_tools.h"
 #include "print.h"
+#include "mypthread.h"
 
 int test_STLTest(){
 	STLTest mstl;
@@ -38,9 +39,10 @@ int get_local_mac(char *mac, int len_limit){
 int main(int argc, const char *argv[])
 {
 	char mac_addr[32] = {0};
-	get_local_mac(mac_addr, sizeof(mac_addr));
+	//get_local_mac(mac_addr, sizeof(mac_addr));
 	//test_STLTest();
 	//test_myString();
+	test_pthread1();
 	return 0;
 }
 

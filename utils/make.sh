@@ -8,4 +8,5 @@ cmake ..
 make
 cd ..
 echo "step 2. run test program"
+pkill printInfo
 cp build/printInfo ./
