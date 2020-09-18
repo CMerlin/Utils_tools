@@ -6,6 +6,19 @@
 #include "print.h"
 #include "mypthread.h"
 
+#if 1 /*[B][call c func]:***********************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "rtc_queue.h"
+
+#ifdef __cplusplus
+}
+#endif
+#endif /*[E][call c func]:***********************************************/
+
+
 int test_STLTest(){
 	STLTest mstl;
 	mstl.setIntVal(32);
@@ -42,7 +55,8 @@ int main(int argc, const char *argv[])
 	//get_local_mac(mac_addr, sizeof(mac_addr));
 	//test_STLTest();
 	//test_myString();
-	test_pthread1();
+	//test_pthread1();
+	test_func_queue();
 	return 0;
 }
 
