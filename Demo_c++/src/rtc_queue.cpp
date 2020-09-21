@@ -115,16 +115,20 @@ int release_rtc_queue(){
 
 	while(1){
 		//if((countv<=0) && (countv<=0)){
-		LOGINFO("[%s][%s][%d]:\n", TAG, __func__, __LINE__);
-		if((0 == QueueEmpty(rtc_queue_v)) && (0 == QueueEmpty(rtc_queue_a))){
+		int countv = QueueSize(rtc_queue_v);
+		int counta = QueueSize(rtc_queue_a);
+		int ret = QueueEmpty(rtc_queue_v);
+		
+		LOGINFO("[%s][%s][%d]: countv=%d counta=%d ret=%d\n", TAG, __func__, __LINE__, countv, counta, ret);
+		if((1 == QueueEmpty(rtc_queue_v)) && (1 == QueueEmpty(rtc_queue_a))){
 			break;
 		}
 		LOGINFO("[%s][%s][%d]:\n", TAG, __func__, __LINE__);
-		if(0 != QueueEmpty(rtc_queue_v)){
+		if(1 != QueueEmpty(rtc_queue_v)){
 			QueuePop(rtc_queue_v);
 		}
 		LOGINFO("[%s][%s][%d]:\n", TAG, __func__, __LINE__);
-		if(0 != QueueEmpty(rtc_queue_a)){
+		if(1 != QueueEmpty(rtc_queue_a)){
 			QueuePop(rtc_queue_a);
 		}
 		LOGINFO("[%s][%s][%d]:\n", TAG, __func__, __LINE__);
