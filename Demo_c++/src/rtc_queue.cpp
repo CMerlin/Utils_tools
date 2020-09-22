@@ -43,14 +43,21 @@ void QueuePush(Queue* q, QDataType data) {
 
 void QueuePop(Queue* q) {
 	assert(q);
-	if (QueueEmpty(q))
+	if (QueueEmpty(q)){
 		return;
+	}
 	QNode* pDelNode = q->_front;
 	if (pDelNode->_pNext == NULL)
 		q->_back = q->_front = NULL;
 	else {
 		q->_front = pDelNode->_pNext;
 	}
+	#if 1 /* --------------------- */
+	QDataType *data = &(pDelNode->_data);
+	printf("[%s][%d]:data=%s\n", __func__, __LINE__, (data->data));
+	free(data->data);
+	data->data = NULL;
+	#endif /* --------------------- */
 	free(pDelNode);
 }
 
@@ -132,17 +139,31 @@ int release_rtc_queue(){
 			QueuePop(rtc_queue_a);
 		}
 		LOGINFO("[%s][%s][%d]:\n", TAG, __func__, __LINE__);
-		usleep(1000 * 1000);
+		//usleep(1000 * 1000);
 	}
 	LOGINFO("[%s][%s][%d]:exit countv=%d counta=%d\n", TAG, __func__, __LINE__, countv, counta);
 	return 0;
 }
 
+//int video_count = 0;
 int write_video_to_sip(S_VIDEO_PKG *frame){
 	if((0 >= frame->data_len) || (NULL == frame->data)){
 		LOGERR("[Er][%s][%s][%d]:data_len=%d\n", TAG, __func__, __LINE__, (frame->data_len));
 		return -1;
 	}
+#if 1
+	pthread_mutex_lock(&mtx_v);
+	QDataType data;
+	memset(&data, 0, sizeof(QDataType));
+	data.data = (unsigned char*)malloc((frame->data_len));
+	//sprintf((data.data), "[%d]:hello world\n", video_count);
+	memset(data.data, 0, sizeof(frame->data_len));
+	data.type = EAV_VIDEO;
+	data.pts = frame->pts;
+	memcpy(data.data, (frame->data), (frame->data_len));
+	QueuePush(rtc_queue_v, data);
+	pthread_mutex_unlock(&mtx_v);
+#endif
 
 	#if 0
 		pthread_mutex_lock(&mtx_v);
@@ -158,7 +179,7 @@ int write_video_to_sip(S_VIDEO_PKG *frame){
 	#endif
 
 
-	#if 1
+	#if 0
 	pthread_mutex_lock(&mtx_v);
 	QDataType *data = (QDataType*)malloc(sizeof(QDataType));
 	memset(data, 0, sizeof(QDataType));
@@ -174,19 +195,48 @@ int write_video_to_sip(S_VIDEO_PKG *frame){
 	return 0;
 }
 
+int queue_push_video(S_VIDEO_PKG *frame){
+#if 1
+	pthread_mutex_lock(&mtx_v);
+	QDataType data;
+	memset(&data, 0, sizeof(QDataType));
+	data.data = (unsigned char*)malloc((frame->data_len));
+	memset(data.data, 0, sizeof(frame->data_len));
+	data.type = EAV_VIDEO;
+	data.pts = frame->pts;
+	memcpy(data.data, (frame->data), (frame->data_len));
+	QueuePush(rtc_queue_v, data);
+	pthread_mutex_unlock(&mtx_v);
+#endif
+
+
+	return 0;
+}
+
+int queue_relsese_video(){
+	if(1 != QueueEmpty(rtc_queue_v)){
+		QueuePop(rtc_queue_v);
+	}
+
+	return 0;
+}
+
 static void *thread_rtc_task(void *arg)
 {
 	LOGINFO("[KK][%s][%s][%d]:runing\n", TAG, __func__, __LINE__);
-	int count = 0;
+	int count = 0, v_count = 0;
 	init_av_queue();
 	while(1){
-		usleep(1 * 1000 * 1000);
+		//usleep(1 * 1000 * 1000);
+		//usleep(500 * 1000);
 		count++;
+		v_count++;
 		LOGINFO("[ME][%s][%s][%d]:\n", TAG, __func__, __LINE__);
 
 		#if 1 /* -------------------------------- */
 		S_VIDEO_PKG pkg;
 		unsigned char buffer[2048] = {0};
+		sprintf((char*)buffer, "[%d]:hello world\n", v_count);
 		pkg.data = buffer;
 		pkg.data_len = 2048;
 		pkg.pts = time(NULL);
