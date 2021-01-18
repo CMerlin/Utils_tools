@@ -92,6 +92,7 @@ void QueueDestory(Queue* q);//销毁队列
 //uint64_t get_sys_time_ms();
 //int sip_pjsua_init();
 int test_func_queue();
+int test_change_audio_vol(void);
 
 #ifdef __cplusplus
 }

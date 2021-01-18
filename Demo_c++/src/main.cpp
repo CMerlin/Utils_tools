@@ -56,7 +56,8 @@ int main(int argc, const char *argv[])
 	//test_STLTest();
 	//test_myString();
 	//test_pthread1();
-	test_func_queue();
+	//test_func_queue();
+	test_change_audio_vol();
 	return 0;
 }
 
